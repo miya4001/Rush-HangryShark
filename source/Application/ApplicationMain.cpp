@@ -6,6 +6,7 @@
  * @date   April 2022
  *********************************************************************/
 #include "ApplicationMain.h"
+#include "../Mode/ModeGame.h"
 
 namespace Game {
   namespace Application {
@@ -23,6 +24,10 @@ namespace Game {
       if (!ApplicationBase::Init()) {
         return false;  // ‰Šú‰»¸”s
       }
+      // ƒ‚[ƒhƒQ[ƒ€‚Ì“o˜^
+      _modeServer->AddMode("Game", std::make_unique<Mode::ModeGame>(*this));
+      // ƒ‚[ƒhƒQ[ƒ€‚Ì’Ç‰Á
+      _modeServer->PushBack("Game");
       return true;  // ‰Šú‰»¬Œ÷
     }
   } // namespace Application

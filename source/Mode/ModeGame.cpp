@@ -47,7 +47,8 @@ namespace Game {
     }
 
     void ModeGame::Draw() const {
-
+      // モードゲーム確認四角形描画
+      DrawBox(100, 100, 200, 200, GetColor(255, 0, 0), true);
     }
   } // namespace Mode
 } // namespace Game
