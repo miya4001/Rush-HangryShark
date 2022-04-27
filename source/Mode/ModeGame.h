@@ -22,7 +22,7 @@ namespace Game {
    * @brief  モード
    */
   namespace Mode {
-    constexpr auto MGame = "ModeGame";  //!< ゲーム登録用キー
+    constexpr auto MGame = "ModeGame";  //!< モードゲーム登録用キー
     /**
      * @class  ModeGame
      * @brief  モードゲームクラス

@@ -6,7 +6,7 @@
  * @date   April 2022
  *********************************************************************/
 #include "ApplicationMain.h"
-#include "../Mode/ModeGame.h"
+#include "../Mode/ModeTitle.h"
 
 namespace Game {
   namespace Application {
@@ -24,10 +24,10 @@ namespace Game {
       if (!ApplicationBase::Init()) {
         return false;  // 初期化失敗
       }
-      // モードゲームの登録
-      _modeServer->AddMode("Game", std::make_unique<Mode::ModeGame>(*this));
-      // モードゲームの追加
-      _modeServer->PushBack("Game");
+      // モードタイトルの登録
+      _modeServer->AddMode(Mode::MTitle, std::make_unique<Mode::ModeTitle>(*this));
+      // モードタイトルの追加
+      _modeServer->PushBack(Mode::MTitle);
       return true;  // 初期化成功
     }
   } // namespace Application

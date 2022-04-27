@@ -11,7 +11,7 @@
 
 namespace Game {
   namespace Mode {
-    ModeTitle::ModeTitle(Application::ApplicationMain& app) : ModeBase(*app.GetApplication()) {
+    ModeTitle::ModeTitle(Application::ApplicationMain& app) : ModeBase(*app.GetApplication()), _appMain(app) {
 
     }
 
@@ -34,7 +34,7 @@ namespace Game {
       // STARTボタンが入力された場合
       if (joypad.GetButton(XINPUT_BUTTON_A, AppInput::InputTrigger)) {
         // モードゲームの登録
-        _app.GetModeServer().AddMode(MGame, std::make_shared<Mode::ModeGame>(_app));
+        _app.GetModeServer().AddMode(MGame, std::make_shared<Mode::ModeGame>(_appMain));
         // モードゲーム遷移
         _app.GetModeServer().TransionToMode(MGame);
       }

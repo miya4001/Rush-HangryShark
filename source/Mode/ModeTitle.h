@@ -13,9 +13,16 @@
 */
 namespace Game {
   /**
+   * @brief  アプリケーション
+   */
+  namespace Application {
+    class ApplicationMain;
+  } // namespace Application
+  /**
    * @brief  モード
    */
   namespace Mode {
+    constexpr auto MTitle = "ModeTitle";  //!< モードタイトル登録用キー
     /**
      * @class  ModeTitle
      * @brief  モードタイトルクラス
@@ -54,6 +61,10 @@ namespace Game {
        * @brief  描画
        */
       void Draw() const override;
+
+    private:
+      //!< アプリケーションメインの参照
+      Application::ApplicationMain& _appMain;
     };
   } // namespace Mode
 } // namespace Game
