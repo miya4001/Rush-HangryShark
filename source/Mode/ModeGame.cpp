@@ -14,10 +14,6 @@ namespace Game {
 
     }
 
-    ModeGame::~ModeGame() {
-
-    }
-
     bool ModeGame::Init() {
       return true;
     }

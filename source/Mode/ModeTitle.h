@@ -1,6 +1,6 @@
 /*****************************************************************//**
- * @file   ModeGame.h
- * @brief  モードゲームクラス
+ * @file   ModeTitle.h
+ * @brief  モードタイトルクラス
  * 
  * @author 宮澤耀生
  * @date   April 2022
@@ -9,31 +9,24 @@
 #include <appframe.h>
 
 /**
- * @brief  ゲーム
- */
+* @brief  ゲーム
+*/
 namespace Game {
-  /**
-   * @brief  アプリケーション
-   */
-  namespace Application {
-    class ApplicationMain;
-  } // namespace Application
   /**
    * @brief  モード
    */
   namespace Mode {
-    constexpr auto MGame = "ModeGame";  //!< ゲーム登録用キー
     /**
-     * @class  ModeGame
-     * @brief  モードゲームクラス
+     * @class  ModeTitle
+     * @brief  モードタイトルクラス
      */
-    class ModeGame : public AppFrame::Mode::ModeBase {
+    class ModeTitle : public AppFrame::Mode::ModeBase {
     public:
       /**
        * @brief コンストラクタ
        * @param app アプリケーションの参照
        */
-      ModeGame(Application::ApplicationMain& app);
+      ModeTitle(Application::ApplicationMain& app);
       /**
        * @brief  初期化
        * @return true:初期化成功
@@ -61,10 +54,6 @@ namespace Game {
        * @brief  描画
        */
       void Draw() const override;
-
-    private:
-      //!< アプリケーションメインの参照
-      Application::ApplicationMain& _appMain;
     };
   } // namespace Mode
 } // namespace Game

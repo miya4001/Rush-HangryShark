@@ -33,12 +33,18 @@
     <ClInclude Include="source\Mode\ModeGame.h">
       <Filter>ヘッダー ファイル\Mode</Filter>
     </ClInclude>
+    <ClInclude Include="source\Mode\ModeTitle.h">
+      <Filter>ヘッダー ファイル\Mode</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="source\Application\ApplicationMain.cpp">
       <Filter>ソース ファイル\Application</Filter>
     </ClCompile>
     <ClCompile Include="source\Mode\ModeGame.cpp">
+      <Filter>ソース ファイル\Mode</Filter>
+    </ClCompile>
+    <ClCompile Include="source\Mode\ModeTitle.cpp">
       <Filter>ソース ファイル\Mode</Filter>
     </ClCompile>
   </ItemGroup>
