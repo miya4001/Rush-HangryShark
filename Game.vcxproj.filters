@@ -25,6 +25,12 @@
     <Filter Include="ヘッダー ファイル\Mode">
       <UniqueIdentifier>{d3001960-d138-48dd-b171-7d3933a8dc2f}</UniqueIdentifier>
     </Filter>
+    <Filter Include="ヘッダー ファイル\Object">
+      <UniqueIdentifier>{aa00edc5-6408-4f26-8c39-a72808a4d4e5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ソース ファイル\Object">
+      <UniqueIdentifier>{62ec0f45-f345-428b-bcb2-56daf88524d6}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="source\Application\ApplicationMain.h">
@@ -36,6 +42,9 @@
     <ClInclude Include="source\Mode\ModeTitle.h">
       <Filter>ヘッダー ファイル\Mode</Filter>
     </ClInclude>
+    <ClInclude Include="source\Object\ObjectBase.h">
+      <Filter>ヘッダー ファイル\Object</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="source\Application\ApplicationMain.cpp">
@@ -46,6 +55,9 @@
     </ClCompile>
     <ClCompile Include="source\Mode\ModeTitle.cpp">
       <Filter>ソース ファイル\Mode</Filter>
+    </ClCompile>
+    <ClCompile Include="source\Object\ObjectBase.cpp">
+      <Filter>ソース ファイル\Object</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

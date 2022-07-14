@@ -162,11 +162,13 @@
     <ClInclude Include="source\Application\ApplicationMain.h" />
     <ClInclude Include="source\Mode\ModeGame.h" />
     <ClInclude Include="source\Mode\ModeTitle.h" />
+    <ClInclude Include="source\Object\ObjectBase.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="source\Application\ApplicationMain.cpp" />
     <ClCompile Include="source\Mode\ModeGame.cpp" />
     <ClCompile Include="source\Mode\ModeTitle.cpp" />
+    <ClCompile Include="source\Object\ObjectBase.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

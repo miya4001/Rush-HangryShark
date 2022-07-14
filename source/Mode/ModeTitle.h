@@ -9,8 +9,8 @@
 #include <appframe.h>
 
 /**
-* @brief  ゲーム
-*/
+ * @brief  ゲーム
+ */
 namespace Game {
   /**
    * @brief  アプリケーション
