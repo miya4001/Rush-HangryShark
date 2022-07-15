@@ -10,7 +10,7 @@
 namespace Game {
   namespace Object {
     ObjectBase::ObjectBase(Application::ApplicationMain& app) : _app(app) {
-
+      _world = AppMath::Matrix44::Identity();
     }
 
     ObjectBase::~ObjectBase() {
@@ -18,7 +18,7 @@ namespace Game {
     }
 
     bool ObjectBase::Init() {
-
+      return true;
     }
 
     void ObjectBase::Process() {
@@ -34,7 +34,12 @@ namespace Game {
     }
 
     void ObjectBase::WorldMatrix() {
-
+      // ÉèÅ[ÉãÉhç¿ïWïœä∑
+#ifdef _DEBUG
+      _world = AppMath::Utility::ToWorldMatrix(_position, _rotation, _scale, AppMath::Degree);
+#else
+      _world = AppMath::Utility::ToWorldMatrix(_position, _rotation, _scale, AppMath::Radian);
+#endif
     }
   } // namespace Object
 } // namespace Game
