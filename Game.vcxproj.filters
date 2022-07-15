@@ -45,6 +45,9 @@
     <ClInclude Include="source\Object\ObjectBase.h">
       <Filter>ヘッダー ファイル\Object</Filter>
     </ClInclude>
+    <ClInclude Include="source\Object\ObjectServer.h">
+      <Filter>ヘッダー ファイル\Object</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="source\Application\ApplicationMain.cpp">
@@ -57,6 +60,9 @@
       <Filter>ソース ファイル\Mode</Filter>
     </ClCompile>
     <ClCompile Include="source\Object\ObjectBase.cpp">
+      <Filter>ソース ファイル\Object</Filter>
+    </ClCompile>
+    <ClCompile Include="source\Object\ObjectServer.cpp">
       <Filter>ソース ファイル\Object</Filter>
     </ClCompile>
   </ItemGroup>
