@@ -26,11 +26,18 @@ namespace Game {
     }
 
     void ObjectBase::Draw() const {
-
+      // €–Só‘Ô‚Å‚È‚¢ê‡•`‰æ
+      if (!IsDead()) {
+        MV1DrawModel(_modelHandle);
+      }
     }
 
     bool ObjectBase::IsDead() const {
       return _objectState == ObjectState::Dead;
+    }
+
+    void ObjectBase::SetParameters() {
+
     }
 
     void ObjectBase::WorldMatrix() {

@@ -31,6 +31,12 @@
     <Filter Include="ソース ファイル\Object">
       <UniqueIdentifier>{62ec0f45-f345-428b-bcb2-56daf88524d6}</UniqueIdentifier>
     </Filter>
+    <Filter Include="ヘッダー ファイル\Player">
+      <UniqueIdentifier>{7acab9e8-353e-4876-be1c-dc559cd52d67}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ソース ファイル\Player">
+      <UniqueIdentifier>{ddb0c24f-40ea-45c5-849d-3d778f59169d}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="source\Application\ApplicationMain.h">
@@ -48,6 +54,9 @@
     <ClInclude Include="source\Object\ObjectServer.h">
       <Filter>ヘッダー ファイル\Object</Filter>
     </ClInclude>
+    <ClInclude Include="source\Player\PlayerShark.h">
+      <Filter>ヘッダー ファイル\Player</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="source\Application\ApplicationMain.cpp">
@@ -64,6 +73,9 @@
     </ClCompile>
     <ClCompile Include="source\Object\ObjectServer.cpp">
       <Filter>ソース ファイル\Object</Filter>
+    </ClCompile>
+    <ClCompile Include="source\Player\PlayerShark.cpp">
+      <Filter>ソース ファイル\Player</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

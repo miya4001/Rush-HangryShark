@@ -112,10 +112,15 @@ namespace Game {
 
     protected:
       /**
+       * @brief  パラメータの設定
+       */
+      virtual void SetParameters();
+      /**
        * @brief  ワールド座標の更新
        */
       void WorldMatrix();
 
+      int _modelHandle{ 0 };  //!< モデルハンドル
       //!< アプリケーションの参照
       Application::ApplicationMain& _app;
       //!< オブジェクトの識別

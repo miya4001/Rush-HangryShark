@@ -164,6 +164,7 @@
     <ClInclude Include="source\Mode\ModeTitle.h" />
     <ClInclude Include="source\Object\ObjectBase.h" />
     <ClInclude Include="source\Object\ObjectServer.h" />
+    <ClInclude Include="source\Player\PlayerShark.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="source\Application\ApplicationMain.cpp" />
@@ -171,6 +172,7 @@
     <ClCompile Include="source\Mode\ModeTitle.cpp" />
     <ClCompile Include="source\Object\ObjectBase.cpp" />
     <ClCompile Include="source\Object\ObjectServer.cpp" />
+    <ClCompile Include="source\Player\PlayerShark.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
