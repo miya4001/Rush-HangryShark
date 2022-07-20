@@ -57,7 +57,7 @@ namespace Game {
         throw ("オブジェクトはnullptrです");
 #endif
         return; // キーが不正
-      // 追加予約
+        // 追加予約
         _addObjectRegistry.emplace_back(std::move(object));
       }
     }

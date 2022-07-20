@@ -13,6 +13,12 @@
  */
 namespace Game {
   /**
+   * @brief  オブジェクト
+   */
+  namespace Object {
+    class ObjectServer;
+  } // namespace Object
+  /**
    * @brief  アプリケーション
    */
   namespace Application {
@@ -32,9 +38,15 @@ namespace Game {
        *         false:初期化失敗
        */
       bool Init() override;
+      /**
+       * @brief  オブジェクトサーバの取得
+       * @return オブジェクトサーバの参照
+       */
+      Object::ObjectServer& GetObjectServer();
 
     private:
-
+      //!< オブジェクトサーバ
+      std::unique_ptr<Object::ObjectServer> _objectServer{ nullptr };
     };
   } // namespace Application
 } // namespace Game

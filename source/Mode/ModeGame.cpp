@@ -7,6 +7,7 @@
  *********************************************************************/
 #include "ModeGame.h"
 #include "../Application/ApplicationMain.h"
+#include "../Object/ObjectServer.h"
 
 namespace Game {
   namespace Mode {
@@ -23,7 +24,8 @@ namespace Game {
     }
 
     void ModeGame::Exit() {
-
+      // 生成したオブジェクトを削除
+      _appMain.GetObjectServer().Release();
     }
 
     void ModeGame::Input(AppFrame::Input::InputManager& input) {
@@ -40,11 +42,15 @@ namespace Game {
     void ModeGame::Process() {
       // 入力
       Input(_app.GetInputManager());
+      // オブジェクトサーバの更新
+      _appMain.GetObjectServer().Process();
     }
 
     void ModeGame::Draw() const {
       // モードゲーム確認四角形描画
       DrawBox(100, 100, 200, 200, GetColor(255, 0, 0), true);
+      // オブジェクトサーバの描画
+      _appMain.GetObjectServer().Draw();
     }
   } // namespace Mode
 } // namespace Game
