@@ -63,6 +63,11 @@ namespace Game {
       void Draw() const override;
 
     private:
+      /**
+       * @brief  リソース読み込み
+       */
+      void LoadResource() override;
+
       //!< アプリケーションメインの参照
       Application::ApplicationMain& _appMain;
     };

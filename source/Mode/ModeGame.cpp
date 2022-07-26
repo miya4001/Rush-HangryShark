@@ -8,6 +8,7 @@
 #include "ModeGame.h"
 #include "../Application/ApplicationMain.h"
 #include "../Object/ObjectServer.h"
+#include "../Player/PlayerShark.h"
 
 namespace Game {
   namespace Mode {
@@ -20,7 +21,11 @@ namespace Game {
     }
 
     void ModeGame::Enter() {
-
+      // リソースの読み取り処理
+      LoadResource();
+      // 自機の生成
+      auto player = std::make_shared<Player::PlayerShark>(_appMain);
+      _appMain.GetObjectServer().RegisterObject(player);
     }
 
     void ModeGame::Exit() {
@@ -51,6 +56,22 @@ namespace Game {
       DrawBox(100, 100, 200, 200, GetColor(255, 0, 0), true);
       // オブジェクトサーバの描画
       _appMain.GetObjectServer().Draw();
+    }
+
+    void ModeGame::LoadResource() {
+      // 読み込み済みの場合中断
+      if (_isLoad) {
+        return;
+      }
+      // 各種モデルハンドルの読み込み
+      using ModelLoadServer = AppFrame::Model::ModelLoadServer;
+      const ModelLoadServer::LoadModelMap loadModelMap{
+        {"shark", "resource/Model/Shark/megalodon.mv1"}
+      };
+      // モデル読み込みサーバに一括読み込み
+      _app.GetModelLoadServer().LoadModels(loadModelMap);
+      // 読み込み完了
+      _isLoad = true;
     }
   } // namespace Mode
 } // namespace Game

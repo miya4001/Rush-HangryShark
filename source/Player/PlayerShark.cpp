@@ -6,17 +6,19 @@
  * @date   July 2022
  *********************************************************************/
 #include "PlayerShark.h"
+#include "../Application/ApplicationMain.h"
 
 namespace {
   // プレイヤー各種定数
-  constexpr int HungryMax = 100;       //!< 空腹値上限
-  constexpr int HungryMin = 0;         //!< 空腹値下限
-  constexpr int HungryInit = 75;       //!< 初期空腹値
-  constexpr int HungryCountMax = 120;  //!< 空腹カウント上限
-  constexpr int EatTimeMax = 60;       //!< 捕食時間上限
-  constexpr int EatValue = 10;         //!< 捕食値
-  constexpr float SwimSpeed = 10.0f;   //!< 移動速度
-  constexpr float RushSpeed = 20.0f;   //!< 突撃速度
+  constexpr auto Modelhandle = "shark";  //!< モデルハンドルキー
+  constexpr int HungryMax = 100;         //!< 空腹値上限
+  constexpr int HungryMin = 0;           //!< 空腹値下限
+  constexpr int HungryInit = 75;         //!< 初期空腹値
+  constexpr int HungryCountMax = 60;     //!< 空腹カウント上限
+  constexpr int EatTimeMax = 60;         //!< 捕食時間上限
+  constexpr int EatValue = 10;           //!< 捕食値
+  constexpr float SwimSpeed = 10.0f;     //!< 移動速度
+  constexpr float RushSpeed = 20.0f;     //!< 突撃速度
 }
 
 namespace Game {
@@ -50,6 +52,8 @@ namespace Game {
     }
 
     void PlayerShark::SetParameters() {
+      // モデルハンドルの設定
+      _modelHandle = _app.GetModelLoadServer().GetModelHandle(Modelhandle);
       // 各種パラメータの設定
       _hungry = HungryInit;
     }
@@ -89,8 +93,9 @@ namespace Game {
       if (_isEating) {
         return;
       }
+      // 魚との接触判定
       // 捕食開始
-      _isEating = true;
+      // _isEating = true;
     }
 
     void PlayerShark::Eat() {
