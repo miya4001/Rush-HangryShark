@@ -19,6 +19,12 @@ namespace Game {
     class ObjectServer;
   } // namespace Object
   /**
+   * @brief  カメラ
+   */
+  namespace Camera {
+    class Camera;
+  } // namespace Camera
+  /**
    * @brief  アプリケーション
    */
   namespace Application {
@@ -43,10 +49,17 @@ namespace Game {
        * @return オブジェクトサーバの参照
        */
       Object::ObjectServer& GetObjectServer();
+      /**
+       * @brief  カメラの取得
+       * @return カメラの参照
+       */
+      Camera::Camera& GetCamera();
 
     private:
       //!< オブジェクトサーバ
       std::unique_ptr<Object::ObjectServer> _objectServer{ nullptr };
+      //!< カメラ
+      std::unique_ptr<Camera::Camera> _camera{ nullptr };
     };
   } // namespace Application
 } // namespace Game

@@ -9,10 +9,9 @@
 
 namespace {
   // カメラ各種定数
-  constexpr float Near = 100.0f;   //!< 手前クリップ距離
-  constexpr float Far = 5000.0f;   //!< 奥クリップ距離
-  constexpr float Distance = 250;  //!< 位置-注視点間距離
-  namespace AppMath = AppFrame::Math;
+  constexpr float Near = 100.0f;      //!< 手前クリップ距離
+  constexpr float Far = 5000.0f;      //!< 奥クリップ距離
+  constexpr float Distance = 250.0f;  //!< 位置-注視点間距離
 }
 
 namespace Game {
