@@ -37,6 +37,12 @@
     <Filter Include="ソース ファイル\Player">
       <UniqueIdentifier>{ddb0c24f-40ea-45c5-849d-3d778f59169d}</UniqueIdentifier>
     </Filter>
+    <Filter Include="ヘッダー ファイル\Camera">
+      <UniqueIdentifier>{2b09fa0e-c38e-4940-8b54-7bb41c632b5c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ソース ファイル\Camera">
+      <UniqueIdentifier>{8c74182c-1535-4ed3-92f3-0e04086bf4c3}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="source\Application\ApplicationMain.h">
@@ -57,6 +63,9 @@
     <ClInclude Include="source\Player\PlayerShark.h">
       <Filter>ヘッダー ファイル\Player</Filter>
     </ClInclude>
+    <ClInclude Include="source\Camera\Camera.h">
+      <Filter>ヘッダー ファイル\Camera</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="source\Application\ApplicationMain.cpp">
@@ -76,6 +85,9 @@
     </ClCompile>
     <ClCompile Include="source\Player\PlayerShark.cpp">
       <Filter>ソース ファイル\Player</Filter>
+    </ClCompile>
+    <ClCompile Include="source\Camera\Camera.cpp">
+      <Filter>ソース ファイル\Camera</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>
