@@ -29,10 +29,9 @@ namespace Game {
 
     void ModeTitle::Input(AppFrame::Input::InputManager& input) {
       // XInputジョイパッドの入力処理の取得
-      auto joypad = input.GetXJoypad();
-      namespace AppInput = AppFrame::Input;
+      auto xJoypad = input.GetXJoypad();
       // STARTボタンが入力された場合
-      if (joypad.GetButton(XINPUT_BUTTON_A, AppInput::InputTrigger)) {
+      if (xJoypad.GetButton(XINPUT_BUTTON_A, AppFrame::Input::InputTrigger)) {
         // モードゲームの登録
         _app.GetModeServer().AddMode(MGame, std::make_shared<Mode::ModeGame>(_appMain));
         // モードゲーム遷移
@@ -46,8 +45,6 @@ namespace Game {
     }
 
     void ModeTitle::Draw() const {
-      // モードタイトル確認四角形描画
-      DrawBox(100, 100, 200, 200, GetColor(0, 255, 0), true);
     }
   } // namespace Mode
 } // namespace Game

@@ -48,10 +48,9 @@ namespace Game {
 
     void ModeGame::Input(AppFrame::Input::InputManager& input) {
       // XInputジョイパッドの入力処理の取得
-      auto joypad = input.GetXJoypad();
-      namespace AppInput = AppFrame::Input;
+      auto xJoypad = input.GetXJoypad();
       // STARTボタンが入力された場合
-      if (joypad.GetButton(XINPUT_BUTTON_START, AppInput::InputTrigger)) {
+      if (xJoypad.GetButton(XINPUT_BUTTON_START, AppFrame::Input::InputTrigger)) {
         // アプリケーションの終了要請
         _app.RequestTerminate();
       }
