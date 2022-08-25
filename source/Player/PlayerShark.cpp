@@ -65,10 +65,12 @@ namespace Game {
       DrawFormatString(0, 0, GetColor(255, 255, 255), "x:%f  y:%f, z:%f", x, y, z);
       // 向き
       auto [rX, rY, rZ] = _rotation.GetVector3();
-      DrawFormatString(0, 20, GetColor(255, 255, 255), "rotationX:%f  rotationY:%f rotationZ:%f", rX, rY, rZ);
+      DrawFormatString(0, 20, GetColor(255, 255, 255), "rX:%f  rY:%f rZ:%f", rX, rY, rZ);
       // 左スティック入力
       auto [lx, ly] = _app.GetInputManager().GetXJoypad().GetStick(AppFrame::Input::StickLeft);
       DrawFormatString(0, 40, GetColor(255, 255, 255), "lx:%d  ly:%d", lx, ly);
+      // 空腹
+      DrawFormatString(0, 60, GetColor(255, 255, 255), "hungry:%d  count:%d", _hungry, _hungryCount);
       // 軸線分
       DrawLine3D(VGet(-200.0f, 0.0f, 0.0f), VGet(200.0f, 0.0f, 0.0f), GetColor(255, 0, 0));
       DrawLine3D(VGet(0.0f, 0.0f, -200.0f), VGet(0.0f, 0.0f, 200.0f), GetColor(0, 255, 0));
