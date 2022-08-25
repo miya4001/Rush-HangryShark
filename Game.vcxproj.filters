@@ -43,6 +43,12 @@
     <Filter Include="ソース ファイル\Camera">
       <UniqueIdentifier>{8c74182c-1535-4ed3-92f3-0e04086bf4c3}</UniqueIdentifier>
     </Filter>
+    <Filter Include="ヘッダー ファイル\Sea">
+      <UniqueIdentifier>{d76c6c13-22bd-413d-a53b-d4de05a30ad6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ソース ファイル\Sea">
+      <UniqueIdentifier>{f9c973d8-86d0-4dcd-ba32-0a2890f92e17}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="source\Application\ApplicationMain.h">
@@ -66,6 +72,9 @@
     <ClInclude Include="source\Camera\Camera.h">
       <Filter>ヘッダー ファイル\Camera</Filter>
     </ClInclude>
+    <ClInclude Include="source\Sea\SeaSphere.h">
+      <Filter>ヘッダー ファイル\Sea</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="source\Application\ApplicationMain.cpp">
@@ -88,6 +97,9 @@
     </ClCompile>
     <ClCompile Include="source\Camera\Camera.cpp">
       <Filter>ソース ファイル\Camera</Filter>
+    </ClCompile>
+    <ClCompile Include="source\Sea\SeaSphere.cpp">
+      <Filter>ソース ファイル\Sea</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

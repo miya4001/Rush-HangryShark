@@ -81,6 +81,7 @@ namespace Game {
       // モデルハンドルの設定
       _modelHandle = _app.GetModelLoadServer().GetModelHandle(Modelhandle);
       // 各種パラメータの設定
+      _objectId = ObjectId::Player;
       _scale.Fill(1.0f);
       _hungry = HungryInit;
       _speed = SwimSpeed;

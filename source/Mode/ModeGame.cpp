@@ -9,6 +9,7 @@
 #include "../Application/ApplicationMain.h"
 #include "../Object/ObjectServer.h"
 #include "../Player/PlayerShark.h"
+#include "../Sea/SeaSphere.h"
 
 namespace Game {
   namespace Mode {
@@ -23,6 +24,9 @@ namespace Game {
     void ModeGame::Enter() {
       // リソースの読み取り処理
       LoadResource();
+      // 海中背景の生成
+      auto sea = std::make_shared<Sea::SeaSphere>(_appMain);
+      _appMain.GetObjectServer().RegisterObject(sea);
       // 自機の生成
       auto player = std::make_shared<Player::PlayerShark>(_appMain);
       _appMain.GetObjectServer().RegisterObject(player);
@@ -52,8 +56,6 @@ namespace Game {
     }
 
     void ModeGame::Draw() const {
-      // モードゲーム確認四角形描画
-      DrawBox(100, 100, 200, 200, GetColor(255, 0, 0), true);
       // オブジェクトサーバの描画
       _appMain.GetObjectServer().Draw();
     }
@@ -66,7 +68,8 @@ namespace Game {
       // 各種モデルハンドルの読み込み
       using ModelLoadServer = AppFrame::Model::ModelLoadServer;
       const ModelLoadServer::LoadModelMap loadModelMap{
-        {"shark", "resource/Model/Shark/megalodon.mv1"}
+        {"shark", "resource/Model/Shark/megalodon.mv1"},
+        {"sea", "resource/Model/Sea/skysphere.mv1"}
       };
       // モデル読み込みサーバに一括読み込み
       _app.GetModelLoadServer().LoadModels(loadModelMap);

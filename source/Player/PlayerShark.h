@@ -47,7 +47,9 @@ namespace Game {
        * @brief  XV
        */
       void Process() override;
-
+      /**
+       * @brief  •`‰æ
+       */
       void Draw() const override;
 
     private:

@@ -166,6 +166,7 @@
     <ClInclude Include="source\Object\ObjectBase.h" />
     <ClInclude Include="source\Object\ObjectServer.h" />
     <ClInclude Include="source\Player\PlayerShark.h" />
+    <ClInclude Include="source\Sea\SeaSphere.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="source\Application\ApplicationMain.cpp" />
@@ -175,6 +176,7 @@
     <ClCompile Include="source\Object\ObjectBase.cpp" />
     <ClCompile Include="source\Object\ObjectServer.cpp" />
     <ClCompile Include="source\Player\PlayerShark.cpp" />
+    <ClCompile Include="source\Sea\SeaSphere.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
