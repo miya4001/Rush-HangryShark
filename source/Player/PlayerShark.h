@@ -16,6 +16,7 @@ namespace Game {
    * @brief  プレイヤー
    */
   namespace Player {
+    namespace AppMath = AppFrame::Math;
     /**
      * @class PlayerShark
      * @brief プレイヤー(サメ)クラス
@@ -47,6 +48,8 @@ namespace Game {
        */
       void Process() override;
 
+      void Draw() const override;
+
     private:
       /**
        * @brief  パラメータの設定
@@ -68,11 +71,19 @@ namespace Game {
        * @brief  捕食
        */
       void Eat();
+      /**
+       * @brief  移動量の算出
+       * @return 移動量
+       */
+      AppMath::Vector4 Move();
 
       int _hungry{ 0 };         //!< 空腹値
       int _hungryCount{ 0 };    //!< 空腹カウント
       int _eatTime{ 0 };        //!< 捕食時間
+      float _speed{ 0.0f };     //!< 移動速度
       bool _isEating{ false };  //!< 捕食中
+      //!< 前方向き
+      AppMath::Vector4 _forward;
       //!< プレイヤーの状態
       PlayerState _playerState{ PlayerState::Idle };
       //!< 前フレームのプレイヤーの状態

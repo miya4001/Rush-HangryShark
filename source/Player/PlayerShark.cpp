@@ -7,6 +7,7 @@
  *********************************************************************/
 #include "PlayerShark.h"
 #include "../Application/ApplicationMain.h"
+#include "../Camera/Camera.h"
 
 namespace {
   // プレイヤー各種定数
@@ -17,8 +18,8 @@ namespace {
   constexpr int HungryCountMax = 60;     //!< 空腹カウント上限
   constexpr int EatTimeMax = 60;         //!< 捕食時間上限
   constexpr int EatValue = 10;           //!< 捕食値
-  constexpr float SwimSpeed = 10.0f;     //!< 移動速度
-  constexpr float RushSpeed = 20.0f;     //!< 突撃速度
+  constexpr float SwimSpeed = 5.0f;      //!< 水泳速度
+  constexpr float RushSpeed = 10.0f;     //!< 突撃速度
 }
 
 namespace Game {
@@ -49,13 +50,38 @@ namespace Game {
       Eat();
       // ワールド座標の更新
       WorldMatrix();
+      // モデルのワールド座標の設定
+      MV1SetMatrix(_modelHandle, AppMath::UtilityDX::ToMATRIX(_world));
+      // 追従カメラ更新
+      _app.GetCamera().Tracking(_position, _forward);
+    }
+
+    void PlayerShark::Draw() const {
+      ObjectBase::Draw();
+      // デバッグ情報描画
+#ifdef _DEBUG
+      // ローカル座標
+      auto [x, y, z] = _position.GetVector3();
+      DrawFormatString(0, 0, GetColor(255, 255, 255), "x:%f  y:%f, z:%f", x, y, z);
+      // 向き
+      auto [rX, rY, rZ] = _rotation.GetVector3();
+      DrawFormatString(0, 20, GetColor(255, 255, 255), "rotationX:%f  rotationY:%f rotationZ:%f", rX, rY, rZ);
+      // 左スティック入力
+      auto [lx, ly] = _app.GetInputManager().GetXJoypad().GetStick(AppFrame::Input::StickLeft);
+      DrawFormatString(0, 40, GetColor(255, 255, 255), "lx:%d  ly:%d", lx, ly);
+      // 軸線分
+      DrawLine3D(VGet(-200.0f, 0.0f, 0.0f), VGet(200.0f, 0.0f, 0.0f), GetColor(255, 0, 0));
+      DrawLine3D(VGet(0.0f, 0.0f, -200.0f), VGet(0.0f, 0.0f, 200.0f), GetColor(0, 255, 0));
+#endif
     }
 
     void PlayerShark::SetParameters() {
       // モデルハンドルの設定
       _modelHandle = _app.GetModelLoadServer().GetModelHandle(Modelhandle);
       // 各種パラメータの設定
+      _scale.Fill(1.0f);
       _hungry = HungryInit;
+      _speed = SwimSpeed;
     }
 
     void PlayerShark::Hungry() {
@@ -85,7 +111,10 @@ namespace Game {
       if (_isEating) {
         return;
       }
-      // 移動処理
+      // 移動量の算出
+      auto move = Move();
+      // ローカル座標の更新
+      _position.Add(move);
     }
 
     void PlayerShark::Hit() {
@@ -119,6 +148,40 @@ namespace Game {
       }
       // 捕食時間を増やす
       ++_eatTime;
+    }
+
+    AppMath::Vector4 PlayerShark::Move() {
+      // 移動量
+      auto move = AppMath::Vector4();
+      // 入力状態の取得
+      auto xJoypad = _app.GetInputManager().GetXJoypad();
+      auto [leftX, leftY] = xJoypad.GetStick(AppFrame::Input::StickLeft);
+      // 軸方向の入力状態(型変更)
+      float x = static_cast<float>(leftX);
+      float z = static_cast<float>(leftY);
+      // 移動量が無い場合中断
+      if (x * x + z * z == 0.0f) {
+        return move;
+      }
+      // デッドゾーン最大値
+      float deadZoneMax = static_cast<float>(xJoypad.GetDeadZoneMax());
+      // 移動方向
+      float moveX = x / deadZoneMax;
+      float moveZ = z / deadZoneMax;
+      // 移動量の設定
+      move = AppMath::Vector4(moveX * _speed, 0.0f, moveZ * _speed);
+      // ラジアン
+      float radian = std::atan2(move.GetX(), -move.GetZ());
+#ifdef _DEBUG
+      // デグリー値をセット
+      _rotation.Set(0.0f, AppMath::Utility::RadianToDegree(radian), 0.0f);
+#else
+      // ラジアン値をセット
+      _rotation.Set(0.0f, radian, 0.0f);
+#endif
+      // 前方向きの設定
+      _forward = AppMath::Vector4::Normalize(move);
+      return move;
     }
   } // namespace Player
 } // namespace Game
