@@ -83,7 +83,7 @@ namespace Game {
       float _speed{ 0.0f };     //!< 移動速度
       bool _isEating{ false };  //!< 捕食中
       //!< 前方向き
-      AppMath::Vector4 _forward;
+      AppMath::Vector4 _forward{ 0.0f, 0.0f, -1.0f };
       //!< プレイヤーの状態
       PlayerState _playerState{ PlayerState::Idle };
       //!< 前フレームのプレイヤーの状態
