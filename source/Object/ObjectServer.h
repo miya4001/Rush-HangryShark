@@ -46,8 +46,9 @@ namespace Game {
       /**
        * @brief  オブジェクトを登録
        * @param  object オブジェクトのスマートポインタ
+       * @param  add 直接追加(デフォルトでfalse)
        */
-      void RegisterObject(std::shared_ptr<ObjectBase> object);
+      void RegisterObject(std::shared_ptr<ObjectBase> object, const bool add = false);
       /**
        * @brief  オブジェクトレジストリの取得
        * @return オブジェクトのシェアードポインタが格納された動的配列

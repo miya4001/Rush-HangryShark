@@ -50,13 +50,18 @@ namespace Game {
       }
     }
 
-    void ObjectServer::RegisterObject(std::shared_ptr<ObjectBase> object) {
+    void ObjectServer::RegisterObject(std::shared_ptr<ObjectBase> object, const bool add) {
       // オブジェクトの取得に失敗した場合エラー
       if (object == nullptr) {
 #ifdef _DEBUG
         throw ("オブジェクトはnullptrです");
 #endif
         return; // キーが不正
+      }
+      // 直接追加する場合
+      if (add) {
+        _objectRegistry.emplace_back(std::move(object));
+        return;
       }
       // 追加予約
       _addObjectRegistry.emplace_back(std::move(object));

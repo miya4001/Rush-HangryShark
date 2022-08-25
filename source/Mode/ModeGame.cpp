@@ -7,9 +7,16 @@
  *********************************************************************/
 #include "ModeGame.h"
 #include "../Application/ApplicationMain.h"
+#include "../Camera/Camera.h"
 #include "../Object/ObjectServer.h"
 #include "../Player/PlayerShark.h"
 #include "../Sea/SeaSphere.h"
+
+namespace {
+  namespace AppMath = AppFrame::Math;
+  const AppMath::Vector4 CameraPosition{ 0.0f, 100.0f, 250.0f };  //!< 初期カメラ位置
+  const AppMath::Vector4 CameraTarget{ 0.0f, 50.0f, 0.0f };       //!< 初期カメラ注視点
+}
 
 namespace Game {
   namespace Mode {
@@ -24,12 +31,14 @@ namespace Game {
     void ModeGame::Enter() {
       // リソースの読み取り処理
       LoadResource();
+      // カメラ初期化
+      _appMain.GetCamera().FixedPoint(CameraPosition, CameraTarget);
       // 海中背景の生成
       auto sea = std::make_shared<Sea::SeaSphere>(_appMain);
-      _appMain.GetObjectServer().RegisterObject(sea);
+      _appMain.GetObjectServer().RegisterObject(sea, true);
       // 自機の生成
       auto player = std::make_shared<Player::PlayerShark>(_appMain);
-      _appMain.GetObjectServer().RegisterObject(player);
+      _appMain.GetObjectServer().RegisterObject(player, true);
     }
 
     void ModeGame::Exit() {
