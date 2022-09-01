@@ -62,28 +62,27 @@ namespace Game {
        */
       void Hungry();
       /**
-       * @brief  移動
-       */
-      void Swim();
-      /**
-       * @brief  接触
-       */
-      void Hit();
       /**
        * @brief  捕食
        */
       void Eat();
       /**
-       * @brief  移動量の算出
-       * @return 移動量
+       * @brief  接触
        */
-      AppMath::Vector4 Move();
+      void Hit();
+      /**
+       * @brief  回転
+       */
+      void Rotate();
+      /**
+       * @brief  移動
+       */
+      void Move();
 
       int _hungry{ 0 };         //!< 空腹値
       int _hungryCount{ 0 };    //!< 空腹カウント
       int _eatTime{ 0 };        //!< 捕食時間
       float _speed{ 0.0f };     //!< 移動速度
-      bool _isEating{ false };  //!< 捕食中
       //!< 前方向き
       AppMath::Vector4 _forward{ 0.0f, 0.0f, -1.0f };
       //!< プレイヤーの状態

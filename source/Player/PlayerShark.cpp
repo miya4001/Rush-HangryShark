@@ -18,8 +18,9 @@ namespace {
   constexpr int HungryCountMax = 60;     //!< 空腹カウント上限
   constexpr int EatTimeMax = 60;         //!< 捕食時間上限
   constexpr int EatValue = 10;           //!< 捕食値
-  constexpr float SwimSpeed = 5.0f;      //!< 水泳速度
-  constexpr float RushSpeed = 10.0f;     //!< 突撃速度
+  constexpr float RotateDegree = 3.0f;   //!< 回転角度(デグリー値)
+  constexpr float SwimSpeed = 10.0f;     //!< 水泳速度
+  constexpr float RushSpeed = 20.0f;     //!< 突撃速度
 }
 
 namespace Game {
@@ -42,12 +43,12 @@ namespace Game {
         // ゲームオーバー
         return;
       }
-      // 移動
-      Swim();
+      // 回転
+      Rotate();
+      // 移動 
+      Move();
       // 接触
       Hit();
-      // 捕食
-      Eat();
       // ワールド座標の更新
       WorldMatrix();
       // モデルのワールド座標の設定
@@ -66,12 +67,9 @@ namespace Game {
       // 向き
       auto [rX, rY, rZ] = _rotation.GetVector3();
       DrawFormatString(0, 20, GetColor(255, 255, 255), "rX:%f  rY:%f rZ:%f", rX, rY, rZ);
-      // 左スティック入力
-      auto [lx, ly] = _app.GetInputManager().GetXJoypad().GetStick(AppFrame::Input::StickLeft);
-      DrawFormatString(0, 40, GetColor(255, 255, 255), "lx:%d  ly:%d", lx, ly);
       // 空腹
-      DrawFormatString(0, 60, GetColor(255, 255, 255), "hungry:%d  count:%d", _hungry, _hungryCount);
-      // 軸線分
+      DrawFormatString(0, 40, GetColor(255, 255, 255), "hungry:%d  count:%d", _hungry, _hungryCount);
+      // 原点軸線分
       DrawLine3D(VGet(-200.0f, 0.0f, 0.0f), VGet(200.0f, 0.0f, 0.0f), GetColor(255, 0, 0));
       DrawLine3D(VGet(0.0f, 0.0f, -200.0f), VGet(0.0f, 0.0f, 200.0f), GetColor(0, 255, 0));
 #endif
@@ -89,7 +87,7 @@ namespace Game {
 
     void PlayerShark::Hungry() {
       // 捕食中の場合中断
-      if (_isEating) {
+      if (_playerState == PlayerState::Eat) {
         return;
       }
       // 空腹カウントが上限の場合
@@ -109,32 +107,7 @@ namespace Game {
       ++_hungryCount;
     }
 
-    void PlayerShark::Swim() {
-      // 捕食中の場合中断
-      if (_isEating) {
-        return;
-      }
-      // 移動量の算出
-      auto move = Move();
-      // ローカル座標の更新
-      _position.Add(move);
-    }
-
-    void PlayerShark::Hit() {
-      // 捕食中の場合中断
-      if (_isEating) {
-        return;
-      }
-      // 魚との接触判定
-      // 捕食開始
-      // _isEating = true;
-    }
-
     void PlayerShark::Eat() {
-      // 捕食中でない場合中断
-      if (!_isEating) {
-        return;
-      }
       // 捕食時間が上限の場合
       if (EatTimeMax <= _eatTime) {
         // 捕食時間初期化
@@ -146,45 +119,74 @@ namespace Game {
           _hungry = HungryMax;
         }
         // 捕食終了
-        _isEating = false;
+        _playerState = PlayerState::Idle;
         return;
       }
       // 捕食時間を増やす
       ++_eatTime;
     }
 
-    AppMath::Vector4 PlayerShark::Move() {
-      // 移動量
-      auto move = AppMath::Vector4();
+    void PlayerShark::Hit() {
+      // 魚との接触判定
+
+      // 捕食状態
+      //_playerState = PlayerState::Eat;
+    }
+
+    void PlayerShark::Rotate() {
       // 入力状態の取得
       auto xJoypad = _app.GetInputManager().GetXJoypad();
-      auto [leftX, leftY] = xJoypad.GetStick(AppFrame::Input::StickLeft);
-      // 軸方向の入力状態(型変更)
-      float x = static_cast<float>(leftX);
-      float z = static_cast<float>(leftY);
-      // 移動量が無い場合中断
-      if (x * x + z * z == 0.0f) {
-        return move;
-      }
-      // デッドゾーン最大値
-      float deadZoneMax = static_cast<float>(xJoypad.GetDeadZoneMax());
-      // 移動方向
-      float moveX = x / deadZoneMax;
-      float moveZ = z / deadZoneMax;
-      // 移動量の設定
-      move = AppMath::Vector4(moveX * _speed, 0.0f, moveZ * _speed);
-      // ラジアン
-      float radian = std::atan2(move.GetX(), -move.GetZ());
+      // LBボタン(押下)の入力状態
+      bool leftB = xJoypad.GetButton(XINPUT_BUTTON_LEFT_SHOULDER, AppFrame::Input::InputPress);
+      // RBボタン(押下)の入力状態
+      bool rightB = xJoypad.GetButton(XINPUT_BUTTON_RIGHT_SHOULDER, AppFrame::Input::InputPress);
+      // 角度
+      auto angle = AppMath::Vector4();
+      // 入力状態に沿って角度の設定
+      if (leftB) {
+        // 左回転
 #ifdef _DEBUG
       // デグリー値をセット
-      _rotation.Set(0.0f, AppMath::Utility::RadianToDegree(radian), 0.0f);
+        angle.SetY(-RotateDegree);
 #else
       // ラジアン値をセット
-      _rotation.Set(0.0f, radian, 0.0f);
+        angle.SetY(AppMath::Utility::DegreeToRadian(-RotateDegree));
 #endif
-      // 前方向きの設定
-      _forward = AppMath::Vector4::Normalize(move);
-      return move;
+      } else if (rightB) {
+        //右回転
+#ifdef _DEBUG
+      // デグリー値をセット
+        angle.SetY(RotateDegree);
+#else
+      // ラジアン値をセット
+        angle.SetY(AppMath::Utility::DegreeToRadian(RotateDegree));
+#endif
+      }
+      // 向きに角度を加算
+      _rotation.Add(angle);
+      // y軸回転行列
+      auto rotateY = AppMath::Matrix44::ToRotationY(AppMath::Utility::DegreeToRadian(_rotation.GetY()));
+      // 正面
+      auto front = AppMath::Vector4(0, 0, -1);
+      // 前方向きの算出
+      _forward = AppMath::Utility::TransformVector(front, rotateY);
+    }
+
+    void PlayerShark::Move() {
+      // 入力状態の取得
+      auto xJoypad = _app.GetInputManager().GetXJoypad();
+      // 左スティック入力状態
+      auto [leftX, leftY] = xJoypad.GetStick(AppFrame::Input::StickLeft);
+      // 上方向入力が無い場合中断
+      if (leftY <= 0.0f) {
+        return;
+      }
+      // 移動量
+      auto move = AppMath::Vector4();
+      // 前方向きに移動速度倍
+      move = _forward * _speed;
+      // 移動量の追加
+      _position.Add(move);
     }
   } // namespace Player
 } // namespace Game
