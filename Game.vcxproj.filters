@@ -49,6 +49,12 @@
     <Filter Include="ソース ファイル\Sea">
       <UniqueIdentifier>{f9c973d8-86d0-4dcd-ba32-0a2890f92e17}</UniqueIdentifier>
     </Filter>
+    <Filter Include="ソース ファイル\Enemy">
+      <UniqueIdentifier>{f0e748a8-ab3b-48cd-abaf-8f6071d13e77}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ヘッダー ファイル\Enemy">
+      <UniqueIdentifier>{c1336dda-f2ed-4824-a17f-fd680ea33b43}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="source\Application\ApplicationMain.h">
@@ -75,6 +81,12 @@
     <ClInclude Include="source\Sea\SeaSphere.h">
       <Filter>ヘッダー ファイル\Sea</Filter>
     </ClInclude>
+    <ClInclude Include="source\Enemy\EnemyBase.h">
+      <Filter>ヘッダー ファイル\Enemy</Filter>
+    </ClInclude>
+    <ClInclude Include="source\Enemy\EnemyTuna.h">
+      <Filter>ヘッダー ファイル\Enemy</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="source\Application\ApplicationMain.cpp">
@@ -100,6 +112,12 @@
     </ClCompile>
     <ClCompile Include="source\Sea\SeaSphere.cpp">
       <Filter>ソース ファイル\Sea</Filter>
+    </ClCompile>
+    <ClCompile Include="source\Enemy\EnemyBase.cpp">
+      <Filter>ソース ファイル\Enemy</Filter>
+    </ClCompile>
+    <ClCompile Include="source\Enemy\EnemyTuna.cpp">
+      <Filter>ソース ファイル\Enemy</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

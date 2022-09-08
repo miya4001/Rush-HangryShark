@@ -18,6 +18,7 @@ namespace {
   constexpr int HungryCountMax = 60;     //!< 空腹カウント上限
   constexpr int EatTimeMax = 60;         //!< 捕食時間上限
   constexpr int EatValue = 10;           //!< 捕食値
+  constexpr float Scale = 1.0f;          //!< 拡大率
   constexpr float RotateDegree = 3.0f;   //!< 回転角度(デグリー値)
   constexpr float SwimSpeed = 10.0f;     //!< 水泳速度
   constexpr float RushSpeed = 20.0f;     //!< 突撃速度
@@ -80,7 +81,7 @@ namespace Game {
       _modelHandle = _app.GetModelLoadServer().GetModelHandle(Modelhandle);
       // 各種パラメータの設定
       _objectId = ObjectId::Player;
-      _scale.Fill(1.0f);
+      _scale.Fill(Scale);
       _hungry = HungryInit;
       _speed = SwimSpeed;
     }
@@ -167,7 +168,7 @@ namespace Game {
       // y軸回転行列
       auto rotateY = AppMath::Matrix44::ToRotationY(AppMath::Utility::DegreeToRadian(_rotation.GetY()));
       // 正面
-      auto front = AppMath::Vector4(0, 0, -1);
+      auto front = AppMath::Vector4(0.0f, 0.0f, -1.0f);
       // 前方向きの算出
       _forward = AppMath::Utility::TransformVector(front, rotateY);
     }

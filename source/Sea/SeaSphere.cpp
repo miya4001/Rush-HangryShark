@@ -12,6 +12,7 @@
 namespace {
   // 海中背景各種定数
   constexpr auto Modelhandle = "sea";  //!< モデルハンドルキー
+  constexpr float Scale = 0.5f;        //!< 拡大率
 }
 
 namespace Game {
@@ -47,7 +48,7 @@ namespace Game {
       // モデルハンドルの設定
       _modelHandle = _app.GetModelLoadServer().GetModelHandle(Modelhandle);
       // 各種パラメータの設定
-      _scale.Fill(1.0f);
+      _scale.Fill(Scale);
     }
   } // namespace Sea
 } // namespace Game
