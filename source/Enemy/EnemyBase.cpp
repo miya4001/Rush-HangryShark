@@ -47,6 +47,10 @@ namespace Game {
       return false;
     }
 
+    void EnemyBase::Move() {
+
+    }
+
     void EnemyBase::Hit() {
 
     }

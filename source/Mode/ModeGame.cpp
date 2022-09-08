@@ -12,6 +12,7 @@
 #include "../Player/PlayerShark.h"
 #include "../Sea/SeaSphere.h"
 #include "../Enemy/EnemyTuna.h"
+#include "../Enemy/EnemyJerryfish.h"
 
 namespace {
   namespace AppMath = AppFrame::Math;
@@ -41,8 +42,11 @@ namespace Game {
       auto player = std::make_shared<Player::PlayerShark>(_appMain);
       _appMain.GetObjectServer().RegisterObject(player, true);
       // 敵(マグロ)の生成
-      auto enemy = std::make_shared<Enemy::EnemyTuna>(_appMain);
-      _appMain.GetObjectServer().RegisterObject(enemy, true);
+      auto tuna = std::make_shared<Enemy::EnemyTuna>(_appMain);
+      _appMain.GetObjectServer().RegisterObject(tuna, true);
+      // 敵(クラゲ)の生成
+      auto jerry = std::make_shared<Enemy::EnemyJerryfish>(_appMain);
+      _appMain.GetObjectServer().RegisterObject(jerry, true);
     }
 
     void ModeGame::Exit() {
@@ -82,7 +86,8 @@ namespace Game {
       const ModelLoadServer::LoadModelMap loadModelMap{
         {"sea", "resource/Model/Sea/skysphere.mv1"},
         {"shark", "resource/Model/Shark/megalodon.mv1"},
-        {"tuna", "resource/Model/Tuna/Tuna.mv1"}
+        {"tuna", "resource/Model/Tuna/Tuna.mv1"},
+        {"jerryfish", "resource/Model/Jerryfish/jerryfish.mv1"}
       };
       // モデル読み込みサーバに一括読み込み
       _app.GetModelLoadServer().LoadModels(loadModelMap);

@@ -51,6 +51,10 @@ namespace Game{
        */
       virtual bool IsOverSea();
       /**
+       * @brief  ˆÚ“®
+       */
+      virtual void Move();
+      /**
        * @brief  Õ“Ë
        */
       virtual void Hit();

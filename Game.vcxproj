@@ -162,6 +162,7 @@
     <ClInclude Include="source\Application\ApplicationMain.h" />
     <ClInclude Include="source\Camera\Camera.h" />
     <ClInclude Include="source\Enemy\EnemyBase.h" />
+    <ClInclude Include="source\Enemy\EnemyJerryfish.h" />
     <ClInclude Include="source\Enemy\EnemyTuna.h" />
     <ClInclude Include="source\Mode\ModeGame.h" />
     <ClInclude Include="source\Mode\ModeTitle.h" />
@@ -174,6 +175,7 @@
     <ClCompile Include="source\Application\ApplicationMain.cpp" />
     <ClCompile Include="source\Camera\Camera.cpp" />
     <ClCompile Include="source\Enemy\EnemyBase.cpp" />
+    <ClCompile Include="source\Enemy\EnemyJerryfish.cpp" />
     <ClCompile Include="source\Enemy\EnemyTuna.cpp" />
     <ClCompile Include="source\Mode\ModeGame.cpp" />
     <ClCompile Include="source\Mode\ModeTitle.cpp" />

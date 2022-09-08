@@ -1,6 +1,6 @@
 /*****************************************************************//**
- * @file   EnemyTuna.h
- * @brief  敵(マグロ)クラス
+ * @file   EnemyJerryfish.h
+ * @brief  敵(クラゲ)クラス
  * 
  * @author 宮澤耀生
  * @date   September 2022
@@ -17,16 +17,16 @@ namespace Game {
    */
   namespace Enemy {
     /**
-     * @class EnemyTuna
-     * @brief 敵(マグロ)クラス
+     * @class EnemyJerryfish
+     * @brief 敵(クラゲ)クラス
      */
-    class EnemyTuna :public EnemyBase {
+    class EnemyJerryfish :public EnemyBase {
     public:
       /**
        * @brief コンストラクタ
        * @param app アプリケーションの参照
        */
-      EnemyTuna(Application::ApplicationMain& app);
+      EnemyJerryfish(Application::ApplicationMain& app);
       /**
        * @brief  更新
        */
