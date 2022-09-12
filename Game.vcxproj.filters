@@ -55,6 +55,12 @@
     <Filter Include="ヘッダー ファイル\Enemy">
       <UniqueIdentifier>{c1336dda-f2ed-4824-a17f-fd680ea33b43}</UniqueIdentifier>
     </Filter>
+    <Filter Include="ヘッダー ファイル\Collision">
+      <UniqueIdentifier>{2d0d2434-e44e-4a39-b182-e5da4c915d02}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ソース ファイル\Collision">
+      <UniqueIdentifier>{f4ebe9d8-36b5-4862-92fa-832a164efc57}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="source\Application\ApplicationMain.h">
@@ -90,6 +96,9 @@
     <ClInclude Include="source\Enemy\EnemyJerryfish.h">
       <Filter>ヘッダー ファイル\Enemy</Filter>
     </ClInclude>
+    <ClInclude Include="source\Collision\CollisionSphere.h">
+      <Filter>ヘッダー ファイル\Collision</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="source\Application\ApplicationMain.cpp">
@@ -124,6 +133,9 @@
     </ClCompile>
     <ClCompile Include="source\Enemy\EnemyJerryfish.cpp">
       <Filter>ソース ファイル\Enemy</Filter>
+    </ClCompile>
+    <ClCompile Include="source\Collision\CollisionSphere.cpp">
+      <Filter>ソース ファイル\Collision</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>
