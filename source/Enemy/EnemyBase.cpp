@@ -20,14 +20,16 @@ namespace Game {
     }
 
     void EnemyBase::Process() {
-      // 海中範囲外の場合中断
-      if (IsOverSea()) {
-        return;
-      }
-      // ワールド座標の更新
-      WorldMatrix();
-      // モデルのワールド座標の設定
-      MV1SetMatrix(_modelHandle, AppMath::UtilityDX::ToMATRIX(_world));
+
+    }
+
+    void EnemyBase::Draw() const {
+      ObjectBase::Draw();
+      // デバッグ情報描画
+#ifdef _DEBUG
+      // 球の衝突判定の描画
+      _sphere->Draw();
+#endif
     }
 
     void EnemyBase::SetParameters() {

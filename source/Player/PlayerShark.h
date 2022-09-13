@@ -7,6 +7,7 @@
  *********************************************************************/
 #pragma once
 #include "../Object/ObjectBase.h"
+#include "../Collision/CollisionSphere.h"
 
 /**
  * @brief  ゲーム
@@ -62,15 +63,6 @@ namespace Game {
        */
       void Hungry();
       /**
-      /**
-       * @brief  捕食
-       */
-      void Eat();
-      /**
-       * @brief  接触
-       */
-      void Hit();
-      /**
        * @brief  回転
        */
       void Rotate();
@@ -78,17 +70,26 @@ namespace Game {
        * @brief  移動
        */
       void Move();
+      /**
+       * @brief  接触
+       */
+      void Hit();
+      /**
+      /**
+       * @brief  捕食
+       */
+      void Eat();
 
       int _hungry{ 0 };         //!< 空腹値
       int _hungryCount{ 0 };    //!< 空腹カウント
       int _eatTime{ 0 };        //!< 捕食時間
       float _speed{ 0.0f };     //!< 移動速度
-      //!< 前方向き
-      AppMath::Vector4 _forward{ 0.0f, 0.0f, -1.0f };
       //!< プレイヤーの状態
       PlayerState _playerState{ PlayerState::Idle };
-      //!< 前フレームのプレイヤーの状態
-      PlayerState _oldPlayerState{ PlayerState::Idle };
+      //!< 前方向き
+      AppMath::Vector4 _forward{ 0.0f, 0.0f, -1.0f };
+      //!< 球の衝突判定
+      std::unique_ptr<Collision::CollisionSphere> _sphere;
     };
   } // namespace Player
 } // namespace Game

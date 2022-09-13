@@ -7,6 +7,7 @@
  *********************************************************************/
 #pragma once
 #include "../Object/ObjectBase.h"
+#include "../Collision/CollisionSphere.h"
 
 /**
  * @brief  ÉQÅ[ÉÄ
@@ -38,6 +39,10 @@ namespace Game{
        * @brief  çXêV
        */
       virtual void Process();
+      /**
+       * @brief  ï`âÊ
+       */
+      void Draw() const override;
 
     protected:
       /**
@@ -58,6 +63,9 @@ namespace Game{
        * @brief  è’ìÀ
        */
       virtual void Hit();
+
+      //!< ãÖÇÃè’ìÀîªíË
+      std::unique_ptr<Collision::CollisionSphere> _sphere;
     };
   } // namespace Enemy
 } // namespace Game

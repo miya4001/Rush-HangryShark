@@ -19,6 +19,8 @@ namespace {
   constexpr int EatTimeMax = 60;         //!< 捕食時間上限
   constexpr int EatValue = 10;           //!< 捕食値
   constexpr float Scale = 1.0f;          //!< 拡大率
+  constexpr float Radius = 50.0f;        //!< 球半径
+  constexpr float SphereY = 25.0f;      //!< 球y座標
   constexpr float RotateDegree = 3.0f;   //!< 回転角度(デグリー値)
   constexpr float SwimSpeed = 10.0f;     //!< 水泳速度
   constexpr float RushSpeed = 20.0f;     //!< 突撃速度
@@ -73,6 +75,8 @@ namespace Game {
       // 原点軸線分
       DrawLine3D(VGet(-200.0f, 0.0f, 0.0f), VGet(200.0f, 0.0f, 0.0f), GetColor(255, 0, 0));
       DrawLine3D(VGet(0.0f, 0.0f, -200.0f), VGet(0.0f, 0.0f, 200.0f), GetColor(0, 255, 0));
+      // 球の衝突判定の描画
+      _sphere->Draw();
 #endif
     }
 
@@ -84,6 +88,10 @@ namespace Game {
       _scale.Fill(Scale);
       _hungry = HungryInit;
       _speed = SwimSpeed;
+      // 球の衝突判定の設定
+      auto position = _position;
+      position.SetY(SphereY);
+      _sphere = std::make_unique<Collision::CollisionSphere>(*this, position, Radius);
     }
 
     void PlayerShark::Hungry() {
@@ -106,32 +114,6 @@ namespace Game {
       }
       // 空腹カウントを増やす
       ++_hungryCount;
-    }
-
-    void PlayerShark::Eat() {
-      // 捕食時間が上限の場合
-      if (EatTimeMax <= _eatTime) {
-        // 捕食時間初期化
-        _eatTime = 0;
-        // 空腹値に捕食値追加
-        _hungry += EatValue;
-        // 空腹値上限調整
-        if (HungryMax <= _hungry) {
-          _hungry = HungryMax;
-        }
-        // 捕食終了
-        _playerState = PlayerState::Idle;
-        return;
-      }
-      // 捕食時間を増やす
-      ++_eatTime;
-    }
-
-    void PlayerShark::Hit() {
-      // 魚との接触判定
-
-      // 捕食状態
-      //_playerState = PlayerState::Eat;
     }
 
     void PlayerShark::Rotate() {
@@ -166,7 +148,11 @@ namespace Game {
       // 向きに角度を加算
       _rotation.Add(angle);
       // y軸回転行列
+#ifdef _DEBUG
       auto rotateY = AppMath::Matrix44::ToRotationY(AppMath::Utility::DegreeToRadian(_rotation.GetY()));
+#else
+      auto rotateY = AppMath::Matrix44::ToRotationY(_rotation.GetY());
+#endif
       // 正面
       auto front = AppMath::Vector4(0.0f, 0.0f, -1.0f);
       // 前方向きの算出
@@ -188,6 +174,34 @@ namespace Game {
       move = _forward * _speed;
       // 移動量の追加
       _position.Add(move);
+      // 球の衝突判定の更新
+      _sphere->Process(move);
+    }
+
+    void PlayerShark::Hit() {
+      // 魚との接触判定
+
+      // 捕食状態
+      //_playerState = PlayerState::Eat;
+    }
+
+    void PlayerShark::Eat() {
+      // 捕食時間が上限の場合
+      if (EatTimeMax <= _eatTime) {
+        // 捕食時間初期化
+        _eatTime = 0;
+        // 空腹値に捕食値追加
+        _hungry += EatValue;
+        // 空腹値上限調整
+        if (HungryMax <= _hungry) {
+          _hungry = HungryMax;
+        }
+        // 捕食終了
+        _playerState = PlayerState::Idle;
+        return;
+      }
+      // 捕食時間を増やす
+      ++_eatTime;
     }
   } // namespace Player
 } // namespace Game
