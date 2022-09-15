@@ -20,7 +20,7 @@ namespace {
   constexpr int EatValue = 10;           //!< 捕食値
   constexpr float Scale = 1.0f;          //!< 拡大率
   constexpr float Radius = 50.0f;        //!< 球半径
-  constexpr float SphereY = 25.0f;      //!< 球y座標
+  constexpr float SphereY = 25.0f;       //!< 球y座標
   constexpr float RotateDegree = 3.0f;   //!< 回転角度(デグリー値)
   constexpr float SwimSpeed = 10.0f;     //!< 水泳速度
   constexpr float RushSpeed = 20.0f;     //!< 突撃速度

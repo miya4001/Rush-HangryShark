@@ -6,6 +6,10 @@
  * @date   September 2022
  *********************************************************************/
 #include "EnemyBase.h"
+#include "../Application/ApplicationMain.h"
+#include "../Object/ObjectServer.h"
+#include "../Sea/SeaSphere.h"
+#include "../Player/PlayerShark.h"
 
 namespace Game {
   namespace Enemy {
@@ -37,16 +41,20 @@ namespace Game {
       _objectId = ObjectId::Enemy;
     }
 
-    bool EnemyBase::IsOverSea() {
-      // ŠC’†”ÍˆÍ”»’è
-      //if () {
-      //  // Ž€–S
-      //  _objectState = ObjectState::Dead;
-      //  // ŠC’†”ÍˆÍŠO
-      //  return true;
-      //}
+    bool EnemyBase::InTheSea() {
       // ŠC’†”ÍˆÍ“à
-      return false;
+      bool inTheSea = false;
+      // ƒIƒuƒWƒFƒNƒg‚ÌƒRƒs[
+      auto objects = _app.GetObjectServer().GetObjects();
+      // ŠC’†”wŒi‚ð’T‚·
+      for (auto object : objects) {
+        if (object->GetId() == ObjectId::Sea) {
+          // ŠC’†”ÍˆÍ“à”»’è
+          inTheSea = _sphere->IntersectSphere(std::dynamic_pointer_cast<Sea::SeaSphere>(object)->GetSphere());
+          break;
+        }
+      }
+      return inTheSea;
     }
 
     void EnemyBase::Move() {
@@ -54,7 +62,15 @@ namespace Game {
     }
 
     void EnemyBase::Hit() {
-
+      auto objects = _app.GetObjectServer().GetObjects();
+      for (auto object : objects) {
+        if (object->GetId() != ObjectId::Player) {
+          continue;
+        }
+        if (_sphere->IntersectSphere(std::dynamic_pointer_cast<Player::PlayerShark>(object)->GetSphere())) {
+          break;
+        }
+      }
     }
   } // namespace Enemy
 } // namespace Game

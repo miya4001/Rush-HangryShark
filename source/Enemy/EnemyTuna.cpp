@@ -26,7 +26,9 @@ namespace Game {
 
     void EnemyTuna::Process() {
       // ŠC’†”ÍˆÍŠO‚Ìê‡’†’f
-      if (IsOverSea()) {
+      if (!InTheSea()) {
+        // €–S
+        _objectState = ObjectState::Dead;
         return;
       }
       // ˆÚ“®

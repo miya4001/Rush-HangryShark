@@ -13,6 +13,7 @@ namespace {
   // 海中背景各種定数
   constexpr auto Modelhandle = "sea";  //!< モデルハンドルキー
   constexpr float Scale = 0.5f;        //!< 拡大率
+  constexpr float Radius = 2500.0f;    //!< 球半径
 }
 
 namespace Game {
@@ -35,6 +36,7 @@ namespace Game {
         if (obj->GetId() == ObjectId::Player) {
           // プレイヤーのローカル座標に更新
           _position = obj->GetPosition();
+          _sphere->SetPosition(_position);
           break;
         }
       }
@@ -48,7 +50,10 @@ namespace Game {
       // モデルハンドルの設定
       _modelHandle = _app.GetModelLoadServer().GetModelHandle(Modelhandle);
       // 各種パラメータの設定
+      _objectId = ObjectId::Sea;
       _scale.Fill(Scale);
+      // 球の衝突判定の設定
+      _sphere = std::make_unique<Collision::CollisionSphere>(*this, _position, Radius);
     }
   } // namespace Sea
 } // namespace Game

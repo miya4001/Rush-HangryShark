@@ -43,6 +43,13 @@ namespace Game{
        * @brief  •`‰æ
        */
       void Draw() const override;
+      /**
+       * @brief  ‹…‚ÌÕ“Ë”»’è‚Ìæ“¾
+       * @return ‹…‚ÌÕ“Ë”»’è‚ÌQÆ
+       */
+      Collision::CollisionSphere& GetSphere() {
+        return *_sphere;
+      }
 
     protected:
       /**
@@ -50,11 +57,11 @@ namespace Game{
        */
       virtual void SetParameters();
       /**
-       * @brief  ŠC’†”ÍˆÍŠO”»’è
-       * @return true:ŠC’†”ÍˆÍŠO
-       *         false:ŠC’†”ÍˆÍ“à
+       * @brief  ŠC’†”ÍˆÍ“à”»’è
+       * @return true:ŠC’†”ÍˆÍ“à
+       *         false:ŠC’†”ÍˆÍŠO
        */
-      virtual bool IsOverSea();
+      virtual bool InTheSea();
       /**
        * @brief  ˆÚ“®
        */
@@ -65,7 +72,7 @@ namespace Game{
       virtual void Hit();
 
       //!< ‹…‚ÌÕ“Ë”»’è
-      std::unique_ptr<Collision::CollisionSphere> _sphere;
+      std::unique_ptr<Collision::CollisionSphere> _sphere{ nullptr };
     };
   } // namespace Enemy
 } // namespace Game

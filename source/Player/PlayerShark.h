@@ -52,6 +52,13 @@ namespace Game {
        * @brief  •`‰æ
        */
       void Draw() const override;
+      /**
+       * @brief  ‹…‚ÌÕ“Ë”»’è‚Ìæ“¾
+       * @return ‹…‚ÌÕ“Ë”»’è‚ÌQÆ
+       */
+      Collision::CollisionSphere& GetSphere() {
+        return *_sphere;
+      }
 
     private:
       /**
@@ -89,7 +96,7 @@ namespace Game {
       //!< ‘O•ûŒü‚«
       AppMath::Vector4 _forward{ 0.0f, 0.0f, -1.0f };
       //!< ‹…‚ÌÕ“Ë”»’è
-      std::unique_ptr<Collision::CollisionSphere> _sphere;
+      std::unique_ptr<Collision::CollisionSphere> _sphere{ nullptr };
     };
   } // namespace Player
 } // namespace Game

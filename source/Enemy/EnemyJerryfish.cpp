@@ -25,11 +25,15 @@ namespace Game {
 
     void EnemyJerryfish::Process() {
       // 海中範囲外の場合中断
-      if (IsOverSea()) {
+      if (!InTheSea()) {
+        // 死亡
+        _objectState = ObjectState::Dead;
         return;
       }
       // 移動
       Move();
+      // 衝突
+      Hit();
       // ワールド座標の更新
       WorldMatrix();
       // モデルのワールド座標の設定

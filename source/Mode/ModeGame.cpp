@@ -43,10 +43,10 @@ namespace Game {
       _appMain.GetObjectServer().RegisterObject(player, true);
       // “G(ƒ}ƒOƒ)‚Ì¶¬
       auto tuna = std::make_shared<Enemy::EnemyTuna>(_appMain);
-      _appMain.GetObjectServer().RegisterObject(tuna, true);
+      _appMain.GetObjectServer().RegisterObject(tuna);
       // “G(ƒNƒ‰ƒQ)‚Ì¶¬
       auto jerry = std::make_shared<Enemy::EnemyJerryfish>(_appMain);
-      _appMain.GetObjectServer().RegisterObject(jerry, true);
+      _appMain.GetObjectServer().RegisterObject(jerry);
     }
 
     void ModeGame::Exit() {

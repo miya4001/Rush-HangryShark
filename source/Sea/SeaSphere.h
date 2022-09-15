@@ -7,6 +7,7 @@
  *********************************************************************/
 #pragma once
 #include "../Object/ObjectBase.h"
+#include "../Collision/CollisionSphere.h"
 
 /**
  * @brief  ゲーム
@@ -38,12 +39,22 @@ namespace Game{
        * @brief  更新
        */
       void Process() override;
+      /**
+       * @brief  球の衝突判定の取得
+       * @return 球の衝突判定の参照
+       */
+      Collision::CollisionSphere& GetSphere() {
+        return *_sphere;
+      }
 
     private:
       /**
        * @brief  パラメータの設定
        */
       void SetParameters() override;
+
+      //!< 球の衝突判定
+      std::unique_ptr<Collision::CollisionSphere> _sphere{ nullptr };
     };
   } // namespace Sea
 } // namespace Game

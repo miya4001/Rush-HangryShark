@@ -35,7 +35,8 @@ namespace Game {
       enum class ObjectId {
         Object,  //!< オブジェクト
         Player,  //!< プレイヤー
-        Enemy    //!< 敵
+        Enemy,   //!< 敵
+        Sea      //!< 海
       };
       /**
        * @brief  オブジェクトの状態の列挙型クラス
