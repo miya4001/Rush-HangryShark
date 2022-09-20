@@ -65,6 +65,13 @@ namespace Game{
       inline void SetPosition(const AppMath::Vector4 position) {
         _position = position;
       }
+      /**
+       * @brief  ローカル座標の取得
+       * @return ローカル座標
+       */
+      AppMath::Vector4 GetPosition() {
+        return _position;
+      }
 
     private:
       float _radius{ 0.0f };     //!< 球の半径

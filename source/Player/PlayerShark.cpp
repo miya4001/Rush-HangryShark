@@ -7,23 +7,26 @@
  *********************************************************************/
 #include "PlayerShark.h"
 #include "../Application/ApplicationMain.h"
+#include "../Object/ObjectServer.h"
 #include "../Camera/Camera.h"
+#include "../Enemy/EnemyBase.h"
 
 namespace {
   // プレイヤー各種定数
-  constexpr auto Modelhandle = "shark";  //!< モデルハンドルキー
-  constexpr int HungryMax = 100;         //!< 空腹値上限
-  constexpr int HungryMin = 0;           //!< 空腹値下限
-  constexpr int HungryInit = 75;         //!< 初期空腹値
-  constexpr int HungryCountMax = 60;     //!< 空腹カウント上限
-  constexpr int EatTimeMax = 60;         //!< 捕食時間上限
-  constexpr int EatValue = 10;           //!< 捕食値
-  constexpr float Scale = 1.0f;          //!< 拡大率
-  constexpr float Radius = 50.0f;        //!< 球半径
-  constexpr float SphereY = 25.0f;       //!< 球y座標
-  constexpr float RotateDegree = 3.0f;   //!< 回転角度(デグリー値)
-  constexpr float SwimSpeed = 10.0f;     //!< 水泳速度
-  constexpr float RushSpeed = 20.0f;     //!< 突撃速度
+  constexpr auto Modelhandle = "shark";    //!< モデルハンドルキー
+  constexpr int HungryMax = 100;           //!< 空腹値上限
+  constexpr int HungryMin = 0;             //!< 空腹値下限
+  constexpr int HungryInit = 75;           //!< 初期空腹値
+  constexpr int HungryCountMax = 60;       //!< 空腹カウント上限
+  constexpr int EatTimeMax = 60;           //!< 捕食時間上限
+  constexpr int EatValue = 10;             //!< 捕食値
+  constexpr float Scale = 1.0f;            //!< 拡大率
+  constexpr float Radius = 50.0f;          //!< 球半径
+  constexpr float SphereY = 25.0f;         //!< 球y座標
+  constexpr float RotateDegree = 3.0f;     //!< 回転角度(デグリー値)
+  constexpr float SwimSpeed = 10.0f;       //!< 水泳速度
+  constexpr float RushSpeed = 20.0f;       //!< 突撃速度
+  constexpr float AttackDistance = 50.0f;  //!< 攻撃距離
 }
 
 namespace Game {
@@ -50,8 +53,10 @@ namespace Game {
       Rotate();
       // 移動 
       Move();
-      // 接触
-      Hit();
+      // 攻撃
+      Attack();
+      // 捕食
+      Eat();
       // ワールド座標の更新
       WorldMatrix();
       // モデルのワールド座標の設定
@@ -75,8 +80,10 @@ namespace Game {
       // 原点軸線分
       DrawLine3D(VGet(-200.0f, 0.0f, 0.0f), VGet(200.0f, 0.0f, 0.0f), GetColor(255, 0, 0));
       DrawLine3D(VGet(0.0f, 0.0f, -200.0f), VGet(0.0f, 0.0f, 200.0f), GetColor(0, 255, 0));
-      // 球の衝突判定の描画
+      // 本体球の衝突判定の描画
       _sphere->Draw();
+      // 攻撃球の衝突判定の描画
+      _attack->Draw();
 #endif
     }
 
@@ -92,6 +99,7 @@ namespace Game {
       auto position = _position;
       position.SetY(SphereY);
       _sphere = std::make_unique<Collision::CollisionSphere>(*this, position, Radius);
+      _attack = std::make_unique<Collision::CollisionSphere>(*this, position, Radius);
     }
 
     void PlayerShark::Hungry() {
@@ -174,18 +182,52 @@ namespace Game {
       move = _forward * _speed;
       // 移動量の追加
       _position.Add(move);
-      // 球の衝突判定の更新
+      // 本体球の衝突判定の更新
       _sphere->Process(move);
     }
 
-    void PlayerShark::Hit() {
-      // 魚との接触判定
-
-      // 捕食状態
-      //_playerState = PlayerState::Eat;
+    void PlayerShark::Attack() {
+      // 入力状態の取得
+      auto xJoypad = _app.GetInputManager().GetXJoypad();
+      // Aボタン(トリガ)の入力状態
+      bool buttonA = xJoypad.GetButton(XINPUT_BUTTON_A, AppFrame::Input::InputTrigger);
+      // 本体球の座標
+      auto spherePosition = _sphere->GetPosition();
+      // 攻撃していない場合中断
+      if (!buttonA) {
+        // 攻撃球を本体球と合わせる
+        _attack->SetPosition(spherePosition);
+        return;
+      }
+      // 前方向きの不要なyを無視
+      auto forward = _forward;
+      forward.SetY(0.0f);
+      // 前方向きの方向に長さを距離倍
+      auto distance = forward * AttackDistance;
+      // 攻撃球を本体球から距離分後方に設定
+      auto attackPposition = spherePosition + distance;
+      _attack->SetPosition(attackPposition);
+      // オブジェクトのコピー
+      auto objects = _app.GetObjectServer().GetObjects();
+      // 敵を探す
+      for (auto object : objects) {
+        if (object->GetId() != ObjectId::Enemy) {
+          continue;
+        }
+        // 魚との接触判定
+        if (_attack->IntersectSphere(std::dynamic_pointer_cast<Enemy::EnemyBase>(object)->GetSphere())) {
+          // 捕食状態
+          _playerState = PlayerState::Eat;
+          break;
+        }
+      }
     }
 
     void PlayerShark::Eat() {
+      // 捕食中でない場合中断
+      if (_playerState != PlayerState::Eat) {
+        return;
+      }
       // 捕食時間が上限の場合
       if (EatTimeMax <= _eatTime) {
         // 捕食時間初期化

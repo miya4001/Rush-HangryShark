@@ -28,10 +28,11 @@ namespace Game {
        * @brief  プレイヤーの状態の列挙型クラス
        */
       enum class PlayerState {
-        Idle,  //!< 待機
-        Swim,  //!< 移動
-        Rush,  //!< 突撃
-        Eat,   //!< 捕食
+        Idle,    //!< 待機
+        Swim,    //!< 移動
+        Rush,    //!< 突撃
+        Attack,  //!< 攻撃
+        Eat      //!< 捕食
       };
       /**
        * @brief コンストラクタ
@@ -53,11 +54,25 @@ namespace Game {
        */
       void Draw() const override;
       /**
-       * @brief  球の衝突判定の取得
-       * @return 球の衝突判定の参照
+       * @brief  プレイヤー状態の取得
+       * @return プレイヤー状態
+       */
+      PlayerState GetPlayerState() {
+        return _playerState;
+      }
+      /**
+       * @brief  本体球の衝突判定の取得
+       * @return 本体球の衝突判定の参照
        */
       Collision::CollisionSphere& GetSphere() {
         return *_sphere;
+      }
+      /**
+       * @brief  攻撃球の衝突判定の取得
+       * @return 攻撃球の衝突判定の参照
+       */
+      Collision::CollisionSphere& GetAttack() {
+        return *_attack;
       }
 
     private:
@@ -78,9 +93,9 @@ namespace Game {
        */
       void Move();
       /**
-       * @brief  接触
+       * @brief  攻撃
        */
-      void Hit();
+      void Attack();
       /**
       /**
        * @brief  捕食
@@ -95,8 +110,10 @@ namespace Game {
       PlayerState _playerState{ PlayerState::Idle };
       //!< 前方向き
       AppMath::Vector4 _forward{ 0.0f, 0.0f, -1.0f };
-      //!< 球の衝突判定
+      //!< 本体球の衝突判定
       std::unique_ptr<Collision::CollisionSphere> _sphere{ nullptr };
+      //!< 攻撃球の衝突判定
+      std::unique_ptr<Collision::CollisionSphere> _attack{ nullptr };
     };
   } // namespace Player
 } // namespace Game
