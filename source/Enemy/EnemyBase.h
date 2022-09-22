@@ -57,6 +57,12 @@ namespace Game{
        */
       virtual void SetParameters();
       /**
+       * @brief  ¶¬î•ñ‚Ìİ’è
+       * @param  position ¶¬À•W
+       * @param  rotation ¶¬Œü‚«
+       */
+      virtual void Spawn(const AppMath::Vector4 position, const AppMath::Vector4 rotation);
+      /**
        * @brief  ŠC’†”ÍˆÍ“à”»’è
        * @return true:ŠC’†”ÍˆÍ“à
        *         false:ŠC’†”ÍˆÍŠO

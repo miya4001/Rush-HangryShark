@@ -12,8 +12,6 @@ namespace {
   // マグロ各種定数
   constexpr auto Modelhandle = "tuna";  //!< モデルハンドルキー
   constexpr float Scale = 0.15f;        //!< 拡大率
-  constexpr float Radius = 30.0f;       //!< 球半径
-  constexpr float SphereY = 25.0f;      //!< 球y座標
   constexpr float Speed = 2.0f;         //!< 移動速度
   constexpr float RotateDegree = 1.0f;  //!< 回転角度(デグリー値)
 }
@@ -45,12 +43,9 @@ namespace Game {
       // モデルハンドルの設定
       _modelHandle = _app.GetModelLoadServer().GetModelHandle(Modelhandle);
       // 各種パラメータの設定
-      _position.Set(-500.0f, 0.0f, -500.0f);
       _scale.Fill(Scale);
-      // 球の衝突判定の設定
-      auto position = _position;
-      position.SetY(SphereY);
-      _sphere = std::make_unique<Collision::CollisionSphere>(*this, position, Radius);
+      // 生成情報(一時的)
+      Spawn(AppMath::Vector4(-500.0f, 0.0f, -500.0f), _rotation);
     }
 
     void EnemyTuna::Move() {
