@@ -26,7 +26,11 @@ namespace Game {
 #ifdef _DEBUG
     void CollisionSphere::Draw() const {
       // ‹…‚Ì•`‰æ(Õ“Ë‚ ‚è‚Ìê‡‹…‚Ì“h‚è‚Â‚Ô‚µ)
-      DrawSphere3D(AppMath::UtilityDX::ToVECTOR(_position), _radius, 10, GetColor(0, 0, 0), 0, _collision);
+      DrawSphere3D(AppMath::UtilityDX::ToVECTOR(_position), _radius, 10, GetColor(0, 0, 0), 0, _drawFill);
+    }
+
+    void CollisionSphere::NoFill() {
+      _drawFill = false;
     }
 #endif
 
@@ -37,6 +41,10 @@ namespace Game {
       float sumRadius = _radius + sphere._radius;
       // ‹——£‚Ì“ñæ‚ª”¼Œa‚Ì‡Œv‚Ì“ñæˆÈ‰º‚Ìê‡Õ“Ë
       _collision = distSquared <= sumRadius * sumRadius;
+#ifdef _DEBUG
+      // Õ“Ë”»’è‚É‡‚í‚¹‚Ä“h‚è‚Â‚Ô‚µ
+      _drawFill = _collision;
+#endif
       return _collision;
     }
   } // namespace Collision

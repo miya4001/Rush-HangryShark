@@ -50,6 +50,10 @@ namespace Game{
        * @brief  •`‰æ
        */
       void Draw() const;
+      /**
+       * @brief  “h‚è‚Â‚Ô‚µ‰ğœ
+       */
+      void NoFill();
 #endif
       /**
        * @brief  ‹…‚Æ‹…‚ÌÕ“Ë”»’è
@@ -76,6 +80,9 @@ namespace Game{
     private:
       float _radius{ 0.0f };     //!< ‹…‚Ì”¼Œa
       bool _collision{ false };  //!< Õ“Ë”»’è
+#ifdef _DEBUG
+      bool _drawFill{ false };   //!< “h‚è‚Â‚Ô‚µ
+#endif
       //!< Š—LÒ‚ÌQÆ
       Object::ObjectBase& _owner;
       //!< ƒ[ƒJƒ‹À•W

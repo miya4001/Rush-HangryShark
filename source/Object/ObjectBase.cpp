@@ -32,6 +32,10 @@ namespace Game {
       }
     }
 
+    void ObjectBase::Dead() {
+      _objectState = ObjectState::Dead;
+    }
+
     bool ObjectBase::IsDead() const {
       return _objectState == ObjectState::Dead;
     }

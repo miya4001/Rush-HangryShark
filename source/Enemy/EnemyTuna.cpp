@@ -28,7 +28,7 @@ namespace Game {
       // ŠC’†”ÍˆÍŠO‚Ìê‡’†’f
       if (!InTheSea()) {
         // €–S
-        _objectState = ObjectState::Dead;
+        Dead();
         return;
       }
       // ˆÚ“®

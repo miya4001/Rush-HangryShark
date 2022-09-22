@@ -116,7 +116,7 @@ namespace Game {
         // ‹ó• ’l‚ª‰ºŒÀ‚Ìê‡
         if (_hungry <= HungryMin) {
           // €–S
-          _objectState = ObjectState::Dead;
+          Dead();
         }
         return;
       }
@@ -176,6 +176,8 @@ namespace Game {
       if (leftY <= 0.0f) {
         return;
       }
+      // ˆÚ“®ó‘Ô
+      _playerState = PlayerState::Swim;
       // ˆÚ“®—Ê
       auto move = AppMath::Vector4();
       // ‘O•ûŒü‚«‚ÉˆÚ“®‘¬“x”{
@@ -197,8 +199,13 @@ namespace Game {
       if (!buttonA) {
         // UŒ‚‹…‚ğ–{‘Ì‹…‚Æ‡‚í‚¹‚é
         _attack->SetPosition(spherePosition);
+#ifdef _DEBUG
+        _attack->NoFill();
+#endif
         return;
       }
+      // UŒ‚ó‘Ô
+      _playerState = PlayerState::Attack;
       // ‘O•ûŒü‚«‚Ì•s—v‚Èy‚ğ–³‹
       auto forward = _forward;
       forward.SetY(0.0f);
@@ -214,12 +221,16 @@ namespace Game {
         if (object->GetId() != ObjectId::Enemy) {
           continue;
         }
-        // ‹›‚Æ‚ÌÚG”»’è
+        // “G‚Æ‚ÌÚG”»’è
         if (_attack->IntersectSphere(std::dynamic_pointer_cast<Enemy::EnemyBase>(object)->GetSphere())) {
+          // “G‚Ì€–S
+          object->Dead();
           // •ßHó‘Ô
           _playerState = PlayerState::Eat;
           break;
         }
+        // UŒ‚I—¹
+        _playerState = PlayerState::Idle;
       }
     }
 
