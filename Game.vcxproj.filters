@@ -61,6 +61,12 @@
     <Filter Include="ソース ファイル\Collision">
       <UniqueIdentifier>{f4ebe9d8-36b5-4862-92fa-832a164efc57}</UniqueIdentifier>
     </Filter>
+    <Filter Include="ヘッダー ファイル\Spawn">
+      <UniqueIdentifier>{a68b0ef9-8e21-4e04-9b4c-69cd41e33351}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ソース ファイル\Spawn">
+      <UniqueIdentifier>{79717d6e-16d0-4cd1-b080-4a55ebed5e99}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="source\Application\ApplicationMain.h">
@@ -99,6 +105,12 @@
     <ClInclude Include="source\Collision\CollisionSphere.h">
       <Filter>ヘッダー ファイル\Collision</Filter>
     </ClInclude>
+    <ClInclude Include="source\Spawn\SpawnEnemy.h">
+      <Filter>ヘッダー ファイル\Spawn</Filter>
+    </ClInclude>
+    <ClInclude Include="source\Spawn\SpawnServer.h">
+      <Filter>ヘッダー ファイル\Spawn</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="source\Application\ApplicationMain.cpp">
@@ -136,6 +148,12 @@
     </ClCompile>
     <ClCompile Include="source\Collision\CollisionSphere.cpp">
       <Filter>ソース ファイル\Collision</Filter>
+    </ClCompile>
+    <ClCompile Include="source\Spawn\SpawnEnemy.cpp">
+      <Filter>ソース ファイル\Spawn</Filter>
+    </ClCompile>
+    <ClCompile Include="source\Spawn\SpawnServer.cpp">
+      <Filter>ソース ファイル\Spawn</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>
