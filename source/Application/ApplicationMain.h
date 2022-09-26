@@ -25,6 +25,12 @@ namespace Game {
     class Camera;
   } // namespace Camera
   /**
+   * @brief  生成
+   */
+  namespace Spawn {
+    class SpawnServer;
+  } // namespace Spawn
+  /**
    * @brief  アプリケーション
    */
   namespace Application {
@@ -54,12 +60,19 @@ namespace Game {
        * @return カメラの参照
        */
       Camera::Camera& GetCamera();
+      /**
+       * @brief  生成サーバの取得
+       * @return 生成サーバの参照
+       */
+      Spawn::SpawnServer& GetSpawnServer();
 
     private:
       //!< オブジェクトサーバ
       std::unique_ptr<Object::ObjectServer> _objectServer{ nullptr };
       //!< カメラ
       std::unique_ptr<Camera::Camera> _camera{ nullptr };
+      //!< 生成サーバ
+      std::unique_ptr<Spawn::SpawnServer> _spawnServer{ nullptr };
     };
   } // namespace Application
 } // namespace Game

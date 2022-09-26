@@ -8,6 +8,7 @@
 #include "ApplicationMain.h"
 #include "../Object/ObjectServer.h"
 #include "../Camera/Camera.h"
+#include "../Spawn/SpawnServer.h"
 #include "../Mode/ModeTitle.h"
 
 namespace Game {
@@ -30,6 +31,8 @@ namespace Game {
       _objectServer = std::make_unique<Object::ObjectServer>();
       // カメラの生成
       _camera = std::make_unique<Camera::Camera>();
+      // 生成サーバの生成
+      _spawnServer = std::make_unique<Spawn::SpawnServer>(*this);
       // モードタイトルの登録
       _modeServer->AddMode(Mode::MTitle, std::make_unique<Mode::ModeTitle>(*this));
       // モードタイトルの追加
@@ -43,6 +46,10 @@ namespace Game {
 
     Camera::Camera& ApplicationMain::GetCamera() {
       return *_camera;
+    }
+
+    Spawn::SpawnServer& ApplicationMain::GetSpawnServer() {
+      return *_spawnServer;
     }
   } // namespace Application
 } // namespace Game

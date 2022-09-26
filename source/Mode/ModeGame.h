@@ -67,6 +67,10 @@ namespace Game {
        * @brief  リソース読み込み
        */
       void LoadResource() override;
+      /**
+       * @brief  生成情報の設定
+       */
+      void SetSpawn();
 
       //!< アプリケーションメインの参照
       Application::ApplicationMain& _appMain;

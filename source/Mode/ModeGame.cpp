@@ -7,12 +7,12 @@
  *********************************************************************/
 #include "ModeGame.h"
 #include "../Application/ApplicationMain.h"
-#include "../Camera/Camera.h"
 #include "../Object/ObjectServer.h"
+#include "../Camera/Camera.h"
+#include "../Spawn/SpawnServer.h"
+#include "../Spawn/SpawnEnemy.h"
 #include "../Player/PlayerShark.h"
 #include "../Sea/SeaSphere.h"
-#include "../Enemy/EnemyTuna.h"
-#include "../Enemy/EnemyJerryfish.h"
 
 namespace {
   namespace AppMath = AppFrame::Math;
@@ -35,23 +35,15 @@ namespace Game {
       LoadResource();
       // カメラ初期化
       _appMain.GetCamera().FixedPoint(CameraPosition, CameraTarget);
-      // 海中背景の生成
-      auto sea = std::make_shared<Sea::SeaSphere>(_appMain);
-      _appMain.GetObjectServer().RegisterObject(sea, true);
-      // プレイヤー(サメ)の生成
-      auto player = std::make_shared<Player::PlayerShark>(_appMain);
-      _appMain.GetObjectServer().RegisterObject(player, true);
-      // 敵(マグロ)の生成
-      auto tuna = std::make_shared<Enemy::EnemyTuna>(_appMain);
-      _appMain.GetObjectServer().RegisterObject(tuna);
-      // 敵(クラゲ)の生成
-      auto jerry = std::make_shared<Enemy::EnemyJerryfish>(_appMain);
-      _appMain.GetObjectServer().RegisterObject(jerry);
+      // 生成情報の設定
+      SetSpawn();
     }
 
     void ModeGame::Exit() {
       // 生成したオブジェクトを削除
       _appMain.GetObjectServer().Release();
+      // 生成サーバの解放
+      _appMain.GetSpawnServer().Release();
     }
 
     void ModeGame::Input(AppFrame::Input::InputManager& input) {
@@ -83,9 +75,9 @@ namespace Game {
       }
       // 各種モデルハンドルの読み込み
       using ModelLoadServer = AppFrame::Model::ModelLoadServer;
-      const ModelLoadServer::LoadModelMap loadModelMap{
-        {"sea", "resource/Model/Sea/skysphere.mv1"},
+      const ModelLoadServer::LoadModelMap loadModelMap {
         {"shark", "resource/Model/Shark/megalodon.mv1"},
+        {"sea", "resource/Model/Sea/skysphere.mv1"},
         {"tuna", "resource/Model/Tuna/Tuna.mv1"},
         {"jerryfish", "resource/Model/Jerryfish/jerryfish.mv1"}
       };
@@ -93,6 +85,25 @@ namespace Game {
       _app.GetModelLoadServer().LoadModels(loadModelMap);
       // 読み込み完了
       _isLoad = true;
+    }
+
+    void ModeGame::SetSpawn() {
+      // プレイヤー(サメ)の生成
+      auto player = std::make_shared<Player::PlayerShark>(_appMain);
+      _appMain.GetObjectServer().RegisterObject(player, true);
+      // 海中背景の生成
+      auto sea = std::make_shared<Sea::SeaSphere>(_appMain);
+      _appMain.GetObjectServer().RegisterObject(sea, true);
+      // 敵生成情報
+      const Spawn::SpawnServer::EnemyTable enemyA{
+        {SpawnNumber::Tuna, {-500.0f, 0.0f, -500.0f}, {0.0f, 0.0f, 0.0f}},
+        {SpawnNumber::Tuna, {500.0f, 0.0f, -500.0f}, {0.0f, 0.0f, 0.0f}},
+        {SpawnNumber::Jerryfish, {-250.0f, 0.0f, -750.0f}, {0.0f, 0.0f, 0.0f}},
+        {SpawnNumber::Jerryfish, {250.0f, 0.0f, -750.0f}, {0.0f, 0.0f, 0.0f}}
+      };
+      // 生成情報の登録
+      _appMain.GetSpawnServer().RegisterSpawnTable("enemyA", enemyA);
+      _appMain.GetSpawnServer().Spawn("enemyA");
     }
   } // namespace Mode
 } // namespace Game

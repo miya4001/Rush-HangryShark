@@ -44,8 +44,6 @@ namespace Game {
       _modelHandle = _app.GetModelLoadServer().GetModelHandle(Modelhandle);
       // 各種パラメータの設定
       _scale.Fill(Scale);
-      // 生成情報(一時的)
-      Spawn(AppMath::Vector4(-500.0f, 0.0f, -500.0f), _rotation);
     }
 
     void EnemyTuna::Move() {
