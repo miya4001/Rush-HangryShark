@@ -30,8 +30,13 @@ namespace Game {
        * @param  rotation 生成向き
        */
       SpawnEnemy(const int number, const AppMath::Vector4 position, const AppMath::Vector4 rotation);
-      
-      
+      /**
+       * @brief  識別番号の取得
+       * @return 識別番号
+       */
+      int GetNumber() {
+        return _number;
+      }
       /**
        * @brief  生成情報の取得
        * @return 生成座標(プレイヤー座標への加数), 生成向き

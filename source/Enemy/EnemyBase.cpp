@@ -42,11 +42,6 @@ namespace Game {
 #endif
     }
 
-    void EnemyBase::SetParameters() {
-      // 各種パラメータの設定
-      _objectId = ObjectId::Enemy;
-    }
-
     void EnemyBase::Spawn(const AppMath::Vector4 position, const AppMath::Vector4 rotation) {
       _position = position;
       _rotation = rotation;
@@ -54,6 +49,11 @@ namespace Game {
       auto pos = _position;
       pos.SetY(SphereY);
       _sphere = std::make_unique<Collision::CollisionSphere>(*this, pos, Radius);
+    }
+
+    void EnemyBase::SetParameters() {
+      // 各種パラメータの設定
+      _objectId = ObjectId::Enemy;
     }
 
     bool EnemyBase::InTheSea() {

@@ -44,6 +44,12 @@ namespace Game{
        */
       void Draw() const override;
       /**
+       * @brief  生成情報の設定
+       * @param  position 生成座標
+       * @param  rotation 生成向き
+       */
+      virtual void Spawn(const AppMath::Vector4 position, const AppMath::Vector4 rotation);
+      /**
        * @brief  球の衝突判定の取得
        * @return 球の衝突判定の参照
        */
@@ -56,12 +62,6 @@ namespace Game{
        * @brief  パラメータの設定
        */
       virtual void SetParameters();
-      /**
-       * @brief  生成情報の設定
-       * @param  position 生成座標
-       * @param  rotation 生成向き
-       */
-      virtual void Spawn(const AppMath::Vector4 position, const AppMath::Vector4 rotation);
       /**
        * @brief  海中範囲内判定
        * @return true:海中範囲内
