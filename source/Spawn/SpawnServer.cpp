@@ -36,10 +36,6 @@ namespace Game {
       _spawnRegistry.clear();
     }
 
-    void SpawnServer::Process() {
-
-    }
-
     void SpawnServer::RegisterSpawnTable(const std::string_view key, const EnemyTable enemy) {
       // ¶¬î•ñ‚ÌŠm”F
       if (enemy.empty()) {

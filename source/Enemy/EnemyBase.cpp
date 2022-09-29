@@ -43,7 +43,12 @@ namespace Game {
     }
 
     void EnemyBase::Spawn(const AppMath::Vector4 position, const AppMath::Vector4 rotation) {
-      _position = position;
+      // プレイヤーのコピー
+      auto player = _app.GetObjectServer().GetPlayerShark();
+      // プレイヤーのローカル座標
+      auto playerPosition = player->GetPosition();
+      // 各種パラメータの設定
+      _position = playerPosition + position;
       _rotation = rotation;
       // 球の衝突判定の設定
       auto pos = _position;
@@ -77,15 +82,10 @@ namespace Game {
     }
 
     void EnemyBase::Hit() {
-      auto objects = _app.GetObjectServer().GetObjects();
-      for (auto object : objects) {
-        if (object->GetId() != ObjectId::Player) {
-          continue;
-        }
-        if (_sphere->IntersectSphere(std::dynamic_pointer_cast<Player::PlayerShark>(object)->GetSphere())) {
-          break;
-        }
-      }
+      // プレイヤーのコピー
+      auto player = _app.GetObjectServer().GetPlayerShark();
+      // プレイヤーの球と衝突判定
+      _sphere->IntersectSphere(std::dynamic_pointer_cast<Player::PlayerShark>(player)->GetSphere());
     }
   } // namespace Enemy
 } // namespace Game

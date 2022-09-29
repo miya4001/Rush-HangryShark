@@ -13,6 +13,12 @@
  */
 namespace Game {
   /**
+   * @brief  プレイヤー
+   */
+  namespace Player {
+    class PlayerShark;
+  }
+  /**
    * @brief  オブジェクト
    */
   namespace Object {
@@ -56,6 +62,11 @@ namespace Game {
       std::vector<std::shared_ptr<ObjectBase>> GetObjects() {
         return _objectRegistry;
       }
+      /**
+       * @brief  プレイヤーの取得
+       * @return プレイヤーの参照
+       */
+      std::shared_ptr<Player::PlayerShark> GetPlayerShark();
 
     private:
       /**

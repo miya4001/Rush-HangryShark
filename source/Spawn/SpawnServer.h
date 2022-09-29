@@ -64,10 +64,6 @@ namespace Game{
        */
       void Release();
       /**
-       * @brief  XV
-       */
-      void Process();
-      /**
        * @brief  ¶¬î•ñ‚Ì“o˜^
        * @param  key ¶¬î•ñ‚É•R‚Ã‚¯‚é•¶š—ñ
        * @param  enemy ¶¬î•ñ‚ªŠi”[‚³‚ê‚½˜A‘z”z—ñ

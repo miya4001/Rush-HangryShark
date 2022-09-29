@@ -7,6 +7,7 @@
  *********************************************************************/
 #include "ObjectServer.h"
 #include "ObjectBase.h"
+#include "../Player/PlayerShark.h"
 
 namespace Game {
   namespace Object {
@@ -54,7 +55,7 @@ namespace Game {
       // オブジェクトの取得に失敗した場合エラー
       if (object == nullptr) {
 #ifdef _DEBUG
-        throw ("オブジェクトはnullptrです");
+        throw ("ObjectServer:オブジェクトはnullptrです");
 #endif
         return; // キーが不正
       }
@@ -65,6 +66,26 @@ namespace Game {
       }
       // 追加予約
       _addObjectRegistry.emplace_back(std::move(object));
+    }
+
+    std::shared_ptr<Player::PlayerShark> ObjectServer::GetPlayerShark() {
+      // プレイヤーのコピー
+      std::shared_ptr<Player::PlayerShark> player = nullptr;
+      // レジストリから探す
+      for (auto object : _objectRegistry) {
+        // プレイヤーの場合ポインタの取得
+        if (object->GetId() == ObjectBase::ObjectId::Player) {
+          player = std::dynamic_pointer_cast<Player::PlayerShark>(object);
+          break;
+        }
+      }
+      // プレイヤーの取得に失敗した場合エラー
+      if (player == nullptr) {
+#ifdef _DEBUG
+        throw ("ObjectServer:プレイヤーの取得に失敗しました");
+#endif
+      }
+      return player;
     }
 
     void ObjectServer::AddObjects() {

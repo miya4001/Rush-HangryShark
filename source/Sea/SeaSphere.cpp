@@ -8,6 +8,7 @@
 #include "SeaSphere.h"
 #include "../Application/ApplicationMain.h"
 #include "../Object/ObjectServer.h"
+#include "../Player/PlayerShark.h"
 
 namespace {
   // 海中背景各種定数
@@ -29,17 +30,12 @@ namespace Game {
     }
 
     void SeaSphere::Process() {
-      // オブジェクトのコピー
-      auto objects = _app.GetObjectServer().GetObjects();
-      // プレイヤーを探す
-      for (auto obj : objects) {
-        if (obj->GetId() == ObjectId::Player) {
-          // プレイヤーのローカル座標に更新
-          _position = obj->GetPosition();
-          _sphere->SetPosition(_position);
-          break;
-        }
-      }
+      // プレイヤーのコピー
+      auto player = _app.GetObjectServer().GetPlayerShark();
+      // プレイヤーのローカル座標に更新
+      _position = player->GetPosition();
+      // 球のローカル座標の設定
+      _sphere->SetPosition(_position);
       // ワールド座標の更新
       WorldMatrix();
       // モデルのワールド座標の設定

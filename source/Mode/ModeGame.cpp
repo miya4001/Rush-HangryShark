@@ -9,10 +9,10 @@
 #include "../Application/ApplicationMain.h"
 #include "../Object/ObjectServer.h"
 #include "../Camera/Camera.h"
+#include "../Sea/SeaSphere.h"
+#include "../Player/PlayerShark.h"
 #include "../Spawn/SpawnServer.h"
 #include "../Spawn/SpawnEnemy.h"
-#include "../Player/PlayerShark.h"
-#include "../Sea/SeaSphere.h"
 
 namespace {
   namespace AppMath = AppFrame::Math;
@@ -78,8 +78,8 @@ namespace Game {
       // 各種モデルハンドルの読み込み
       using ModelLoadServer = AppFrame::Model::ModelLoadServer;
       const ModelLoadServer::LoadModelMap loadModelMap {
-        {"shark", "resource/Model/Shark/megalodon.mv1"},
         {"sea", "resource/Model/Sea/skysphere.mv1"},
+        {"shark", "resource/Model/Shark/megalodon.mv1"},
         {"tuna", "resource/Model/Tuna/Tuna.mv1"},
         {"jerryfish", "resource/Model/Jerryfish/jerryfish.mv1"}
       };
@@ -90,12 +90,12 @@ namespace Game {
     }
 
     void ModeGame::SetSpawn() {
-      // プレイヤー(サメ)の生成
-      auto player = std::make_shared<Player::PlayerShark>(_appMain);
-      _appMain.GetObjectServer().RegisterObject(player, true);
       // 海中背景の生成
       auto sea = std::make_shared<Sea::SeaSphere>(_appMain);
       _appMain.GetObjectServer().RegisterObject(sea, true);
+      // プレイヤー(サメ)の生成
+      auto player = std::make_shared<Player::PlayerShark>(_appMain);
+      _appMain.GetObjectServer().RegisterObject(player, true);
       // 敵生成情報
       const Spawn::SpawnServer::EnemyTable enemyA{
         {SpawnNumber::Tuna, {-500.0f, 0.0f, -500.0f}, {0.0f, 0.0f, 0.0f}},
