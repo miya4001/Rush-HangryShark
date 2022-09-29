@@ -44,6 +44,8 @@ namespace Game {
       _appMain.GetObjectServer().Release();
       // 生成サーバの解放
       _appMain.GetSpawnServer().Release();
+      // 複製したモデルの解放
+      _appMain.GetModelLoadServer().DeleteDuplicateModels();
     }
 
     void ModeGame::Input(AppFrame::Input::InputManager& input) {

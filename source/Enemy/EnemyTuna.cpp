@@ -41,7 +41,7 @@ namespace Game {
 
     void EnemyTuna::SetParameters() {
       // モデルハンドルの設定
-      _modelHandle = _app.GetModelLoadServer().GetModelHandle(Modelhandle);
+      _modelHandle = _app.GetModelLoadServer().GetDuplicateModelHandle(Modelhandle);
       // 各種パラメータの設定
       _scale.Fill(Scale);
     }
