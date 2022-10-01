@@ -111,6 +111,9 @@
     <ClInclude Include="source\Spawn\SpawnServer.h">
       <Filter>ヘッダー ファイル\Spawn</Filter>
     </ClInclude>
+    <ClInclude Include="source\Spawn\SpawnComponent.h">
+      <Filter>ヘッダー ファイル\Spawn</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="source\Application\ApplicationMain.cpp">
@@ -153,6 +156,9 @@
       <Filter>ソース ファイル\Spawn</Filter>
     </ClCompile>
     <ClCompile Include="source\Spawn\SpawnServer.cpp">
+      <Filter>ソース ファイル\Spawn</Filter>
+    </ClCompile>
+    <ClCompile Include="source\Spawn\SpawnComponet.cpp">
       <Filter>ソース ファイル\Spawn</Filter>
     </ClCompile>
   </ItemGroup>

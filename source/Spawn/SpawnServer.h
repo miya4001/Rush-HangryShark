@@ -111,5 +111,5 @@ namespace Game{
   namespace SpawnNumber {
     constexpr int Tuna = 1;       //!< ƒ}ƒOƒ
     constexpr int Jerryfish = 2;  //!< ƒNƒ‰ƒQ
-  }
+  } // namespace SpawnNumber
 } // namespace Game
