@@ -117,6 +117,9 @@
     <ClInclude Include="source\Mode\ModeGameOver.h">
       <Filter>ヘッダー ファイル\Mode</Filter>
     </ClInclude>
+    <ClInclude Include="source\Mode\ModeAMG.h">
+      <Filter>ヘッダー ファイル\Mode</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="source\Application\ApplicationMain.cpp">
@@ -165,6 +168,9 @@
       <Filter>ソース ファイル\Spawn</Filter>
     </ClCompile>
     <ClCompile Include="source\Mode\ModeGameOver.cpp">
+      <Filter>ソース ファイル\Mode</Filter>
+    </ClCompile>
+    <ClCompile Include="source\Mode\ModeAMG.cpp">
       <Filter>ソース ファイル\Mode</Filter>
     </ClCompile>
   </ItemGroup>

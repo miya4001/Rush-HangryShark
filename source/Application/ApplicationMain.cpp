@@ -9,7 +9,7 @@
 #include "../Object/ObjectServer.h"
 #include "../Camera/Camera.h"
 #include "../Spawn/SpawnServer.h"
-#include "../Mode/ModeTitle.h"
+#include "../Mode/ModeAMG.h"
 
 namespace Game {
   namespace Application {
@@ -33,10 +33,10 @@ namespace Game {
       _camera = std::make_unique<Camera::Camera>();
       // 生成サーバの生成
       _spawnServer = std::make_unique<Spawn::SpawnServer>(*this);
-      // モードタイトルの登録
-      _modeServer->AddMode(Mode::Title, std::make_unique<Mode::ModeTitle>(*this));
-      // モードタイトルの追加
-      _modeServer->PushBack(Mode::Title);
+      // モードAMGの登録
+      _modeServer->AddMode(Mode::AMG, std::make_unique<Mode::ModeAMG>(*this));
+      // モードAMGの追加
+      _modeServer->PushBack(Mode::AMG);
       return true;  // 初期化成功
     }
 
