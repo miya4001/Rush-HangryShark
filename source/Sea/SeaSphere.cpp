@@ -44,7 +44,7 @@ namespace Game {
 
     void SeaSphere::SetParameters() {
       // モデルハンドルの設定
-      _modelHandle = _app.GetModelLoadServer().GetModelHandle(Modelhandle);
+      _modelHandle = _app.GetModelLoadServer().GetDuplicateModelHandle(Modelhandle);
       // 各種パラメータの設定
       _objectId = ObjectId::Sea;
       _scale.Fill(Scale);

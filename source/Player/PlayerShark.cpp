@@ -90,7 +90,7 @@ namespace Game {
 
     void PlayerShark::SetParameters() {
       // モデルハンドルの設定
-      _modelHandle = _app.GetModelLoadServer().GetModelHandle(Modelhandle);
+      _modelHandle = _app.GetModelLoadServer().GetDuplicateModelHandle(Modelhandle);
       // 各種パラメータの設定
       _objectId = ObjectId::Player;
       _scale.Fill(Scale);
