@@ -11,8 +11,6 @@
 #include "../Camera/Camera.h"
 #include "../Sea/SeaSphere.h"
 #include "../Player/PlayerShark.h"
-#include "../Spawn/SpawnServer.h"
-#include "../Spawn/SpawnEnemy.h"
 
 namespace {
   namespace AppMath = AppFrame::Math;
@@ -27,6 +25,8 @@ namespace Game {
     }
 
     bool ModeGame::Init() {
+      // 生成コンポーネントの生成
+      _spawn = std::make_unique<Spawn::SpawnComponent>(_appMain);
       return true;
     }
 
@@ -42,10 +42,10 @@ namespace Game {
     void ModeGame::Exit() {
       // 生成したオブジェクトを削除
       _appMain.GetObjectServer().Release();
-      // 生成サーバの解放
-      _appMain.GetSpawnServer().Release();
       // 複製したモデルの解放
       _appMain.GetModelLoadServer().DeleteDuplicateModels();
+      // 生成コンポーネントの解放
+      _spawn->Release();
     }
 
     void ModeGame::Input(AppFrame::Input::InputManager& input) {
@@ -63,6 +63,8 @@ namespace Game {
       Input(_app.GetInputManager());
       // オブジェクトサーバの更新
       _appMain.GetObjectServer().Process();
+      // 生成コンポーネントの更新
+      _spawn->Process();
     }
 
     void ModeGame::Draw() const {
@@ -96,16 +98,8 @@ namespace Game {
       // プレイヤー(サメ)の生成
       auto player = std::make_shared<Player::PlayerShark>(_appMain);
       _appMain.GetObjectServer().RegisterObject(player, true);
-      // 敵生成情報
-      const Spawn::SpawnServer::EnemyTable enemyA{
-        {SpawnNumber::Tuna, {-500.0f, 0.0f, -500.0f}, {0.0f, 0.0f, 0.0f}},
-        {SpawnNumber::Tuna, {500.0f, 0.0f, -500.0f}, {0.0f, 0.0f, 0.0f}},
-        {SpawnNumber::Jerryfish, {-250.0f, 0.0f, -750.0f}, {0.0f, 0.0f, 0.0f}},
-        {SpawnNumber::Jerryfish, {250.0f, 0.0f, -750.0f}, {0.0f, 0.0f, 0.0f}}
-      };
-      // 生成情報の登録
-      _appMain.GetSpawnServer().RegisterSpawnTable("enemyA", enemyA);
-      _appMain.GetSpawnServer().Spawn("enemyA");
+      // 生成情報の設定
+      _spawn->SetSpawn();
     }
   } // namespace Mode
 } // namespace Game

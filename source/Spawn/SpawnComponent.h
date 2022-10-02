@@ -47,7 +47,7 @@ namespace Game {
       /**
        * @brief  生成情報の設定
        */
-      void SetSpawnTable();
+      void SetSpawn();
 
     private:
       /**
@@ -60,8 +60,13 @@ namespace Game {
        * @brief  敵の生成
        */
       void SpawnEnemy();
+      /**
+       * @brief  敵生成情報の登録
+       */
+      void RegisterEnemyTable();
 
-      int _spawnCount{ 0 };  //!< 生成カウント
+      int _spawnCount{ 0 };       //!< 生成カウント
+      bool _isRegister{ false };  //!< 登録フラグ
       //!< アプリケーションの参照
       Application::ApplicationMain& _app;
     };

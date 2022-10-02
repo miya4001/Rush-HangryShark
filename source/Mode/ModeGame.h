@@ -7,6 +7,7 @@
  *********************************************************************/
 #pragma once
 #include <appframe.h>
+#include "../Spawn/SpawnComponent.h"
 
 /**
  * @brief  ゲーム
@@ -74,6 +75,8 @@ namespace Game {
 
       //!< アプリケーションメインの参照
       Application::ApplicationMain& _appMain;
+      //!< 生成コンポーネント
+      std::unique_ptr<Spawn::SpawnComponent> _spawn;
     };
   } // namespace Mode
 } // namespace Game

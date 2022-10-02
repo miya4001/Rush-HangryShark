@@ -14,8 +14,9 @@ namespace {
   // 生成各種定数
   constexpr int Timing = 180;  //!< 生成タイミング
   // 生成キー
-  constexpr auto EnemyA = "enemyA";
-  constexpr auto EnemyB = "enemyB";
+  constexpr auto Start = "start";    //!< 開始テーブル
+  constexpr auto EnemyA = "enemyA";  //!< テーブルA
+  constexpr auto EnemyB = "enemyB";  //!< テーブルB
 }
 
 namespace Game{
@@ -25,7 +26,8 @@ namespace Game{
     }
 
     SpawnComponent::~SpawnComponent() {
-
+      // 生成サーバの解放
+      _app.GetSpawnServer().Release();
     }
 
     void SpawnComponent::Release() {
@@ -42,19 +44,14 @@ namespace Game{
       SpawnEnemy();
     }
 
-    void SpawnComponent::SetSpawnTable() {
-      // 敵生成情報
-      const SpawnServer::EnemyTable enemyA{
-        {SpawnNumber::Tuna, {-500.0f, 0.0f, -500.0f}, {0.0f, 0.0f, 0.0f}},
-        {SpawnNumber::Tuna, {500.0f, 0.0f, -500.0f}, {0.0f, 0.0f, 0.0f}}
-      };
-      const SpawnServer::EnemyTable enemyB{
-        {SpawnNumber::Jerryfish, {-250.0f, 0.0f, -750.0f}, {0.0f, 0.0f, 0.0f}},
-        {SpawnNumber::Jerryfish, {250.0f, 0.0f, -750.0f}, {0.0f, 0.0f, 0.0f}}
-      };
-      // 生成情報の登録
-      _app.GetSpawnServer().RegisterSpawnTable(EnemyA, enemyA);
-      _app.GetSpawnServer().RegisterSpawnTable(EnemyB, enemyB);
+    void SpawnComponent::SetSpawn() {
+      // 未登録の場合
+      if (!_isRegister) {
+        // 敵生成情報の登録
+        RegisterEnemyTable();
+      }
+      // 開始テーブル生成
+      _app.GetSpawnServer().Spawn(Start);
     }
 
     bool SpawnComponent::SpawnTiming() {
@@ -74,6 +71,32 @@ namespace Game{
     void SpawnComponent::SpawnEnemy() {
       // 生成
       _app.GetSpawnServer().Spawn(EnemyA);
+    }
+
+    void SpawnComponent::RegisterEnemyTable() {
+      // 開始テーブル
+      const SpawnServer::EnemyTable start{
+        {SpawnNumber::Tuna, {0.0f, 0.0f, 1000.0f}, {0.0f, 0.0f, 0.0f}},
+        {SpawnNumber::Tuna, {0.0f, 0.0f, -1000.0f}, {0.0f, 0.0f, 0.0f}},
+        {SpawnNumber::Tuna, {1000.0f, 0.0f, 0.0f}, {0.0f, 0.0f, 0.0f}},
+        {SpawnNumber::Tuna, {-1000.0f, 0.0f, 0.0f}, {0.0f, 0.0f, 0.0f}}
+      };
+      // テーブルA
+      const SpawnServer::EnemyTable enemyA{
+        {SpawnNumber::Tuna, {1000.0f, 0.0f, 1000.0f}, {0.0f, 0.0f, 0.0f}},
+        {SpawnNumber::Tuna, {1000.0f, 0.0f, -1000.0f}, {0.0f, 0.0f, 0.0f}},
+        {SpawnNumber::Tuna, {-1000.0f, 0.0f, 1000.0f}, {0.0f, 0.0f, 0.0f}},
+        {SpawnNumber::Tuna, {-1000.0f, 0.0f, -1000.0f}, {0.0f, 0.0f, 0.0f}}
+      };
+      // テーブルB
+      const SpawnServer::EnemyTable enemyB{
+        {SpawnNumber::Jerryfish, {-250.0f, 0.0f, -750.0f}, {0.0f, 0.0f, 0.0f}},
+        {SpawnNumber::Jerryfish, {250.0f, 0.0f, -750.0f}, {0.0f, 0.0f, 0.0f}}
+      };
+      // 生成情報の登録
+      _app.GetSpawnServer().RegisterSpawnTable(Start, start);
+      _app.GetSpawnServer().RegisterSpawnTable(EnemyA, enemyA);
+      _app.GetSpawnServer().RegisterSpawnTable(EnemyB, enemyB);
     }
   } // namespace Spawn
 } // namespace Game
