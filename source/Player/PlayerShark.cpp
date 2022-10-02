@@ -47,6 +47,7 @@ namespace Game {
       // 死亡状態判定
       if (IsDead()) {
         // ゲームオーバー
+        _app.SetGameOver(true);
         return;
       }
       // 回転

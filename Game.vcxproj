@@ -166,6 +166,7 @@
     <ClInclude Include="source\Enemy\EnemyJerryfish.h" />
     <ClInclude Include="source\Enemy\EnemyTuna.h" />
     <ClInclude Include="source\Mode\ModeGame.h" />
+    <ClInclude Include="source\Mode\ModeGameOver.h" />
     <ClInclude Include="source\Mode\ModeTitle.h" />
     <ClInclude Include="source\Object\ObjectBase.h" />
     <ClInclude Include="source\Object\ObjectServer.h" />
@@ -183,6 +184,7 @@
     <ClCompile Include="source\Enemy\EnemyJerryfish.cpp" />
     <ClCompile Include="source\Enemy\EnemyTuna.cpp" />
     <ClCompile Include="source\Mode\ModeGame.cpp" />
+    <ClCompile Include="source\Mode\ModeGameOver.cpp" />
     <ClCompile Include="source\Mode\ModeTitle.cpp" />
     <ClCompile Include="source\Object\ObjectBase.cpp" />
     <ClCompile Include="source\Object\ObjectServer.cpp" />

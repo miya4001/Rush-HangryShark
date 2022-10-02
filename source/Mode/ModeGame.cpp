@@ -11,6 +11,7 @@
 #include "../Camera/Camera.h"
 #include "../Sea/SeaSphere.h"
 #include "../Player/PlayerShark.h"
+#include "ModeGameOver.h"
 
 namespace {
   namespace AppMath = AppFrame::Math;
@@ -65,6 +66,8 @@ namespace Game {
       _appMain.GetObjectServer().Process();
       // 生成コンポーネントの更新
       _spawn->Process();
+      // モード切り替え
+      ChangeMode();
     }
 
     void ModeGame::Draw() const {
@@ -89,6 +92,22 @@ namespace Game {
       _app.GetModelLoadServer().LoadModels(loadModelMap);
       // 読み込み完了
       _isLoad = true;
+    }
+
+    void ModeGame::ChangeMode() {
+      // ゲームオーバーでない場合中断
+      if (!_appMain.GetGameOver()) {
+        return;
+      }
+      // キーの登録判定
+      bool key = _app.GetModeServer().ContainsMode(GameOver);
+      // キーが未登録の場合
+      if (!key) {
+        // モードゲームオーバーの登録
+        _app.GetModeServer().AddMode(GameOver, std::make_shared<Mode::ModeGameOver>(_appMain));
+      }
+      // モードゲームオーバー遷移
+      _app.GetModeServer().TransionToMode(GameOver);
     }
 
     void ModeGame::SetSpawn() {

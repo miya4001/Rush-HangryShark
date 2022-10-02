@@ -34,9 +34,9 @@ namespace Game {
       // 生成サーバの生成
       _spawnServer = std::make_unique<Spawn::SpawnServer>(*this);
       // モードタイトルの登録
-      _modeServer->AddMode(Mode::MTitle, std::make_unique<Mode::ModeTitle>(*this));
+      _modeServer->AddMode(Mode::Title, std::make_unique<Mode::ModeTitle>(*this));
       // モードタイトルの追加
-      _modeServer->PushBack(Mode::MTitle);
+      _modeServer->PushBack(Mode::Title);
       return true;  // 初期化成功
     }
 

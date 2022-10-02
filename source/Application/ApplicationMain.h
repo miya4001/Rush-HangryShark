@@ -51,6 +51,20 @@ namespace Game {
        */
       bool Init() override;
       /**
+       * @brief  ゲームオーバーフラグの設定
+       * @param  flag フラグ
+       */
+      inline void SetGameOver(const bool flag) {
+        _isGameOver = flag;
+      }
+      /**
+       * @brief  ゲームオーバーフラグの取得
+       * @return ゲームオーバーフラグ
+       */
+      inline bool GetGameOver() const {
+        return _isGameOver;
+      }
+      /**
        * @brief  オブジェクトサーバの取得
        * @return オブジェクトサーバの参照
        */
@@ -67,6 +81,7 @@ namespace Game {
       Spawn::SpawnServer& GetSpawnServer();
 
     private:
+      bool _isGameOver{ false };  //!< ゲームオーバーフラグ 
       //!< オブジェクトサーバ
       std::unique_ptr<Object::ObjectServer> _objectServer{ nullptr };
       //!< カメラ

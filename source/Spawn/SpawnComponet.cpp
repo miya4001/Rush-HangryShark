@@ -31,7 +31,7 @@ namespace Game{
     }
 
     void SpawnComponent::Release() {
-      // ¶¬ƒJƒEƒ“ƒg‰Šú‰»
+      // •Ï”‰Šú‰»
       _spawnCount = 0;
     }
 
@@ -45,11 +45,8 @@ namespace Game{
     }
 
     void SpawnComponent::SetSpawn() {
-      // –¢“o˜^‚Ìê‡
-      if (!_isRegister) {
-        // “G¶¬î•ñ‚Ì“o˜^
-        RegisterEnemyTable();
-      }
+      // “G¶¬î•ñ‚Ì“o˜^
+      RegisterEnemyTable();
       // ŠJnƒe[ƒuƒ‹¶¬
       _app.GetSpawnServer().Spawn(Start);
     }
@@ -74,6 +71,10 @@ namespace Game{
     }
 
     void SpawnComponent::RegisterEnemyTable() {
+      // “o˜^Ï‚İ‚Ìê‡’†’f
+      if (_isRegister) {
+        return;
+      }
       // ŠJnƒe[ƒuƒ‹
       const SpawnServer::EnemyTable start{
         {SpawnNumber::Tuna, {0.0f, 0.0f, 1000.0f}, {0.0f, 0.0f, 0.0f}},
@@ -97,6 +98,8 @@ namespace Game{
       _app.GetSpawnServer().RegisterSpawnTable(Start, start);
       _app.GetSpawnServer().RegisterSpawnTable(EnemyA, enemyA);
       _app.GetSpawnServer().RegisterSpawnTable(EnemyB, enemyB);
+      // “o˜^Š®—¹
+      _isRegister = true;
     }
   } // namespace Spawn
 } // namespace Game

@@ -1,35 +1,35 @@
 /*****************************************************************//**
- * @file   ModeTitle.cpp
- * @brief  モードタイトルクラス
+ * @file   ModeGameOver.cpp
+ * @brief  モードゲームオーバークラス
  * 
  * @author 宮澤耀生
- * @date   April 2022
+ * @date   October 2022
  *********************************************************************/
-#include "ModeTitle.h"
+#include "ModeGameOver.h"
 #include "../Application/ApplicationMain.h"
 #include "ModeGame.h"
 
 namespace Game {
   namespace Mode {
-    ModeTitle::ModeTitle(Application::ApplicationMain& app) : ModeBase(*app.GetApplication()), _appMain(app) {
+    ModeGameOver::ModeGameOver(Application::ApplicationMain& app) : ModeBase(*app.GetApplication()), _appMain(app) {
 
     }
 
-    bool ModeTitle::Init() {
+    bool ModeGameOver::Init() {
       return true;
     }
 
-    void ModeTitle::Enter() {
+    void ModeGameOver::Enter() {
       // リソースの読み取り処理
       LoadResource();
     }
 
-    void ModeTitle::Exit() {
+    void ModeGameOver::Exit() {
       // 変数初期化
       _decision = false;
     }
 
-    void ModeTitle::Input(AppFrame::Input::InputManager& input) {
+    void ModeGameOver::Input(AppFrame::Input::InputManager& input) {
       // XInputジョイパッドの入力処理の取得
       auto xJoypad = input.GetXJoypad();
       // Aボタンが入力された場合
@@ -39,18 +39,18 @@ namespace Game {
       }
     }
 
-    void ModeTitle::Process() {
+    void ModeGameOver::Process() {
       // 入力
       Input(_app.GetInputManager());
       // モード切り替え
       ChangeMode();
     }
 
-    void ModeTitle::Draw() const {
+    void ModeGameOver::Draw() const {
 
     }
 
-    void ModeTitle::LoadResource() {
+    void ModeGameOver::LoadResource() {
       // 読み込み済みの場合中断
       if (_isLoad) {
         return;
@@ -59,15 +59,15 @@ namespace Game {
       _isLoad = true;
     }
 
-    void ModeTitle::ChangeMode() {
+    void ModeGameOver::ChangeMode() {
       // 選択未決定の場合中断
       if (!_decision) {
         return;
       }
-      // モードゲームの登録
-      _app.GetModeServer().AddMode(Game, std::make_shared<Mode::ModeGame>(_appMain));
       // モードゲーム遷移
       _app.GetModeServer().TransionToMode(Game);
+      // ゲームオーバーフラグ初期化
+      _appMain.SetGameOver(false);
     }
-  } // namespace Mode
+  } // namespae Mode
 } // namespace Game

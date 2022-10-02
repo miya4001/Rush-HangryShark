@@ -1,13 +1,12 @@
 /*****************************************************************//**
- * @file   ModeGame.h
- * @brief  モードゲームクラス
+ * @file   ModeGameOver.h
+ * @brief  モードゲームオーバークラス
  * 
  * @author 宮澤耀生
- * @date   April 2022
+ * @date   October 2022
  *********************************************************************/
 #pragma once
 #include <appframe.h>
-#include "../Spawn/SpawnComponent.h"
 
 /**
  * @brief  ゲーム
@@ -23,18 +22,18 @@ namespace Game {
    * @brief  モード
    */
   namespace Mode {
-    constexpr auto Game = "ModeGame";  //!< モードゲーム登録用キー
+    constexpr auto GameOver = "ModeGameOver";  //!< モードタイトル登録用キー
     /**
-     * @class  ModeGame
-     * @brief  モードゲームクラス
+     * @class  ModeGameOver
+     * @brief  モードゲームオーバークラス
      */
-    class ModeGame : public AppFrame::Mode::ModeBase {
+    class ModeGameOver : public AppFrame::Mode::ModeBase {
     public:
       /**
        * @brief  コンストラクタ
        * @param  app アプリケーションの参照
        */
-      ModeGame(Application::ApplicationMain& app);
+      ModeGameOver(Application::ApplicationMain& app);
       /**
        * @brief  初期化
        * @return true:初期化成功
@@ -72,15 +71,10 @@ namespace Game {
        * @brief  モード切り替え
        */
       void ChangeMode() override;
-      /**
-       * @brief  生成情報の設定
-       */
-      void SetSpawn();
 
+      bool _decision{ false };  //!< 選択決定
       //!< アプリケーションメインの参照
       Application::ApplicationMain& _appMain;
-      //!< 生成コンポーネント
-      std::unique_ptr<Spawn::SpawnComponent> _spawn;
     };
-  } // namespace Mode
+  } // namespae Mode
 } // namespace Game

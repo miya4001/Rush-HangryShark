@@ -22,7 +22,7 @@ namespace Game {
    * @brief  モード
    */
   namespace Mode {
-    constexpr auto MTitle = "ModeTitle";  //!< モードタイトル登録用キー
+    constexpr auto Title = "ModeTitle";  //!< モードタイトル登録用キー
     /**
      * @class  ModeTitle
      * @brief  モードタイトルクラス
@@ -30,8 +30,8 @@ namespace Game {
     class ModeTitle : public AppFrame::Mode::ModeBase {
     public:
       /**
-       * @brief コンストラクタ
-       * @param app アプリケーションの参照
+       * @brief  コンストラクタ
+       * @param  app アプリケーションの参照
        */
       ModeTitle(Application::ApplicationMain& app);
       /**
@@ -63,6 +63,16 @@ namespace Game {
       void Draw() const override;
 
     private:
+      /**
+       * @brief  リソース読み込み
+       */
+      void LoadResource() override;
+      /**
+       * @brief  モード切り替え
+       */
+      void ChangeMode() override;
+
+      bool _decision{ false };  //!< 選択決定
       //!< アプリケーションメインの参照
       Application::ApplicationMain& _appMain;
     };

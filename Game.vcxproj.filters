@@ -114,6 +114,9 @@
     <ClInclude Include="source\Spawn\SpawnComponent.h">
       <Filter>ヘッダー ファイル\Spawn</Filter>
     </ClInclude>
+    <ClInclude Include="source\Mode\ModeGameOver.h">
+      <Filter>ヘッダー ファイル\Mode</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="source\Application\ApplicationMain.cpp">
@@ -160,6 +163,9 @@
     </ClCompile>
     <ClCompile Include="source\Spawn\SpawnComponet.cpp">
       <Filter>ソース ファイル\Spawn</Filter>
+    </ClCompile>
+    <ClCompile Include="source\Mode\ModeGameOver.cpp">
+      <Filter>ソース ファイル\Mode</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>
