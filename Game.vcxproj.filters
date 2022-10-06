@@ -67,6 +67,12 @@
     <Filter Include="ソース ファイル\Spawn">
       <UniqueIdentifier>{79717d6e-16d0-4cd1-b080-4a55ebed5e99}</UniqueIdentifier>
     </Filter>
+    <Filter Include="ヘッダー ファイル\UI">
+      <UniqueIdentifier>{8906f566-0f84-4fe0-ba36-4c617c94ed9b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ソース ファイル\UI">
+      <UniqueIdentifier>{0fb66b81-4ba9-4433-bc94-07fdfc540576}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="source\Application\ApplicationMain.h">
@@ -120,6 +126,9 @@
     <ClInclude Include="source\Mode\ModeAMG.h">
       <Filter>ヘッダー ファイル\Mode</Filter>
     </ClInclude>
+    <ClInclude Include="source\UI\UIBase.h">
+      <Filter>ヘッダー ファイル\UI</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="source\Application\ApplicationMain.cpp">
@@ -172,6 +181,9 @@
     </ClCompile>
     <ClCompile Include="source\Mode\ModeAMG.cpp">
       <Filter>ソース ファイル\Mode</Filter>
+    </ClCompile>
+    <ClCompile Include="source\UI\UIBase.cpp">
+      <Filter>ソース ファイル\UI</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

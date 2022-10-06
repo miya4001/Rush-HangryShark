@@ -176,6 +176,7 @@
     <ClInclude Include="source\Spawn\SpawnComponent.h" />
     <ClInclude Include="source\Spawn\SpawnServer.h" />
     <ClInclude Include="source\Spawn\SpawnEnemy.h" />
+    <ClInclude Include="source\UI\UIBase.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="source\Application\ApplicationMain.cpp" />
@@ -195,6 +196,7 @@
     <ClCompile Include="source\Spawn\SpawnComponet.cpp" />
     <ClCompile Include="source\Spawn\SpawnServer.cpp" />
     <ClCompile Include="source\Spawn\SpawnEnemy.cpp" />
+    <ClCompile Include="source\UI\UIBase.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
