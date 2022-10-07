@@ -1,59 +1,51 @@
 /*****************************************************************//**
- * @file   UIBase.h
- * @brief  UIの基底クラス
+ * @file   UIHungryGauge.h
+ * @brief  UI空腹ゲージクラス
  * 
  * @author 宮澤耀生
  * @date   October 2022
  *********************************************************************/
 #pragma once
+#include "UIBase.h"
 
-/**
- * @brief  ゲーム
- */
-namespace Game{
-  /**
-   * @brief  アプリケーション
-   */
-  namespace Application {
-    class ApplicationMain;
-  } // namespace Application
+ /**
+  * @brief  ゲーム
+  */
+namespace Game {
   /**
    * @brief  UI
    */
   namespace UI {
     /**
-     * @class UIBase
-     * @brief UIの基底クラス
+     * @class UIHungryGauge
+     * @brief UI空腹ゲージクラス
      */
-    class UIBase {
+    class UIHungryGauge : public UIBase {
     public:
       /**
        * @brief  コンストラクタ
        * @param  app アプリケーションの参照
        */
-      UIBase(Application::ApplicationMain& app);
-      /**
-       * @brief  デストラクタ
-       */
-      virtual ~UIBase();
+      UIHungryGauge(Application::ApplicationMain& app);
       /**
        * @brief  初期化
        * @return true:初期化成功
        *         false:初期化失敗
        */
-      virtual bool Init();
+      bool Init() override;
       /**
        * @brief  更新
        */
-      virtual void Process();
+      void Process() override;
       /**
        * @brief  描画
        */
-      virtual void Draw() const;
+      void Draw() const override;
 
-    protected:
-      //!< アプリケーションの参照
-      Application::ApplicationMain& _app;
+    private:
+      int _gauge{ -1 };          //!< 空腹ゲージ画像
+      int _gaugeBar{ -1 };       //!< 空腹ゲージバー画像
+      int _gaugeBarRightX{ 0 };  //!< ゲージバー右下x座標
     };
   } // namespace UI
 } // namespace Game

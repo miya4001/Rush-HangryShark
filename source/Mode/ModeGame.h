@@ -77,6 +77,10 @@ namespace Game {
        * @brief  生成情報の設定
        */
       void SetSpawn();
+      /**
+       * @brief  UIの設定
+       */
+      void SetUI();
 
       //!< アプリケーションメインの参照
       Application::ApplicationMain& _appMain;

@@ -177,6 +177,7 @@
     <ClInclude Include="source\Spawn\SpawnServer.h" />
     <ClInclude Include="source\Spawn\SpawnEnemy.h" />
     <ClInclude Include="source\UI\UIBase.h" />
+    <ClInclude Include="source\UI\UIHungryGauge.h" />
     <ClInclude Include="source\UI\UIServer.h" />
   </ItemGroup>
   <ItemGroup>
@@ -198,6 +199,7 @@
     <ClCompile Include="source\Spawn\SpawnServer.cpp" />
     <ClCompile Include="source\Spawn\SpawnEnemy.cpp" />
     <ClCompile Include="source\UI\UIBase.cpp" />
+    <ClCompile Include="source\UI\UIHungryGauge.cpp" />
     <ClCompile Include="source\UI\UIServer.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

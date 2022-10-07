@@ -74,6 +74,13 @@ namespace Game {
       Collision::CollisionSphere& GetAttack() {
         return *_attack;
       }
+      /**
+       * @brief  ‹ó• ’l‚ÌŽæ“¾
+       * @return ‹ó• ’l
+       */
+      int GetHungry() {
+        return _hungry;
+      }
 
     private:
       /**

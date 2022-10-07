@@ -11,6 +11,7 @@
 #include "../Camera/Camera.h"
 #include "../Sea/SeaSphere.h"
 #include "../Player/PlayerShark.h"
+#include "../UI/UIHungryGauge.h"
 #include "ModeGameOver.h"
 
 namespace {
@@ -40,6 +41,8 @@ namespace Game {
       _appMain.GetCamera().FixedPoint(CameraPosition, CameraTarget);
       // 生成情報の設定
       SetSpawn();
+      // UIの設定
+      SetUI();
     }
 
     void ModeGame::Exit() {
@@ -88,6 +91,14 @@ namespace Game {
       if (_isLoad) {
         return;
       }
+      // 各種画像ハンドルの読み込み
+      using GraphicLoadServer = AppFrame::Graphic::GraphicLoadServer;
+      const GraphicLoadServer::LoadGraphicMap loadGraphicMap{
+        {"hungryGauge", "resource/Graphic/UI/HungryGauge.png"},
+        {"hungryGaugeBar", "resource/Graphic/UI/HungryGaugeBar.png"}
+      };
+      // 画像読み込みサーバに一括読み込み
+      _app.GetGraphicLoadServer().LoadGraphics(loadGraphicMap);
       // 各種モデルハンドルの読み込み
       using ModelLoadServer = AppFrame::Model::ModelLoadServer;
       const ModelLoadServer::LoadModelMap loadModelMap {
@@ -127,6 +138,12 @@ namespace Game {
       _appMain.GetObjectServer().RegisterObject(player, true);
       // 生成情報の設定
       _spawn->SetSpawn();
+    }
+
+    void ModeGame::SetUI() {
+      // 空腹ゲージの生成
+      auto hungryGauge = std::make_shared<UI::UIHungryGauge>(_appMain);
+      _uiServer->RegisterUI(hungryGauge);
     }
   } // namespace Mode
 } // namespace Game
