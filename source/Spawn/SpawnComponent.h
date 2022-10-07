@@ -22,8 +22,8 @@ namespace Game {
    */
   namespace Spawn {
     /**
-     * @class SpawnComponent
-     * @brief 生成コンポーネントクラス
+     * @class  SpawnComponent
+     * @brief  生成コンポーネントクラス
      */
     class SpawnComponent {
     public:

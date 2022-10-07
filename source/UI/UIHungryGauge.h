@@ -17,8 +17,8 @@ namespace Game {
    */
   namespace UI {
     /**
-     * @class UIHungryGauge
-     * @brief UI空腹ゲージクラス
+     * @class  UIHungryGauge
+     * @brief  UI空腹ゲージクラス
      */
     class UIHungryGauge : public UIBase {
     public:

@@ -18,8 +18,8 @@ namespace Game {
   namespace Spawn {
     namespace AppMath = AppFrame::Math;
     /**
-     * @class SpawnEnemy
-     * @brief 敵の生成情報クラス
+     * @class  SpawnEnemy
+     * @brief  敵の生成情報クラス
      */
     class SpawnEnemy {
     public:

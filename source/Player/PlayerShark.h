@@ -19,8 +19,8 @@ namespace Game {
   namespace Player {
     namespace AppMath = AppFrame::Math;
     /**
-     * @class PlayerShark
-     * @brief プレイヤー(サメ)クラス
+     * @class  PlayerShark
+     * @brief  プレイヤー(サメ)クラス
      */
     class PlayerShark : public Object::ObjectBase {
     public:

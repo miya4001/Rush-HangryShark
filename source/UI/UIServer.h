@@ -18,8 +18,8 @@ namespace Game {
   namespace UI {
     class UIBase;
     /**
-     * @class UIServer
-     * @brief UIを管理するサーバクラス
+     * @class  UIServer
+     * @brief  UIを管理するサーバクラス
      */
     class UIServer {
     public:

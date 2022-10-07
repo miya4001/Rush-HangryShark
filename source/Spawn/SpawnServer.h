@@ -37,8 +37,8 @@ namespace Game{
   namespace Spawn {
     class SpawnEnemy;
     /**
-     * @class SpawnServer
-     * @brief オブジェクトの生成を管理するサーバクラス
+     * @class  SpawnServer
+     * @brief  オブジェクトの生成を管理するサーバクラス
      */
     class SpawnServer {
     public:

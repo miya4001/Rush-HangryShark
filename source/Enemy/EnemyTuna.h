@@ -17,8 +17,8 @@ namespace Game {
    */
   namespace Enemy {
     /**
-     * @class EnemyTuna
-     * @brief 敵(マグロ)クラス
+     * @class  EnemyTuna
+     * @brief  敵(マグロ)クラス
      */
     class EnemyTuna :public EnemyBase {
     public:

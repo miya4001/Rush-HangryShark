@@ -24,8 +24,8 @@ namespace Game {
   namespace Object {
     namespace AppMath = AppFrame::Math;
     /**
-     * @class ObjectBase
-     * @brief オブジェクトの基底クラス
+     * @class  ObjectBase
+     * @brief  オブジェクトの基底クラス
      */
     class ObjectBase {
     public:

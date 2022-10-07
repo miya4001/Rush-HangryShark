@@ -19,8 +19,8 @@ namespace Game{
   namespace Enemy {
     namespace AppMath = AppFrame::Math;
     /**
-     * @class EnemyBase
-     * @brief 敵の基底クラス
+     * @class  EnemyBase
+     * @brief  敵の基底クラス
      */
     class EnemyBase : public Object::ObjectBase {
     public:

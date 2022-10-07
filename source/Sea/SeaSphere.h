@@ -19,8 +19,8 @@ namespace Game{
   namespace Sea {
     namespace AppMath = AppFrame::Math;
     /**
-     * @class SeaSphere
-     * @brief ŠC’†”wŒiƒNƒ‰ƒX
+     * @class  SeaSphere
+     * @brief  ŠC’†”wŒiƒNƒ‰ƒX
      */
     class SeaSphere : public Object::ObjectBase {
     public:

@@ -18,8 +18,8 @@ namespace Game {
   namespace Camera {
     namespace AppMath = AppFrame::Math;
     /**
-     * @class Camera
-     * @brief カメラクラス
+     * @class  Camera
+     * @brief  カメラクラス
      */
     class Camera {
     public:

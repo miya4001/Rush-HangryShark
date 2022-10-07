@@ -24,8 +24,8 @@ namespace Game {
   namespace Object {
     class ObjectBase;
     /**
-     * @class ObjectServer
-     * @brief オブジェクトを管理するサーバクラス
+     * @class  ObjectServer
+     * @brief  オブジェクトを管理するサーバクラス
      */
     class ObjectServer {
     public:

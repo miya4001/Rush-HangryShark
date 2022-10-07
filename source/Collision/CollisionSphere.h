@@ -24,8 +24,8 @@ namespace Game{
   namespace Collision {
     namespace AppMath = AppFrame::Math;
     /**
-     * @class CollisionSphere
-     * @brief 球の衝突判定クラス
+     * @class  CollisionSphere
+     * @brief  球の衝突判定クラス
      */
     class CollisionSphere {
     public:

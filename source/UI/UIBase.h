@@ -22,8 +22,8 @@ namespace Game{
    */
   namespace UI {
     /**
-     * @class UIBase
-     * @brief UIの基底クラス
+     * @class  UIBase
+     * @brief  UIの基底クラス
      */
     class UIBase {
     public:

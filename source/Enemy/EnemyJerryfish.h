@@ -17,8 +17,8 @@ namespace Game {
    */
   namespace Enemy {
     /**
-     * @class EnemyJerryfish
-     * @brief “G(ƒNƒ‰ƒQ)ƒNƒ‰ƒX
+     * @class  EnemyJerryfish
+     * @brief  “G(ƒNƒ‰ƒQ)ƒNƒ‰ƒX
      */
     class EnemyJerryfish :public EnemyBase {
     public:
