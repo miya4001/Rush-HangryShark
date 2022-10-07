@@ -30,11 +30,11 @@ namespace Game {
     class ObjectServer {
     public:
       /**
-       * @brief コンストラクタ
+       * @brief  コンストラクタ
        */
       ObjectServer();
       /**
-       * @brief デストラクタ
+       * @brief  デストラクタ
        */
       ~ObjectServer();
       /**

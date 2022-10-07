@@ -23,8 +23,8 @@ namespace Game {
     class EnemyTuna :public EnemyBase {
     public:
       /**
-       * @brief コンストラクタ
-       * @param app アプリケーションの参照
+       * @brief  コンストラクタ
+       * @param  app アプリケーションの参照
        */
       EnemyTuna(Application::ApplicationMain& app);
       /**

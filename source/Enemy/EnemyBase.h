@@ -25,8 +25,8 @@ namespace Game{
     class EnemyBase : public Object::ObjectBase {
     public:
       /**
-       * @brief コンストラクタ
-       * @param app アプリケーションの参照
+       * @brief  コンストラクタ
+       * @param  app アプリケーションの参照
        */
       EnemyBase(Application::ApplicationMain& app);
       /**

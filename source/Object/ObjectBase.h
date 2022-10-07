@@ -47,8 +47,8 @@ namespace Game {
         Dead     //!< 死亡状態
       };
       /**
-       * @brief コンストラクタ
-       * @param app アプリケーションの参照
+       * @brief  コンストラクタ
+       * @param  app アプリケーションの参照
        */
       ObjectBase(Application::ApplicationMain& app);
       /**

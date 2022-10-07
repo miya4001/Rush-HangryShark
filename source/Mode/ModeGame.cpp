@@ -9,12 +9,19 @@
 #include "../Application/ApplicationMain.h"
 #include "../Object/ObjectServer.h"
 #include "../Camera/Camera.h"
-#include "../Sea/SeaSphere.h"
-#include "../Player/PlayerShark.h"
 #include "../UI/UIHungryGauge.h"
 #include "ModeGameOver.h"
 
 namespace {
+  // 画像ハンドルキー
+  constexpr auto HungryGauge = "hungryGauge";        //!< 空腹ゲージ
+  constexpr auto HungryGaugeBar = "hungryGaugeBar";  //!< 空腹ゲージバー
+  // モデルハンドルキー
+  constexpr auto Sea = "sea";              //!< 海中背景
+  constexpr auto Shark = "shark";          //!< サメ
+  constexpr auto Tuna = "tuna";            //!< マグロ
+  constexpr auto Jerryfish = "jerryfish";  //!< クラゲ
+  // 各種定数
   namespace AppMath = AppFrame::Math;
   const AppMath::Vector4 CameraPosition{ 0.0f, 100.0f, 250.0f };  //!< 初期カメラ位置
   const AppMath::Vector4 CameraTarget{ 0.0f, 50.0f, 0.0f };       //!< 初期カメラ注視点
@@ -40,7 +47,7 @@ namespace Game {
       // カメラ初期化
       _appMain.GetCamera().FixedPoint(CameraPosition, CameraTarget);
       // 生成情報の設定
-      SetSpawn();
+      _spawn->SetSpawn();
       // UIの設定
       SetUI();
     }
@@ -94,18 +101,18 @@ namespace Game {
       // 各種画像ハンドルの読み込み
       using GraphicLoadServer = AppFrame::Graphic::GraphicLoadServer;
       const GraphicLoadServer::LoadGraphicMap loadGraphicMap{
-        {"hungryGauge", "resource/Graphic/UI/HungryGauge.png"},
-        {"hungryGaugeBar", "resource/Graphic/UI/HungryGaugeBar.png"}
+        {HungryGauge, "resource/Graphic/UI/HungryGauge.png"},
+        {HungryGaugeBar, "resource/Graphic/UI/HungryGaugeBar.png"}
       };
       // 画像読み込みサーバに一括読み込み
       _app.GetGraphicLoadServer().LoadGraphics(loadGraphicMap);
       // 各種モデルハンドルの読み込み
       using ModelLoadServer = AppFrame::Model::ModelLoadServer;
       const ModelLoadServer::LoadModelMap loadModelMap {
-        {"sea", "resource/Model/Sea/skysphere.mv1"},
-        {"shark", "resource/Model/Shark/megalodon.mv1"},
-        {"tuna", "resource/Model/Tuna/Tuna.mv1"},
-        {"jerryfish", "resource/Model/Jerryfish/jerryfish.mv1"}
+        {Sea, "resource/Model/Sea/skysphere.mv1"},
+        {Shark, "resource/Model/Shark/megalodon.mv1"},
+        {Tuna, "resource/Model/Tuna/Tuna.mv1"},
+        {Jerryfish, "resource/Model/Jerryfish/jerryfish.mv1"}
       };
       // モデル読み込みサーバに一括読み込み
       _app.GetModelLoadServer().LoadModels(loadModelMap);
@@ -127,17 +134,6 @@ namespace Game {
       }
       // モードゲームオーバー遷移
       _app.GetModeServer().TransionToMode(GameOver);
-    }
-
-    void ModeGame::SetSpawn() {
-      // 海中背景の生成
-      auto sea = std::make_shared<Sea::SeaSphere>(_appMain);
-      _appMain.GetObjectServer().RegisterObject(sea, true);
-      // プレイヤー(サメ)の生成
-      auto player = std::make_shared<Player::PlayerShark>(_appMain);
-      _appMain.GetObjectServer().RegisterObject(player, true);
-      // 生成情報の設定
-      _spawn->SetSpawn();
     }
 
     void ModeGame::SetUI() {

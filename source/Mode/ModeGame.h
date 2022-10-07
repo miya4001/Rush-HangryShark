@@ -74,10 +74,6 @@ namespace Game {
        */
       void ChangeMode() override;
       /**
-       * @brief  生成情報の設定
-       */
-      void SetSpawn();
-      /**
        * @brief  UIの設定
        */
       void SetUI();
@@ -85,7 +81,7 @@ namespace Game {
       //!< アプリケーションメインの参照
       Application::ApplicationMain& _appMain;
       //!< 生成コンポーネント
-      std::unique_ptr<Spawn::SpawnComponent> _spawn;
+      std::unique_ptr<Spawn::SpawnComponent> _spawn{ nullptr };
       //!< UIサーバ
       std::unique_ptr<UI::UIServer> _uiServer{ nullptr };
     };

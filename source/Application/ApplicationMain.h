@@ -38,7 +38,7 @@ namespace Game {
      * @class  ApplicationMain
      * @brief  アプリケーションメインクラス
      */
-    class ApplicationMain :public AppFrame::Application::ApplicationBase {
+    class ApplicationMain : public AppFrame::Application::ApplicationBase {
     public:
       /**
        * @brief  コンストラクタ

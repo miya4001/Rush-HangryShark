@@ -23,8 +23,8 @@ namespace Game {
     class EnemyJerryfish :public EnemyBase {
     public:
       /**
-       * @brief コンストラクタ
-       * @param app アプリケーションの参照
+       * @brief  コンストラクタ
+       * @param  app アプリケーションの参照
        */
       EnemyJerryfish(Application::ApplicationMain& app);
       /**

@@ -61,7 +61,7 @@ namespace Game {
 
     void SpawnServer::Spawn(const std::string_view key) {
       // 生成情報を基にオブジェクトを生成し登録
-      for (auto spawn : _spawnRegistry.at(key.data()))
+      for (auto&& spawn : _spawnRegistry.at(key.data()))
         // 識別番号から判別
         switch (spawn->GetNumber()) {
         // マグロ
@@ -88,7 +88,7 @@ namespace Game {
 
     void SpawnServer::DeleteSpawnTable(const std::string_view key) {
       // 生成情報の取り出し
-      auto map = _spawnRegistry.at(key.data());
+      auto&& map = _spawnRegistry.at(key.data());
       // 生成情報の削除
       map.clear();
       // レジストリから削除する

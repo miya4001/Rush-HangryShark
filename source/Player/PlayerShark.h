@@ -36,8 +36,8 @@ namespace Game {
         Dead     //!< 死亡
       };
       /**
-       * @brief コンストラクタ
-       * @param app アプリケーションの参照
+       * @brief  コンストラクタ
+       * @param  app アプリケーションの参照
        */
       PlayerShark(Application::ApplicationMain& app);
       /**
@@ -105,15 +105,14 @@ namespace Game {
        */
       void Attack();
       /**
-      /**
        * @brief  捕食
        */
       void Eat();
 
-      int _hungry{ 0 };         //!< 空腹値
-      int _hungryCount{ 0 };    //!< 空腹カウント
-      int _eatTime{ 0 };        //!< 捕食時間
-      float _speed{ 0.0f };     //!< 移動速度
+      int _hungry{ 0 };       //!< 空腹値
+      int _hungryCount{ 0 };  //!< 空腹カウント
+      int _eatTime{ 0 };      //!< 捕食時間
+      float _speed{ 0.0f };   //!< 移動速度
       //!< プレイヤーの状態
       PlayerState _playerState{ PlayerState::Idle };
       //!< 前方向き

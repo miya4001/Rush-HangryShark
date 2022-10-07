@@ -10,11 +10,11 @@
 #include "ModeTitle.h"
 
 namespace {
+  // 画像ハンドルキー
+  constexpr auto UnderSea = "underSea";  //!< 海中
+  constexpr auto AMGLogo = "amg";        //!< AMG
   // 各種定数
   constexpr int MaxCount = 30;  //!< カウント上限
-  // 画像キー
-  constexpr auto UnderSea = "undersea";  //!< 海中
-  constexpr auto AMGLogo = "amg";            //!< AMG
 }
 
 namespace Game {

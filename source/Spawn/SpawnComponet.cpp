@@ -7,6 +7,9 @@
  *********************************************************************/
 #include "SpawnComponent.h"
 #include "../Application/ApplicationMain.h"
+#include "../Object/ObjectServer.h"
+#include "../Sea/SeaSphere.h"
+#include "../Player/PlayerShark.h"
 #include "SpawnServer.h"
 #include "SpawnEnemy.h"
 
@@ -45,6 +48,12 @@ namespace Game{
     }
 
     void SpawnComponent::SetSpawn() {
+      // ŠC’†”wŒi‚Ì¶¬
+      auto sea = std::make_shared<Sea::SeaSphere>(_app);
+      _app.GetObjectServer().RegisterObject(sea, true);
+      // ƒvƒŒƒCƒ„[(ƒTƒ)‚Ì¶¬
+      auto player = std::make_shared<Player::PlayerShark>(_app);
+      _app.GetObjectServer().RegisterObject(player, true);
       // “G¶¬î•ñ‚Ì“o˜^
       RegisterEnemyTable();
       // ŠJnƒe[ƒuƒ‹¶¬

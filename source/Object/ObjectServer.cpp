@@ -34,7 +34,7 @@ namespace Game {
         AddObjects();
       }
       // レジストリ内のオブジェクトの更新
-      for (auto object : _objectRegistry) {
+      for (auto&& object : _objectRegistry) {
         // オブジェクトが死亡状態でない場合更新
         if (!object->IsDead()) {
           object->Process();
@@ -46,8 +46,8 @@ namespace Game {
 
     void ObjectServer::Draw() const {
       // レジストリ内のオブジェクトの描画
-      for (auto&& objct : _objectRegistry) {
-        objct->Draw();
+      for (auto&& object : _objectRegistry) {
+        object->Draw();
       }
     }
 
@@ -72,7 +72,7 @@ namespace Game {
       // プレイヤーのコピー
       std::shared_ptr<Player::PlayerShark> player = nullptr;
       // レジストリから探す
-      for (auto object : _objectRegistry) {
+      for (auto&& object : _objectRegistry) {
         // プレイヤーの場合ポインタの取得
         if (object->GetId() == ObjectBase::ObjectId::Player) {
           player = std::dynamic_pointer_cast<Player::PlayerShark>(object);
@@ -90,8 +90,8 @@ namespace Game {
 
     void ObjectServer::AddObjects() {
       // オブジェクトをレジストリの末尾に追加
-      for (auto&& obj : _addObjectRegistry) {
-        _objectRegistry.emplace_back(std::move(obj));
+      for (auto&& object : _addObjectRegistry) {
+        _objectRegistry.emplace_back(std::move(object));
       }
       // 追加予約レジストリの解放
       _addObjectRegistry.clear();
@@ -103,9 +103,9 @@ namespace Game {
         return;
       }
       // 登録オブジェクトの全解放
-      for (auto&& obj : registry) {
+      for (auto&& object : registry) {
         // 解放処理
-        obj.reset();
+        object.reset();
       }
       // レジストリの解放
       registry.clear();

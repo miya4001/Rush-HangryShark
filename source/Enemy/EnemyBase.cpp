@@ -13,8 +13,8 @@
 
 namespace {
   // “GŠeí’è”
-  constexpr float Radius = 30.0f;       //!< ‹…”¼Œa
-  constexpr float SphereY = 25.0f;      //!< ‹…yÀ•W
+  constexpr float Radius = 30.0f;   //!< ‹…”¼Œa
+  constexpr float SphereY = 25.0f;  //!< ‹…yÀ•W
 }
 
 namespace Game {
@@ -67,7 +67,7 @@ namespace Game {
       // ƒIƒuƒWƒFƒNƒg‚ÌƒRƒs[
       auto objects = _app.GetObjectServer().GetObjects();
       // ŠC’†”wŒi‚ğ’T‚·
-      for (auto object : objects) {
+      for (auto&& object : objects) {
         if (object->GetId() == ObjectId::Sea) {
           // ŠC’†”ÍˆÍ“à”»’è
           inTheSea = _sphere->IntersectSphere(std::dynamic_pointer_cast<Sea::SeaSphere>(object)->GetSphere());
