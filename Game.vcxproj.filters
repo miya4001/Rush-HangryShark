@@ -129,6 +129,9 @@
     <ClInclude Include="source\UI\UIBase.h">
       <Filter>ヘッダー ファイル\UI</Filter>
     </ClInclude>
+    <ClInclude Include="source\UI\UIServer.h">
+      <Filter>ヘッダー ファイル\UI</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="source\Application\ApplicationMain.cpp">
@@ -183,6 +186,9 @@
       <Filter>ソース ファイル\Mode</Filter>
     </ClCompile>
     <ClCompile Include="source\UI\UIBase.cpp">
+      <Filter>ソース ファイル\UI</Filter>
+    </ClCompile>
+    <ClCompile Include="source\UI\UIServer.cpp">
       <Filter>ソース ファイル\UI</Filter>
     </ClCompile>
   </ItemGroup>

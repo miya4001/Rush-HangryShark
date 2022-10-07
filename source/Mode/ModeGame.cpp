@@ -28,6 +28,8 @@ namespace Game {
     bool ModeGame::Init() {
       // 生成コンポーネントの生成
       _spawn = std::make_unique<Spawn::SpawnComponent>(_appMain);
+      // UIサーバの生成
+      _uiServer = std::make_unique<UI::UIServer>();
       return true;
     }
 
@@ -47,6 +49,8 @@ namespace Game {
       _appMain.GetModelLoadServer().DeleteDuplicateModels();
       // 生成コンポーネントの解放
       _spawn->Release();
+      // UIサーバの解放
+      _uiServer->Release();
     }
 
     void ModeGame::Input(AppFrame::Input::InputManager& input) {
@@ -66,6 +70,8 @@ namespace Game {
       _appMain.GetObjectServer().Process();
       // 生成コンポーネントの更新
       _spawn->Process();
+      // UIサーバの更新
+      _uiServer->Process();
       // モード切り替え
       ChangeMode();
     }
@@ -73,6 +79,8 @@ namespace Game {
     void ModeGame::Draw() const {
       // オブジェクトサーバの描画
       _appMain.GetObjectServer().Draw();
+      // UIサーバの描画
+      _uiServer->Draw();
     }
 
     void ModeGame::LoadResource() {

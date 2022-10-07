@@ -8,6 +8,7 @@
 #pragma once
 #include <appframe.h>
 #include "../Spawn/SpawnComponent.h"
+#include "../UI/UIServer.h"
 
 /**
  * @brief  ゲーム
@@ -81,6 +82,8 @@ namespace Game {
       Application::ApplicationMain& _appMain;
       //!< 生成コンポーネント
       std::unique_ptr<Spawn::SpawnComponent> _spawn;
+      //!< UIサーバ
+      std::unique_ptr<UI::UIServer> _uiServer{ nullptr };
     };
   } // namespace Mode
 } // namespace Game
