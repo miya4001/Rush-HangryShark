@@ -45,7 +45,7 @@ namespace Game {
       // 空腹
       Hungry();
       // 死亡状態判定
-      if (IsDead()) {
+      if (_playerState == PlayerState::Dead) {
         // ゲームオーバー
         _app.SetGameOver(true);
         return;
@@ -72,12 +72,12 @@ namespace Game {
 #ifdef _DEBUG
       // ローカル座標
       auto [x, y, z] = _position.GetVector3();
-      DrawFormatString(0, 0, GetColor(255, 255, 255), "x:%f  y:%f, z:%f", x, y, z);
+      DrawFormatString(20, 200, GetColor(255, 255, 255), "x:%f  y:%f, z:%f", x, y, z);
       // 向き
       auto [rX, rY, rZ] = _rotation.GetVector3();
-      DrawFormatString(0, 20, GetColor(255, 255, 255), "rX:%f  rY:%f rZ:%f", rX, rY, rZ);
+      DrawFormatString(20, 220, GetColor(255, 255, 255), "rX:%f  rY:%f rZ:%f", rX, rY, rZ);
       // 空腹
-      DrawFormatString(0, 40, GetColor(255, 255, 255), "hungry:%d  count:%d", _hungry, _hungryCount);
+      DrawFormatString(20, 240, GetColor(255, 255, 255), "hungry:%d  count:%d", _hungry, _hungryCount);
       // 原点軸線分
       DrawLine3D(VGet(-200.0f, 0.0f, 0.0f), VGet(200.0f, 0.0f, 0.0f), GetColor(255, 0, 0));
       DrawLine3D(VGet(0.0f, 0.0f, -200.0f), VGet(0.0f, 0.0f, 200.0f), GetColor(0, 255, 0));
@@ -116,8 +116,8 @@ namespace Game {
         --_hungry;
         // 空腹値が下限の場合
         if (_hungry <= HungryMin) {
-          // 死亡
-          Dead();
+          // 死亡状態
+          _playerState = PlayerState::Dead;
         }
         return;
       }

@@ -33,6 +33,8 @@ namespace Game {
       // ‰æ‘œƒnƒ“ƒhƒ‹‚Ìİ’è
       _gauge = _app.GetGraphicLoadServer().GetGraphicHandle(HungryGauge);
       _gaugeBar = _app.GetGraphicLoadServer().GetGraphicHandle(HungryGaugeBar);
+      // •Ï”‰Šú‰»
+      _gaugeBarRightX = GaugeBarLeftX;
       return true;
     }
 

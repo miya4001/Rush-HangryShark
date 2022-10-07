@@ -32,7 +32,8 @@ namespace Game {
         Swim,    //!< 移動
         Rush,    //!< 突撃
         Attack,  //!< 攻撃
-        Eat      //!< 捕食
+        Eat,     //!< 捕食
+        Dead     //!< 死亡
       };
       /**
        * @brief コンストラクタ
