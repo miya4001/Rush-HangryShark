@@ -7,12 +7,12 @@
  *********************************************************************/
 #include "EnemyJerryfish.h"
 #include "../Application/ApplicationMain.h"
+#include "../ConstLoadResourceKey.h"
 
 namespace {
   // クラゲ各種定数
-  constexpr auto Modelhandle = "jerryfish";  //!< モデルハンドルキー
-  constexpr float Scale = 0.1f;              //!< 拡大率
-  constexpr float RotateDegree = 1.0f;       //!< 回転角度(デグリー値)
+  constexpr float Scale = 0.1f;         //!< 拡大率
+  constexpr float RotateDegree = 1.0f;  //!< 回転角度(デグリー値)
 }
 
 namespace Game {
@@ -40,7 +40,7 @@ namespace Game {
 
     void EnemyJerryfish::SetParameters() {
       // モデルハンドルの設定
-      _modelHandle = _app.GetModelLoadServer().GetDuplicateModelHandle(Modelhandle);
+      _modelHandle = _app.GetModelLoadServer().GetDuplicateModelHandle(ModelKey::Jerryfish);
       // 各種パラメータの設定
       _scale.Fill(Scale);
     }

@@ -7,10 +7,10 @@
  *********************************************************************/
 #include "EnemyTuna.h"
 #include "../Application/ApplicationMain.h"
+#include "../ConstLoadResourceKey.h"
 
 namespace {
   // マグロ各種定数
-  constexpr auto Modelhandle = "tuna";  //!< モデルハンドルキー
   constexpr float Scale = 0.15f;        //!< 拡大率
   constexpr float Speed = 2.0f;         //!< 移動速度
   constexpr float RotateDegree = 1.0f;  //!< 回転角度(デグリー値)
@@ -41,7 +41,7 @@ namespace Game {
 
     void EnemyTuna::SetParameters() {
       // モデルハンドルの設定
-      _modelHandle = _app.GetModelLoadServer().GetDuplicateModelHandle(Modelhandle);
+      _modelHandle = _app.GetModelLoadServer().GetDuplicateModelHandle(ModelKey::Tuna);
       // 各種パラメータの設定
       _scale.Fill(Scale);
     }

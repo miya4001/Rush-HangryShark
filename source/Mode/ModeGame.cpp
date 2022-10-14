@@ -11,16 +11,9 @@
 #include "../Camera/Camera.h"
 #include "../UI/UIHungryGauge.h"
 #include "ModeGameOver.h"
+#include "../ConstLoadResourceKey.h"
 
 namespace {
-  // 画像ハンドルキー
-  constexpr auto HungryGauge = "hungryGauge";        //!< 空腹ゲージ
-  constexpr auto HungryGaugeBar = "hungryGaugeBar";  //!< 空腹ゲージバー
-  // モデルハンドルキー
-  constexpr auto Sea = "sea";              //!< 海中背景
-  constexpr auto Shark = "shark";          //!< サメ
-  constexpr auto Tuna = "tuna";            //!< マグロ
-  constexpr auto Jerryfish = "jerryfish";  //!< クラゲ
   // 各種定数
   namespace AppMath = AppFrame::Math;
   const AppMath::Vector4 CameraPosition{ 0.0f, 100.0f, 250.0f };  //!< 初期カメラ位置
@@ -101,18 +94,19 @@ namespace Game {
       // 各種画像ハンドルの読み込み
       using GraphicLoadServer = AppFrame::Graphic::GraphicLoadServer;
       const GraphicLoadServer::LoadGraphicMap loadGraphicMap{
-        {HungryGauge, "resource/Graphic/UI/HungryGauge.png"},
-        {HungryGaugeBar, "resource/Graphic/UI/HungryGaugeBar.png"}
+        {GraphicKey::HungryGauge, "resource/Graphic/UI/HungryGauge.png"},
+        {GraphicKey::HungryGaugeBar, "resource/Graphic/UI/HungryGaugeBar.png"}
       };
       // 画像読み込みサーバに一括読み込み
       _app.GetGraphicLoadServer().LoadGraphics(loadGraphicMap);
       // 各種モデルハンドルの読み込み
       using ModelLoadServer = AppFrame::Model::ModelLoadServer;
       const ModelLoadServer::LoadModelMap loadModelMap {
-        {Sea, "resource/Model/Sea/skysphere.mv1"},
-        {Shark, "resource/Model/Shark/megalodon.mv1"},
-        {Tuna, "resource/Model/Tuna/Tuna.mv1"},
-        {Jerryfish, "resource/Model/Jerryfish/jerryfish.mv1"}
+        {ModelKey::SeaSphere, "resource/Model/Sea/skysphere.mv1"},
+        {ModelKey::Shark, "resource/Model/Shark/megalodon.mv1"},
+        {ModelKey::Shrimp, "resource/Model/Shrimp/Shrimp.mv1"},
+        {ModelKey::Tuna, "resource/Model/Tuna/Tuna.mv1"},
+        {ModelKey::Jerryfish, "resource/Model/Jerryfish/jerryfish.mv1"}
       };
       // モデル読み込みサーバに一括読み込み
       _app.GetModelLoadServer().LoadModels(loadModelMap);

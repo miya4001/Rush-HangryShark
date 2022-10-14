@@ -162,6 +162,7 @@
     <ClInclude Include="source\Application\ApplicationMain.h" />
     <ClInclude Include="source\Camera\Camera.h" />
     <ClInclude Include="source\Collision\CollisionSphere.h" />
+    <ClInclude Include="source\ConstLoadResourceKey.h" />
     <ClInclude Include="source\Enemy\EnemyBase.h" />
     <ClInclude Include="source\Enemy\EnemyJerryfish.h" />
     <ClInclude Include="source\Enemy\EnemyTuna.h" />

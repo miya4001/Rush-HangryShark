@@ -9,12 +9,12 @@
 #include "../Application/ApplicationMain.h"
 #include "../Object/ObjectServer.h"
 #include "../Player/PlayerShark.h"
+#include "../ConstLoadResourceKey.h"
 
 namespace {
   // 海中背景各種定数
-  constexpr auto Modelhandle = "sea";  //!< モデルハンドルキー
-  constexpr float Scale = 0.5f;        //!< 拡大率
-  constexpr float Radius = 2500.0f;    //!< 球半径
+  constexpr float Scale = 0.5f;      //!< 拡大率
+  constexpr float Radius = 2500.0f;  //!< 球半径
 }
 
 namespace Game {
@@ -44,7 +44,7 @@ namespace Game {
 
     void SeaSphere::SetParameters() {
       // モデルハンドルの設定
-      _modelHandle = _app.GetModelLoadServer().GetDuplicateModelHandle(Modelhandle);
+      _modelHandle = _app.GetModelLoadServer().GetDuplicateModelHandle(ModelKey::SeaSphere);
       // 各種パラメータの設定
       _objectId = ObjectId::Sea;
       _scale.Fill(Scale);

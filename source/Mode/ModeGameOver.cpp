@@ -9,16 +9,9 @@
 #include "../Application/ApplicationMain.h"
 #include "ModeGame.h"
 #include "ModeTitle.h"
+#include "../ConstLoadResourceKey.h"
 
 namespace {
-  // 画像ハンドルキー
-  constexpr auto GameOver = "gameOver";    //!< ゲームオーバー
-  constexpr auto Retry = "retry";          //!< リトライ
-  constexpr auto BackTitle = "backTitle";  //!< タイトルバック
-  constexpr auto Cursor = "cursor";        //!< カーソル
-  // 音源ハンドルキー
-  constexpr auto Bubble = "bubble";  //!< 泡
-  constexpr auto Hungry = "hungry";  //!< 空腹
   // 各種定数
   constexpr int SwitchX = 960;       //!< 切り替え画像x座標
   constexpr int SwitchY = 750;       //!< 切り替え画像y座標
@@ -43,10 +36,10 @@ namespace Game {
       // リソースの読み取り処理
       LoadResource();
       // 画像ハンドルの設定
-      _gameOver = _app.GetGraphicLoadServer().GetGraphicHandle(GameOver);
-      _retry = _app.GetGraphicLoadServer().GetGraphicHandle(Retry);
-      _backTitle = _app.GetGraphicLoadServer().GetGraphicHandle(BackTitle);
-      _bubble = _app.GetGraphicLoadServer().GetGraphicHandle(Cursor);
+      _gameOver = _app.GetGraphicLoadServer().GetGraphicHandle(GraphicKey::GameOver);
+      _retry = _app.GetGraphicLoadServer().GetGraphicHandle(GraphicKey::Retry);
+      _backTitle = _app.GetGraphicLoadServer().GetGraphicHandle(GraphicKey::BackTitle);
+      _bubble = _app.GetGraphicLoadServer().GetGraphicHandle(GraphicKey::Bubble);
       _switch = _retry;
       // 変数初期化
       _bubbleX = BubbleUpX;
@@ -96,9 +89,9 @@ namespace Game {
       // 各種画像ハンドルの読み込み
       using GraphicLoadServer = AppFrame::Graphic::GraphicLoadServer;
       const GraphicLoadServer::LoadGraphicMap loadGraphicMap{
-        {GameOver, "resource/Graphic/GameOver/GameOver.png"},
-        {Retry, "resource/Graphic/GameOver/Retry.png"},
-        {BackTitle, "resource/Graphic/GameOver/BackTitle.png"},
+        {GraphicKey::GameOver, "resource/Graphic/GameOver/GameOver.png"},
+        {GraphicKey::Retry, "resource/Graphic/GameOver/Retry.png"},
+        {GraphicKey::BackTitle, "resource/Graphic/GameOver/BackTitle.png"},
       };
       // 画像読み込みサーバに一括読み込み
       _app.GetGraphicLoadServer().LoadGraphics(loadGraphicMap);
@@ -118,7 +111,7 @@ namespace Game {
         // モードゲーム遷移
         _app.GetModeServer().TransionToMode(Game);
         // 空腹SEの再生
-        _app.GetSoundComponent().PlayBackGround(Hungry, SEVolume);
+        _app.GetSoundComponent().PlayBackGround(SoundKey::Hungry, SEVolume);
         break;
         // 選択下
       case BubbleDownY:
@@ -150,7 +143,7 @@ namespace Game {
       // スティック入力あり
       _isStick = true;
       // 泡SEの再生
-      _app.GetSoundComponent().PlayBackGround(Bubble, SEVolume);
+      _app.GetSoundComponent().PlayBackGround(SoundKey::Bubble, SEVolume);
     }
   } // namespae Mode
 } // namespace Game

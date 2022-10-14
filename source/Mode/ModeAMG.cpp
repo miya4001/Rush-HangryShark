@@ -8,11 +8,9 @@
 #include "ModeAMG.h"
 #include "../Application/ApplicationMain.h"
 #include "ModeTitle.h"
+#include "../ConstLoadResourceKey.h"
 
 namespace {
-  // 画像ハンドルキー
-  constexpr auto UnderSea = "underSea";  //!< 海中
-  constexpr auto AMGLogo = "amg";        //!< AMG
   // 各種定数
   constexpr int MaxCount = 30;  //!< カウント上限
 }
@@ -31,8 +29,8 @@ namespace Game {
       // リソースの読み取り処理
       LoadResource();
       // 画像ハンドルの設定
-      _sea = _app.GetGraphicLoadServer().GetGraphicHandle(UnderSea);
-      _amg = _app.GetGraphicLoadServer().GetGraphicHandle(AMGLogo);
+      _sea = _app.GetGraphicLoadServer().GetGraphicHandle(GraphicKey::UnderSea);
+      _amg = _app.GetGraphicLoadServer().GetGraphicHandle(GraphicKey::AMG);
     }
 
     void ModeAMG::Exit() {
@@ -60,8 +58,8 @@ namespace Game {
       // 各種画像ハンドルの読み込み
       using GraphicLoadServer = AppFrame::Graphic::GraphicLoadServer;
       const GraphicLoadServer::LoadGraphicMap loadGraphicMap {
-        {UnderSea, "resource/Graphic/BackGround/UnderSea.png"},
-        {AMGLogo, "resource/Graphic/BackGround/AMG.png"}
+        {GraphicKey::UnderSea, "resource/Graphic/BackGround/UnderSea.png"},
+        {GraphicKey::AMG, "resource/Graphic/BackGround/AMG.png"}
       };
       // 画像読み込みサーバに一括読み込み
       _app.GetGraphicLoadServer().LoadGraphics(loadGraphicMap);

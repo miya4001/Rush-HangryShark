@@ -8,17 +8,9 @@
 #include "ModeTitle.h"
 #include "../Application/ApplicationMain.h"
 #include "ModeGame.h"
+#include "../ConstLoadResourceKey.h"
 
 namespace {
-  // 画像ハンドルキー
-  constexpr auto UnderSea = "underSea";  //!< 海中
-  constexpr auto Title = "title";        //!< タイトル
-  constexpr auto Start = "start";        //!< 開始
-  constexpr auto Quit = "quit";          //!< 終了
-  constexpr auto Cursor = "cursor";      //!< カーソル
-  // 音源ハンドルキー
-  constexpr auto Bubble = "bubble";  //!< 泡
-  constexpr auto Hungry = "hungry";  //!< 空腹
   // 各種定数
   constexpr int SwitchX = 1500;      //!< 切り替え画像x座標
   constexpr int SwitchY = 850;       //!< 切り替え画像y座標
@@ -43,11 +35,11 @@ namespace Game {
       // リソースの読み取り処理
       LoadResource();
       // 画像ハンドルの設定
-      _sea = _app.GetGraphicLoadServer().GetGraphicHandle(UnderSea);
-      _title = _app.GetGraphicLoadServer().GetGraphicHandle(Title);
-      _start = _app.GetGraphicLoadServer().GetGraphicHandle(Start);
-      _quit = _app.GetGraphicLoadServer().GetGraphicHandle(Quit);
-      _bubble = _app.GetGraphicLoadServer().GetGraphicHandle(Cursor);
+      _sea = _app.GetGraphicLoadServer().GetGraphicHandle(GraphicKey::UnderSea);
+      _title = _app.GetGraphicLoadServer().GetGraphicHandle(GraphicKey::Title);
+      _start = _app.GetGraphicLoadServer().GetGraphicHandle(GraphicKey::Start);
+      _quit = _app.GetGraphicLoadServer().GetGraphicHandle(GraphicKey::Quit);
+      _bubble = _app.GetGraphicLoadServer().GetGraphicHandle(GraphicKey::Bubble);
       _switch = _start;
       // 変数初期化
       _bubbleX = BubbleUpX;
@@ -96,18 +88,18 @@ namespace Game {
       // 各種画像ハンドルの読み込み
       using GraphicLoadServer = AppFrame::Graphic::GraphicLoadServer;
       const GraphicLoadServer::LoadGraphicMap loadGraphicMap{
-        {Title, "resource/Graphic/Title/Title.png"},
-        {Start, "resource/Graphic/Title/Start.png"},
-        {Quit, "resource/Graphic/Title/Quit.png"},
-        {Cursor, "resource/Graphic/Cursor/Bubble.png"}
+        {GraphicKey::Title, "resource/Graphic/Title/Title.png"},
+        {GraphicKey::Start, "resource/Graphic/Title/Start.png"},
+        {GraphicKey::Quit, "resource/Graphic/Title/Quit.png"},
+        {GraphicKey::Bubble, "resource/Graphic/Cursor/Bubble.png"}
       };
       // 画像読み込みサーバに一括読み込み
       _app.GetGraphicLoadServer().LoadGraphics(loadGraphicMap);
       // 各種音源ハンドルの読み込み
       using SoundLoadServer = AppFrame::Sound::SoundLoadServer;
       const SoundLoadServer::LoadSoundMap loadSoundMap{
-        {Bubble, "resource/Sound/SE/Bubble.wav"},
-        {Hungry, "resource/Sound/SE/Hungry.wav"}
+        {SoundKey::Bubble, "resource/Sound/SE/Bubble.wav"},
+        {SoundKey::Hungry, "resource/Sound/SE/Hungry.wav"}
       };
       // 音源読み込みサーバに一括読み込み
       _app.GetSoundLoadServer().LoadSounds(loadSoundMap);
@@ -157,7 +149,7 @@ namespace Game {
       // スティック入力あり
       _isStick = true;
       // 泡SEの再生
-      _app.GetSoundComponent().PlayBackGround(Bubble, SEVolume);
+      _app.GetSoundComponent().PlayBackGround(SoundKey::Bubble, SEVolume);
     }
 
     void ModeTitle::ToModeGame() {
@@ -171,7 +163,7 @@ namespace Game {
       // モードゲーム遷移
       _app.GetModeServer().TransionToMode(Game);
       // 空腹SEの再生
-      _app.GetSoundComponent().PlayBackGround(Hungry, SEVolume);
+      _app.GetSoundComponent().PlayBackGround(SoundKey::Hungry, SEVolume);
     }
   } // namespace Mode
 } // namespace Game

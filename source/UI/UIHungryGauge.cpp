@@ -9,11 +9,9 @@
 #include "../Application/ApplicationMain.h"
 #include "../Object/ObjectServer.h"
 #include "../Player/PlayerShark.h"
+#include "../ConstLoadResourceKey.h"
 
 namespace {
-  // 画像ハンドルキー
-  constexpr auto HungryGauge = "hungryGauge";        //!< 空腹ゲージ
-  constexpr auto HungryGaugeBar = "hungryGaugeBar";  //!< 空腹ゲージバー
   // 空腹ゲージ各種定数
   constexpr int OneGaugeWidth = 7;     //!< ゲージ1目盛幅
   constexpr int GaugeX = 365;          //!< 空腹ゲージx座標
@@ -31,8 +29,8 @@ namespace Game {
 
     bool UIHungryGauge::Init() {
       // 画像ハンドルの設定
-      _gauge = _app.GetGraphicLoadServer().GetGraphicHandle(HungryGauge);
-      _gaugeBar = _app.GetGraphicLoadServer().GetGraphicHandle(HungryGaugeBar);
+      _gauge = _app.GetGraphicLoadServer().GetGraphicHandle(GraphicKey::HungryGauge);
+      _gaugeBar = _app.GetGraphicLoadServer().GetGraphicHandle(GraphicKey::HungryGaugeBar);
       // 変数初期化
       _gaugeBarRightX = GaugeBarLeftX;
       return true;

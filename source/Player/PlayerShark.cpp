@@ -10,10 +10,10 @@
 #include "../Object/ObjectServer.h"
 #include "../Camera/Camera.h"
 #include "../Enemy/EnemyBase.h"
+#include "../ConstLoadResourceKey.h"
 
 namespace {
   // プレイヤー各種定数
-  constexpr auto Modelhandle = "shark";    //!< モデルハンドルキー
   constexpr int HungryMax = 100;           //!< 空腹値上限
   constexpr int HungryMin = 0;             //!< 空腹値下限
   constexpr int HungryInit = 75;           //!< 初期空腹値
@@ -90,7 +90,7 @@ namespace Game {
 
     void PlayerShark::SetParameters() {
       // モデルハンドルの設定
-      _modelHandle = _app.GetModelLoadServer().GetDuplicateModelHandle(Modelhandle);
+      _modelHandle = _app.GetModelLoadServer().GetDuplicateModelHandle(ModelKey::Shark);
       // 各種パラメータの設定
       _objectId = ObjectId::Player;
       _scale.Fill(Scale);
