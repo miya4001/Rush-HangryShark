@@ -84,8 +84,8 @@ namespace Game {
     void EnemyBase::Hit() {
       // プレイヤーのコピー
       auto player = _app.GetObjectServer().GetPlayerShark();
-      // プレイヤーの球と衝突判定
-      _sphere->IntersectSphere(std::dynamic_pointer_cast<Player::PlayerShark>(player)->GetSphere());
+      // プレイヤーの攻撃球と衝突判定
+      _sphere->IntersectSphere(std::dynamic_pointer_cast<Player::PlayerShark>(player)->GetAttack());
     }
   } // namespace Enemy
 } // namespace Game
