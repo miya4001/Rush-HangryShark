@@ -76,6 +76,10 @@ namespace Game {
        * @param  leftY 左スティック上下入力値
        */
       void CursorInput(const int leftY);
+      /**
+       * @brief  モードゲーム遷移
+       */
+      void ToModeGame();
 
       int _sea{ -1 };           //!< 海中画像
       int _title{ -1 };         //!< タイトル画像

@@ -20,10 +20,10 @@ namespace {
   constexpr auto Bubble = "bubble";  //!< 泡
   constexpr auto Hungry = "hungry";  //!< 空腹
   // 各種定数
-  constexpr int SwitchX = 1250;      //!< 切り替え画像x座標
-  constexpr int SwitchY = 750;       //!< 切り替え画像y座標
-  constexpr int BubbleUpX = 1250;    //!< 泡上x座標
-  constexpr int BubbleDownX = 1300;  //!< 泡下x座標
+  constexpr int SwitchX = 1500;      //!< 切り替え画像x座標
+  constexpr int SwitchY = 850;       //!< 切り替え画像y座標
+  constexpr int BubbleUpX = 1350;    //!< 泡上x座標
+  constexpr int BubbleDownX = 1400;  //!< 泡下x座標
   constexpr int BubbleUpY = 800;     //!< 泡上y座標
   constexpr int BubbleDownY = 900;   //!< 泡下y座標
   constexpr int SEVolume = 200;      //!< SE音量
@@ -61,7 +61,7 @@ namespace Game {
 
     void ModeTitle::Input(AppFrame::Input::InputManager& input) {
       // XInputジョイパッドの入力処理の取得
-      auto xJoypad = input.GetXJoypad();
+      auto&& xJoypad = input.GetXJoypad();
       // 左スティック入力状態
       auto [leftX, leftY] = xJoypad.GetStick(AppFrame::Input::StickLeft);
       // カーソル入力
@@ -84,7 +84,7 @@ namespace Game {
       // 画像の描画
       DrawGraph(0, 0, _sea, true);
       DrawGraph(0, 0, _title, true);
-      DrawGraph(SwitchX, SwitchY, _switch, true);
+      DrawRotaGraph(SwitchX, SwitchY, 1.0, 0.0, _switch, true);
       DrawRotaGraph(_bubbleX, _bubbleY, 1.0, 0.0, _bubble, true);
     }
 
@@ -120,23 +120,21 @@ namespace Game {
       if (!_decision) {
         return;
       }
-      // 終了する場合
-      if (_switch == _quit) {
+      // カーソルに合わせて切り替え
+      switch (_bubbleY) {
+      // 選択上
+      case BubbleUpY:
+        // モードゲーム遷移
+        ToModeGame();
+        break;
+      // 選択下
+      case BubbleDownY:
         // アプリケーションの終了要請
         _app.RequestTerminate();
-        return;
+        break;
+      default:
+        break;
       }
-      // キーの登録判定
-      bool key = _app.GetModeServer().ContainsMode(Game);
-      // キーが未登録の場合
-      if (!key) {
-        // モードゲームの登録
-        _app.GetModeServer().AddMode(Game, std::make_shared<Mode::ModeGame>(_appMain));
-      }
-      // モードゲーム遷移
-      _app.GetModeServer().TransionToMode(Game);
-      // 空腹SEの再生
-      _app.GetSoundComponent().PlayBackGround(Hungry, SEVolume);
     }
 
     void ModeTitle::CursorInput(const int leftY) {
@@ -160,6 +158,20 @@ namespace Game {
       _isStick = true;
       // 泡SEの再生
       _app.GetSoundComponent().PlayBackGround(Bubble, SEVolume);
+    }
+
+    void ModeTitle::ToModeGame() {
+      // キーの登録判定
+      bool key = _app.GetModeServer().ContainsMode(Game);
+      // キーが未登録の場合
+      if (!key) {
+        // モードゲームの登録
+        _app.GetModeServer().AddMode(Game, std::make_shared<Mode::ModeGame>(_appMain));
+      }
+      // モードゲーム遷移
+      _app.GetModeServer().TransionToMode(Game);
+      // 空腹SEの再生
+      _app.GetSoundComponent().PlayBackGround(Hungry, SEVolume);
     }
   } // namespace Mode
 } // namespace Game
