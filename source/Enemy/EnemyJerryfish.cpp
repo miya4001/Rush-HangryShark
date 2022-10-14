@@ -25,7 +25,7 @@ namespace Game {
       // ŠC’†”ÍˆÍŠO‚Ìê‡’†’f
       if (!InTheSea()) {
         // €–S
-        Dead();
+        SetDead();
         return;
       }
       // ˆÚ“®

@@ -70,9 +70,9 @@ namespace Game {
        */
       virtual void Draw() const;
       /**
-       * @brief  €–S
+       * @brief  €–Só‘Ô
        */
-      virtual void Dead();
+      virtual void SetDead();
       /**
        * @brief  €–Só‘Ô‚©‚Ì”»’è
        * @return true:€–Só‘Ô

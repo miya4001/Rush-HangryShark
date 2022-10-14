@@ -225,7 +225,7 @@ namespace Game {
         // “G‚Æ‚ÌÚG”»’è
         if (_attack->IntersectSphere(std::dynamic_pointer_cast<Enemy::EnemyBase>(object)->GetSphere())) {
           // “G‚Ì€–S
-          object->Dead();
+          object->SetDead();
           // •ßHó‘Ô
           _playerState = PlayerState::Eat;
           break;

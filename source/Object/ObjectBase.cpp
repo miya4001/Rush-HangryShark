@@ -32,7 +32,7 @@ namespace Game {
       }
     }
 
-    void ObjectBase::Dead() {
+    void ObjectBase::SetDead() {
       _objectState = ObjectState::Dead;
     }
 
