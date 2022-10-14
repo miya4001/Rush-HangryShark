@@ -29,7 +29,7 @@ namespace Game {
        */
       enum class PlayerState {
         Idle,    //!< ‘Ò‹@
-        Swim,    //!< ˆÚ“®
+        Swim,    //!< —V‰j
         Rush,    //!< “ËŒ‚
         Attack,  //!< UŒ‚
         Eat,     //!< •ßH
@@ -93,13 +93,9 @@ namespace Game {
        */
       void Hungry();
       /**
-       * @brief  ‰ñ“]
+       * @brief  —V‰j
        */
-      void Rotate();
-      /**
-       * @brief  ˆÚ“®
-       */
-      void Move();
+      void Swim();
       /**
        * @brief  UŒ‚
        */
@@ -108,6 +104,22 @@ namespace Game {
        * @brief  •ßH
        */
       void Eat();
+      /**
+       * @brief  Ž€–S
+       */
+      void Dead();
+      /**
+       * @brief  ‰ñ“]
+       */
+      void Rotate();
+      /**
+       * @brief  ˆÚ“®
+       */
+      void Move();
+      /**
+       * @brief  UŒ‚€”õ
+       */
+      void AttackReady();
 
       int _hungry{ 0 };       //!< ‹ó• ’l
       int _hungryCount{ 0 };  //!< ‹ó• ƒJƒEƒ“ƒg

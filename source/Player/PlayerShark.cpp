@@ -16,7 +16,7 @@ namespace {
   // プレイヤー各種定数
   constexpr int HungryMax = 100;           //!< 空腹値上限
   constexpr int HungryMin = 0;             //!< 空腹値下限
-  constexpr int HungryInit = 75;           //!< 初期空腹値
+  constexpr int HungryInit = 30;           //!< 初期空腹値
   constexpr int HungryCountMax = 60;       //!< 空腹カウント上限
   constexpr int EatTimeMax = 60;           //!< 捕食時間上限
   constexpr int EatValue = 10;             //!< 捕食値
@@ -44,20 +44,29 @@ namespace Game {
     void PlayerShark::Process() {
       // 空腹
       Hungry();
-      // 死亡状態判定
-      if (_playerState == PlayerState::Dead) {
-        // ゲームオーバー
-        _app.SetGameOver(true);
-        return;
-      }
-      // 回転
-      Rotate();
-      // 移動 
-      Move();
-      // 攻撃
-      Attack();
+      // プレイヤーの状態に合わせて処理
+      switch (_playerState) {
+      // 待機・移動
+      case PlayerState::Idle:
+      case PlayerState::Swim:
+        // 遊泳
+        Swim();
+        break;
+      case PlayerState::Attack:
+        // 攻撃
+        Attack();
+        break;
       // 捕食
-      Eat();
+      case PlayerState::Eat:
+        Eat();
+        break;
+      // 死亡
+      case PlayerState::Dead:
+        Dead();
+        break;
+      default:
+        break;
+      }
       // ワールド座標の更新
       WorldMatrix();
       // モデルのワールド座標の設定
@@ -125,6 +134,67 @@ namespace Game {
       ++_hungryCount;
     }
 
+    void PlayerShark::Swim() {
+      // 回転
+      Rotate();
+      // 移動 
+      Move();
+      // 攻撃準備
+      AttackReady();
+    }
+
+    void PlayerShark::Attack() {
+      // オブジェクトのコピー
+      auto objects = _app.GetObjectServer().GetObjects();
+      // 敵を探す
+      for (auto&& object : objects) {
+        if (object->GetId() != ObjectId::Enemy) {
+          continue;
+        }
+        // 敵との接触判定
+        if (_attack->IntersectSphere(std::dynamic_pointer_cast<Enemy::EnemyBase>(object)->GetSphere())) {
+          // 敵の死亡
+          object->SetDead();
+          // 捕食状態
+          _playerState = PlayerState::Eat;
+          break;
+        }
+        // 攻撃終了
+        _playerState = PlayerState::Idle;
+      }
+    }
+
+    void PlayerShark::Eat() {
+      // 捕食時間が上限の場合
+      if (EatTimeMax <= _eatTime) {
+        // 捕食時間初期化
+        _eatTime = 0;
+        // 空腹値に捕食値追加
+        _hungry += EatValue;
+        // 空腹値上限調整
+        if (HungryMax <= _hungry) {
+          _hungry = HungryMax;
+        }
+#ifdef _DEBUG
+        // 攻撃球の塗りつぶし解除
+        _attack->NoFill();
+#endif
+        // 捕食終了
+        _playerState = PlayerState::Idle;
+        return;
+      }
+      // 捕食時間を増やす
+      ++_eatTime;
+    }
+
+    void PlayerShark::Dead() {
+      // 死亡演出
+      _position.SetY(50.0f);
+      _rotation.SetZ(180.0f);
+      // ゲームオーバー
+      _app.SetGameOver(true);
+    }
+
     void PlayerShark::Rotate() {
       // 入力状態の取得
       auto xJoypad = _app.GetInputManager().GetXJoypad();
@@ -134,23 +204,27 @@ namespace Game {
       bool rightB = xJoypad.GetButton(XINPUT_BUTTON_RIGHT_SHOULDER, AppFrame::Input::InputPress);
       // 角度
       auto angle = AppMath::Vector4();
-      // 入力状態に沿って角度の設定
+      // 同時入力または入力なしの場合中断
+      if (leftB == rightB) {
+        return;
+      }
+      // 左回転
       if (leftB) {
-        // 左回転
 #ifdef _DEBUG
-      // デグリー値をセット
+        // デグリー値をセット
         angle.SetY(-RotateDegree);
 #else
-      // ラジアン値をセット
+        // ラジアン値をセット
         angle.SetY(AppMath::Utility::DegreeToRadian(-RotateDegree));
 #endif
-      } else if (rightB) {
-        //右回転
+      }
+      //右回転
+      if (rightB) {
 #ifdef _DEBUG
-      // デグリー値をセット
+        // デグリー値をセット
         angle.SetY(RotateDegree);
 #else
-      // ラジアン値をセット
+        // ラジアン値をセット
         angle.SetY(AppMath::Utility::DegreeToRadian(RotateDegree));
 #endif
       }
@@ -173,11 +247,11 @@ namespace Game {
       auto xJoypad = _app.GetInputManager().GetXJoypad();
       // 左スティック入力状態
       auto [leftX, leftY] = xJoypad.GetStick(AppFrame::Input::StickLeft);
-      // 上方向入力が無い場合中断
+      // 上方向入力なしの場合中断
       if (leftY <= 0.0f) {
         return;
       }
-      // 移動状態
+      // 遊泳状態
       _playerState = PlayerState::Swim;
       // 移動量
       auto move = AppMath::Vector4();
@@ -189,24 +263,13 @@ namespace Game {
       _sphere->Process(move);
     }
 
-    void PlayerShark::Attack() {
+    void PlayerShark::AttackReady() {
       // 入力状態の取得
       auto xJoypad = _app.GetInputManager().GetXJoypad();
       // Aボタン(トリガ)の入力状態
       bool buttonA = xJoypad.GetButton(XINPUT_BUTTON_A, AppFrame::Input::InputTrigger);
       // 本体球の座標
       auto spherePosition = _sphere->GetPosition();
-      // 攻撃していない場合中断
-      if (!buttonA) {
-        // 攻撃球を本体球と合わせる
-        _attack->SetPosition(spherePosition);
-#ifdef _DEBUG
-        _attack->NoFill();
-#endif
-        return;
-      }
-      // 攻撃状態
-      _playerState = PlayerState::Attack;
       // 前方向きの不要なyを無視
       auto forward = _forward;
       forward.SetY(0.0f);
@@ -215,47 +278,11 @@ namespace Game {
       // 攻撃球を本体球から距離分後方に設定
       auto attackPposition = spherePosition + distance;
       _attack->SetPosition(attackPposition);
-      // オブジェクトのコピー
-      auto objects = _app.GetObjectServer().GetObjects();
-      // 敵を探す
-      for (auto object : objects) {
-        if (object->GetId() != ObjectId::Enemy) {
-          continue;
-        }
-        // 敵との接触判定
-        if (_attack->IntersectSphere(std::dynamic_pointer_cast<Enemy::EnemyBase>(object)->GetSphere())) {
-          // 敵の死亡
-          object->SetDead();
-          // 捕食状態
-          _playerState = PlayerState::Eat;
-          break;
-        }
-        // 攻撃終了
-        _playerState = PlayerState::Idle;
+      // 入力がある場合
+      if (buttonA) {
+        // 攻撃状態
+        _playerState = PlayerState::Attack;
       }
-    }
-
-    void PlayerShark::Eat() {
-      // 捕食中でない場合中断
-      if (_playerState != PlayerState::Eat) {
-        return;
-      }
-      // 捕食時間が上限の場合
-      if (EatTimeMax <= _eatTime) {
-        // 捕食時間初期化
-        _eatTime = 0;
-        // 空腹値に捕食値追加
-        _hungry += EatValue;
-        // 空腹値上限調整
-        if (HungryMax <= _hungry) {
-          _hungry = HungryMax;
-        }
-        // 捕食終了
-        _playerState = PlayerState::Idle;
-        return;
-      }
-      // 捕食時間を増やす
-      ++_eatTime;
     }
   } // namespace Player
 } // namespace Game
