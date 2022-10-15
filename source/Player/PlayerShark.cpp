@@ -14,19 +14,25 @@
 
 namespace {
   // プレイヤー各種定数
-  constexpr int HungryMax = 100;           //!< 空腹値上限
-  constexpr int HungryMin = 0;             //!< 空腹値下限
-  constexpr int HungryInit = 30;           //!< 初期空腹値
-  constexpr int HungryCountMax = 60;       //!< 空腹カウント上限
-  constexpr int EatTimeMax = 60;           //!< 捕食時間上限
-  constexpr int EatValue = 10;             //!< 捕食値
-  constexpr float Scale = 1.0f;            //!< 拡大率
-  constexpr float Radius = 50.0f;          //!< 球半径
-  constexpr float SphereY = 25.0f;         //!< 球y座標
+  constexpr float Scale = 1.0f;     //!< 拡大率
+  constexpr float Radius = 50.0f;   //!< 球半径
+  constexpr float SphereY = 25.0f;  //!< 球y座標
+  // 空腹定数
+  constexpr int HungryMax = 100;      //!< 空腹値上限
+  constexpr int HungryMin = 0;        //!< 空腹値下限
+  constexpr int HungryInit = 30;      //!< 初期空腹値
+  constexpr int HungryCountMax = 60;  //!< 空腹カウント上限
+  // 捕食定数
+  constexpr int EatTimeMax = 60;  //!< 捕食時間上限
+  constexpr int EatValue = 10;    //!< 捕食値
+  // 回転・移動・攻撃準備定数
   constexpr float RotateDegree = 3.0f;     //!< 回転角度(デグリー値)
   constexpr float SwimSpeed = 10.0f;       //!< 水泳速度
   constexpr float RushSpeed = 20.0f;       //!< 突撃速度
   constexpr float AttackDistance = 50.0f;  //!< 攻撃距離
+  // 遊泳アニメーション定数
+  constexpr int AnimationCountMax = 60;  //!< アニメカウント上限
+  constexpr float AnimationY = 0.05f;    //!< アニメy
 }
 
 namespace Game {
@@ -87,6 +93,8 @@ namespace Game {
       DrawFormatString(20, 220, GetColor(255, 255, 255), "rX:%f  rY:%f rZ:%f", rX, rY, rZ);
       // 空腹
       DrawFormatString(20, 240, GetColor(255, 255, 255), "hungry:%d  count:%d", _hungry, _hungryCount);
+      // 遊泳アニメーション
+      DrawFormatString(20, 260, GetColor(255, 255, 255), "animCount:%d", _animationCount);
       // 原点軸線分
       DrawLine3D(VGet(-200.0f, 0.0f, 0.0f), VGet(200.0f, 0.0f, 0.0f), GetColor(255, 0, 0));
       DrawLine3D(VGet(0.0f, 0.0f, -200.0f), VGet(0.0f, 0.0f, 200.0f), GetColor(0, 255, 0));
@@ -104,7 +112,7 @@ namespace Game {
       _objectId = ObjectId::Player;
       _scale.Fill(Scale);
       _hungry = HungryInit;
-      _speed = SwimSpeed;
+      _moveSpeed = SwimSpeed;
       // 球の衝突判定の設定
       auto position = _position;
       position.SetY(SphereY);
@@ -141,6 +149,8 @@ namespace Game {
       Move();
       // 攻撃準備
       AttackReady();
+      // 遊泳アニメーション
+      SwimAnimation();
     }
 
     void PlayerShark::Attack() {
@@ -197,7 +207,7 @@ namespace Game {
 
     void PlayerShark::Rotate() {
       // 入力状態の取得
-      auto xJoypad = _app.GetInputManager().GetXJoypad();
+      auto&& xJoypad = _app.GetInputManager().GetXJoypad();
       // LBボタン(押下)の入力状態
       bool leftB = xJoypad.GetButton(XINPUT_BUTTON_LEFT_SHOULDER, AppFrame::Input::InputPress);
       // RBボタン(押下)の入力状態
@@ -244,7 +254,7 @@ namespace Game {
 
     void PlayerShark::Move() {
       // 入力状態の取得
-      auto xJoypad = _app.GetInputManager().GetXJoypad();
+      auto&& xJoypad = _app.GetInputManager().GetXJoypad();
       // 左スティック入力状態
       auto [leftX, leftY] = xJoypad.GetStick(AppFrame::Input::StickLeft);
       // 上方向入力なしの場合中断
@@ -256,7 +266,7 @@ namespace Game {
       // 移動量
       auto move = AppMath::Vector4();
       // 前方向きに移動速度倍
-      move = _forward * _speed;
+      move = _forward * _moveSpeed;
       // 移動量の追加
       _position.Add(move);
       // 本体球の衝突判定の更新
@@ -265,7 +275,7 @@ namespace Game {
 
     void PlayerShark::AttackReady() {
       // 入力状態の取得
-      auto xJoypad = _app.GetInputManager().GetXJoypad();
+      auto&& xJoypad = _app.GetInputManager().GetXJoypad();
       // Aボタン(トリガ)の入力状態
       bool buttonA = xJoypad.GetButton(XINPUT_BUTTON_A, AppFrame::Input::InputTrigger);
       // 本体球の座標
@@ -283,6 +293,39 @@ namespace Game {
         // 攻撃状態
         _playerState = PlayerState::Attack;
       }
+    }
+
+    void PlayerShark::SwimAnimation() {
+      // アニメーションy
+      auto animationY = AppMath::Vector4(0.0f, AnimationY, 0.0f);
+      // ローカル座標y
+      float positionY = _position.GetY();
+      // 遊泳上昇に合わせてアニメーション
+      if (_swimUp) {
+        // 上昇終了の場合
+        if (AnimationCountMax <= _animationCount) {
+          // 遊泳下降
+          _swimUp = false;
+          // アニメカウント初期化
+          _animationCount = 0;
+          return;
+        }
+        // ローカル座標yに加算
+        _position.Add(animationY);
+      } else {
+        // 下降終了の場合
+        if (AnimationCountMax <= _animationCount) {
+          // 遊泳上昇
+          _swimUp = true;
+          // アニメカウント初期化
+          _animationCount = 0;
+          return;
+        }
+        // ローカル座標yに減算
+        _position.Sub(animationY);
+      }
+      // アニメカウントを増やす
+      ++_animationCount;
     }
   } // namespace Player
 } // namespace Game

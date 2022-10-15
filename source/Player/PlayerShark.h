@@ -120,11 +120,17 @@ namespace Game {
        * @brief  攻撃準備
        */
       void AttackReady();
+      /**
+       * @brief  遊泳アニメーション
+       */
+      void SwimAnimation();
 
-      int _hungry{ 0 };       //!< 空腹値
-      int _hungryCount{ 0 };  //!< 空腹カウント
-      int _eatTime{ 0 };      //!< 捕食時間
-      float _speed{ 0.0f };   //!< 移動速度
+      int _hungry{ 0 };           //!< 空腹値
+      int _hungryCount{ 0 };      //!< 空腹カウント
+      int _eatTime{ 0 };          //!< 捕食時間
+      int _animationCount{ 0 };   //!< アニメカウント
+      float _moveSpeed{ 0.0f };   //!< 移動速度
+      bool _swimUp{ true };       //!< 遊泳上昇
       //!< プレイヤーの状態
       PlayerState _playerState{ PlayerState::Idle };
       //!< 前方向き
