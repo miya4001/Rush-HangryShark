@@ -25,14 +25,17 @@ namespace {
   // 捕食定数
   constexpr int EatTimeMax = 60;  //!< 捕食時間上限
   constexpr int EatValue = 10;    //!< 捕食値
-  // 回転・移動・攻撃準備定数
-  constexpr float RotateDegree = 3.0f;     //!< 回転角度(デグリー値)
-  constexpr float SwimSpeed = 10.0f;       //!< 水泳速度
-  constexpr float RushSpeed = 20.0f;       //!< 突撃速度
-  constexpr float AttackDistance = 50.0f;  //!< 攻撃距離
+  // 死亡
+  constexpr float DeadPositionY = 50.0f;   //!< 死亡位置y
+  constexpr float DeadRotationZ = 180.0f;  //!< 死亡向きz
+  // 遊泳(回転・移動・攻撃準備)定数
+  constexpr float RotateDegree = 3.0f;      //!< 回転角度(デグリー値)
+  constexpr float SwimSpeed = 10.0f;        //!< 水泳速度
+  constexpr float RushSpeed = 20.0f;        //!< 突撃速度
+  constexpr float AttackDistance = 50.0f;   //!< 攻撃距離
   // 遊泳アニメーション定数
   constexpr int AnimationCountMax = 60;  //!< アニメカウント上限
-  constexpr float AnimationY = 0.05f;    //!< アニメy
+  constexpr float AnimationY = 0.05f;    //!< アニメ位置y
 }
 
 namespace Game {
@@ -167,6 +170,8 @@ namespace Game {
           object->SetDead();
           // 捕食状態
           _playerState = PlayerState::Eat;
+          // 捕食SEの再生
+          _app.GetSoundComponent().PlayBackGround(SoundKey::Eat);
           break;
         }
         // 攻撃終了
@@ -199,8 +204,14 @@ namespace Game {
 
     void PlayerShark::Dead() {
       // 死亡演出
-      _position.SetY(50.0f);
-      _rotation.SetZ(180.0f);
+      _position.SetY(DeadPositionY);
+#ifdef _DEBUG
+      // デグリー値をセット
+      _rotation.SetZ(DeadRotationZ);
+#else
+      // ラジアン値をセット
+      _rotation.SetZ(AppMath::Utility::DegreeToRadian(DeadRotationZ));
+#endif
       // ゲームオーバー
       _app.SetGameOver(true);
     }
@@ -292,6 +303,8 @@ namespace Game {
       if (buttonA) {
         // 攻撃状態
         _playerState = PlayerState::Attack;
+        // 噛みつきSEの再生
+        _app.GetSoundComponent().PlayBackGround(SoundKey::Bite);
       }
     }
 

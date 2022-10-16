@@ -110,6 +110,14 @@ namespace Game {
       };
       // モデル読み込みサーバに一括読み込み
       _app.GetModelLoadServer().LoadModels(loadModelMap);
+      // 各種音源ハンドルの読み込み
+      using SoundLoadServer = AppFrame::Sound::SoundLoadServer;
+      const SoundLoadServer::LoadSoundMap loadSoundMap{
+        {SoundKey::Bite, "resource/Sound/SE/Bite.wav"},
+        {SoundKey::Eat, "resource/Sound/SE/Eat.wav"}
+      };
+      // 音源読み込みサーバに一括読み込み
+      _app.GetSoundLoadServer().LoadSounds(loadSoundMap);
       // 読み込み完了
       _isLoad = true;
     }

@@ -31,17 +31,19 @@ namespace Game {
    * @brief  モデルハンドルキー
    */
   namespace ModelKey {
-    constexpr auto SeaSphere = "seaSphere";
-    constexpr auto Shark = "shark";
-    constexpr auto Shrimp = "shrimp";
-    constexpr auto Tuna = "tuna";
-    constexpr auto Jerryfish = "jerryfish";
+    constexpr auto SeaSphere = "seaSphere";  //!< 海中背景モデル
+    constexpr auto Shark = "shark";          //!< サメモデル
+    constexpr auto Shrimp = "shrimp";        //!< エビモデル
+    constexpr auto Tuna = "tuna";            //!< マグロモデル
+    constexpr auto Jerryfish = "jerryfish";  //!< クラゲモデル
   } // namespace ModelKey
   /**
    * @brief  音源ハンドルキー
    */
   namespace SoundKey {
-    constexpr auto Bubble = "bubble";
-    constexpr auto Hungry = "hungry";
+    constexpr auto Bubble = "bubble";  //!< 泡SE
+    constexpr auto Hungry = "hungry";  //!< 空腹SE
+    constexpr auto Bite = "bite";      //!< 噛みつきSE
+    constexpr auto Eat = "eat";        //!< 捕食SE
   } // namespace SoundKey
 }
