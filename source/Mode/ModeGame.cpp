@@ -10,6 +10,7 @@
 #include "../Object/ObjectServer.h"
 #include "../Camera/Camera.h"
 #include "../UI/UIHungryGauge.h"
+#include "../UI/UITimer.h"
 #include "ModeGameOver.h"
 #include "../ConstLoadResourceKey.h"
 
@@ -142,6 +143,9 @@ namespace Game {
       // 空腹ゲージの生成
       auto hungryGauge = std::make_shared<UI::UIHungryGauge>(_appMain);
       _uiServer->RegisterUI(hungryGauge);
+      // タイマーの生成
+      auto timer = std::make_shared<UI::UITimer>(_appMain);
+      _uiServer->RegisterUI(timer);
     }
   } // namespace Mode
 } // namespace Game
