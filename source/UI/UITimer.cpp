@@ -7,6 +7,7 @@
  *********************************************************************/
 #include "UITimer.h"
 #include "../Application/ApplicationMain.h"
+#include "../ConstLoadResourceKey.h"
 
 namespace {
   // タイマー各種定数
@@ -23,6 +24,8 @@ namespace Game {
     }
 
     bool UITimer::Init() {
+      // 画像ハンドルの設定
+      //_timerNumber = _app.GetGraphicLoadServer().GetDivGraphicHandles(GraphicKey::TimerNumber);
       // 変数初期化
       _timerSeconds = TimerSecondsInit;
       // タイマー秒変換
@@ -46,6 +49,10 @@ namespace Game {
     }
 
     void UITimer::Draw() const {
+      // タイマー数字描画
+      //DrawGraph(, , _timerNumber.at(_onePlaceMinutes), true);
+      //DrawGraph(, , _timerNumber.at(_tenPlaceSeconds), true);
+      //DrawGraph(, , _timerNumber.at(_onePlaceSeconds), true);
       // デバッグ情報描画
 #ifdef _DEBUG
       // タイマー

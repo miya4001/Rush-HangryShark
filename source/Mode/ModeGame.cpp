@@ -98,8 +98,13 @@ namespace Game {
         {GraphicKey::HungryGauge, "resource/Graphic/UI/HungryGauge.png"},
         {GraphicKey::HungryGaugeBar, "resource/Graphic/UI/HungryGaugeBar.png"}
       };
+      // 各種分割画像ハンドルの読み込み
+      //const GraphicLoadServer::LoadDivGraphicMap loadDivGraphicMap{
+      //  {GraphicKey::TimerNumber, {"resource/Graphic/.png", 0, 0, 0, 0, 0}}
+      //};
       // 画像読み込みサーバに一括読み込み
       _app.GetGraphicLoadServer().LoadGraphics(loadGraphicMap);
+      //_app.GetGraphicLoadServer().GetDivGraphicHandles(loadDivGraphicMap);
       // 各種モデルハンドルの読み込み
       using ModelLoadServer = AppFrame::Model::ModelLoadServer;
       const ModelLoadServer::LoadModelMap loadModelMap {

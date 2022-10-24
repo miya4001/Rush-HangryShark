@@ -7,6 +7,7 @@
  *********************************************************************/
 #pragma once
 #include "UIBase.h"
+#include <vector>
 
 /**
  * @brief  ゲーム
@@ -57,6 +58,8 @@ namespace Game {
       int _onePlaceSeconds{ 0 };  //!< 秒(一の位)
       int _tenPlaceSeconds{ 0 };  //!< 秒(十の位)
       int _onePlaceMinutes{ 0 };  //!< 分(一の位)
+      // タイマー数字画像ハンドル
+      std::vector<int> _timerNumber;
     };
   } // namespace UI
 } // namespace Game
