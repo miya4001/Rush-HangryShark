@@ -45,9 +45,11 @@ namespace Game {
    * @brief  音源ハンドルキー
    */
   namespace SoundKey {
-    constexpr auto Bubble = "bubble";  //!< 泡SE
-    constexpr auto Hungry = "hungry";  //!< 空腹SE
-    constexpr auto Bite = "bite";      //!< 噛みつきSE
-    constexpr auto Eat = "eat";        //!< 捕食SE
+    constexpr auto Bubble = "bubble";    //!< 泡SE
+    constexpr auto Hungry = "hungry";    //!< 空腹SE
+    constexpr auto Bite = "bite";        //!< 噛みつきSE
+    constexpr auto Eat = "eat";          //!< 捕食SE
+    constexpr auto Drawn = "drawn";      //!< 溺れるSE
+    constexpr auto Whistle = "whistle";  //!< ホイッスルSE
   } // namespace SoundKey
 }

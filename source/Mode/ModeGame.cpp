@@ -122,7 +122,9 @@ namespace Game {
       using SoundLoadServer = AppFrame::Sound::SoundLoadServer;
       const SoundLoadServer::LoadSoundMap loadSoundMap{
         {SoundKey::Bite, "resource/Sound/SE/Bite.wav"},
-        {SoundKey::Eat, "resource/Sound/SE/Eat.wav"}
+        {SoundKey::Eat, "resource/Sound/SE/Eat.wav"},
+        {SoundKey::Drawn, "resource/Sound/SE/Drawn.wav"},
+        {SoundKey::Whistle, "resource/Sound/SE/Whistle.wav"}
       };
       // ‰¹Œ¹“Ç‚İ‚İƒT[ƒo‚ÉˆêŠ‡“Ç‚İ‚İ
       _app.GetSoundLoadServer().LoadSounds(loadSoundMap);
