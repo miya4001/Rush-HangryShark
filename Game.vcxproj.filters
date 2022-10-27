@@ -141,6 +141,9 @@
     <ClInclude Include="source\UI\UITimer.h">
       <Filter>ヘッダー ファイル\UI</Filter>
     </ClInclude>
+    <ClInclude Include="source\Mode\ModeGameClear.h">
+      <Filter>ヘッダー ファイル\Mode</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="source\Application\ApplicationMain.cpp">
@@ -205,6 +208,9 @@
     </ClCompile>
     <ClCompile Include="source\UI\UITimer.cpp">
       <Filter>ソース ファイル\UI</Filter>
+    </ClCompile>
+    <ClCompile Include="source\Mode\ModeGameClear.cpp">
+      <Filter>ソース ファイル\Mode</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

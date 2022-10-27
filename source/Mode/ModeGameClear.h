@@ -1,6 +1,6 @@
 /*****************************************************************//**
- * @file   ModeGameOver.h
- * @brief  モードゲームオーバークラス
+ * @file   ModeGameClear.h
+ * @brief  モードゲームクリアクラス
  * 
  * @author 宮澤耀生
  * @date   October 2022
@@ -8,9 +8,9 @@
 #pragma once
 #include <appframe.h>
 
-/**
- * @brief  ゲーム
- */
+ /**
+  * @brief  ゲーム
+  */
 namespace Game {
   /**
    * @brief  アプリケーション
@@ -22,18 +22,18 @@ namespace Game {
    * @brief  モード
    */
   namespace Mode {
-    constexpr auto GameOver = "ModeGameOver";  //!< モードゲームオーバー登録用キー
+    constexpr auto GameClear = "ModeGameClear";  //!< モードゲームクリア登録用キー
     /**
-     * @class  ModeGameOver
-     * @brief  モードゲームオーバークラス
+     * @class  ModeGameClear
+     * @brief  モードゲームクリアクラス
      */
-    class ModeGameOver : public AppFrame::Mode::ModeBase {
+    class ModeGameClear : public AppFrame::Mode::ModeBase {
     public:
       /**
        * @brief  コンストラクタ
        * @param  app アプリケーションの参照
        */
-      ModeGameOver(Application::ApplicationMain& app);
+      ModeGameClear(Application::ApplicationMain& app);
       /**
        * @brief  初期化
        * @return true:初期化成功
@@ -71,20 +71,10 @@ namespace Game {
        * @brief  モード切り替え
        */
       void ChangeMode() override;
-      /**
-       * @brief  カーソル入力
-       * @param  leftY 左スティック上下入力値
-       */
-      void CursorInput(const int leftY);
 
-      int _gameOver{ -1 };      //!< ゲームオーバー画像
-      int _retry{ -1 };         //!< リトライ画像
-      int _backTitle{ -1 };     //!< タイトルバック画像
+      int _gameClear{ -1 };     //!< ゲームクリア画像
+      int _back{ -1 };          //!< バック画像
       int _bubble{ -1 };        //!< 泡画像
-      int _switch{ -1 };        //!< 切り替え画像
-      int _bubbleX{ 0 };        //!< 泡x座標
-      int _bubbleY{ 0 };        //!< 泡y座標
-      bool _isStick{ false };   //!< 左スティック入力
       bool _decision{ false };  //!< 選択決定
       //!< アプリケーションメインの参照
       Application::ApplicationMain& _appMain;

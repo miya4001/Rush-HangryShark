@@ -58,11 +58,25 @@ namespace Game {
         _isGameOver = flag;
       }
       /**
+       * @brief  ゲームクリアフラグの設定
+       * @param  flag フラグ
+       */
+      inline void SetGameClear(const bool flag) {
+        _isGameClear = flag;
+      }
+      /**
        * @brief  ゲームオーバーフラグの取得
        * @return ゲームオーバーフラグ
        */
       inline bool GetGameOver() const {
         return _isGameOver;
+      }
+      /**
+       * @brief  ゲームクリアフラグの取得
+       * @return ゲームクリアフラグ
+       */
+      inline bool GetGameClear() const {
+        return _isGameClear;
       }
       /**
        * @brief  オブジェクトサーバの取得
@@ -81,7 +95,8 @@ namespace Game {
       Spawn::SpawnServer& GetSpawnServer();
 
     private:
-      bool _isGameOver{ false };  //!< ゲームオーバーフラグ 
+      bool _isGameOver{ false };   //!< ゲームオーバーフラグ
+      bool _isGameClear{ false };  //!< ゲームクリアフラグ
       //!< オブジェクトサーバ
       std::unique_ptr<Object::ObjectServer> _objectServer{ nullptr };
       //!< カメラ

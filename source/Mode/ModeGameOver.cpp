@@ -16,8 +16,8 @@ namespace {
   constexpr int SwitchX = 960;       //!< Ø‚è‘Ö‚¦‰æ‘œxÀ•W
   constexpr int SwitchY = 750;       //!< Ø‚è‘Ö‚¦‰æ‘œyÀ•W
   constexpr int BubbleUpX = 785;     //!< –AãxÀ•W
-  constexpr int BubbleDownX = 860;   //!< –A‰ºxÀ•W
   constexpr int BubbleUpY = 700;     //!< –AãyÀ•W
+  constexpr int BubbleDownX = 860;   //!< –A‰ºxÀ•W
   constexpr int BubbleDownY = 800;   //!< –A‰ºyÀ•W
   constexpr int SEVolume = 200;      //!< SE‰¹—Ê
 }
@@ -115,7 +115,7 @@ namespace Game {
         break;
         // ‘I‘ð‰º
       case BubbleDownY:
-        // ƒ‚[ƒhƒQ[ƒ€‘JˆÚ
+        // ƒ‚[ƒhƒ^ƒCƒgƒ‹‘JˆÚ
         _app.GetModeServer().TransionToMode(Title);
         break;
       default:

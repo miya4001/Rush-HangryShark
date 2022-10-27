@@ -77,6 +77,14 @@ namespace Game {
        * @brief  UIの設定
        */
       void SetUI();
+      /**
+       * @brief  モードゲームオーバー遷移
+       */
+      void ToModeGameOver();
+      /**
+       * @brief  モードゲームクリア遷移
+       */
+      void ToModeGameClear();
 
       //!< アプリケーションメインの参照
       Application::ApplicationMain& _appMain;

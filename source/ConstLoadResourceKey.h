@@ -23,6 +23,8 @@ namespace Game {
     constexpr auto GameOver = "gameOver";              //!< ゲームオーバー画像
     constexpr auto Retry = "retry";                    //!< リトライ画像
     constexpr auto BackTitle = "backTitle";            //!< タイトルバック画像
+    constexpr auto GameClear = "gameClear";            //!< ゲームクリア画像
+    constexpr auto Back = "back";                      //!< バック画像
     constexpr auto Bubble = "bubble";                  //!< 泡画像
     constexpr auto HungryGauge = "hungryGauge";        //!< 空腹ゲージ画像
     constexpr auto HungryGaugeBar = "hungryGaugeBar";  //!< 空腹ゲージバー画像

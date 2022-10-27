@@ -12,6 +12,7 @@
 #include "../UI/UIHungryGauge.h"
 #include "../UI/UITimer.h"
 #include "ModeGameOver.h"
+#include "ModeGameClear.h"
 #include "../ConstLoadResourceKey.h"
 
 namespace {
@@ -130,10 +131,30 @@ namespace Game {
     }
 
     void ModeGame::ChangeMode() {
-      // ゲームオーバーでない場合中断
-      if (!_appMain.GetGameOver()) {
+      // ゲームオーバーの場合
+      if (_appMain.GetGameOver()) {
+        // モードゲームオーバー遷移
+        ToModeGameOver();
         return;
       }
+      // ゲームクリアの場合
+      if (_appMain.GetGameClear()) {
+        // モードゲームクリア遷移
+        ToModeGameClear();
+        return;
+      }
+    }
+
+    void ModeGame::SetUI() {
+      // 空腹ゲージの生成
+      auto hungryGauge = std::make_shared<UI::UIHungryGauge>(_appMain);
+      _uiServer->RegisterUI(hungryGauge);
+      // タイマーの生成
+      auto timer = std::make_shared<UI::UITimer>(_appMain);
+      _uiServer->RegisterUI(timer);
+    }
+
+    void ModeGame::ToModeGameOver() {
       // キーの登録判定
       bool key = _app.GetModeServer().ContainsMode(GameOver);
       // キーが未登録の場合
@@ -145,13 +166,16 @@ namespace Game {
       _app.GetModeServer().TransionToMode(GameOver);
     }
 
-    void ModeGame::SetUI() {
-      // 空腹ゲージの生成
-      auto hungryGauge = std::make_shared<UI::UIHungryGauge>(_appMain);
-      _uiServer->RegisterUI(hungryGauge);
-      // タイマーの生成
-      auto timer = std::make_shared<UI::UITimer>(_appMain);
-      _uiServer->RegisterUI(timer);
+    void ModeGame::ToModeGameClear() {
+      // キーの登録判定
+      bool key = _app.GetModeServer().ContainsMode(GameClear);
+      // キーが未登録の場合
+      if (!key) {
+        // モードゲームクリアの登録
+        _app.GetModeServer().AddMode(GameClear, std::make_shared<Mode::ModeGameClear>(_appMain));
+      }
+      // モードゲームクリア遷移
+      _app.GetModeServer().TransionToMode(GameClear);
     }
   } // namespace Mode
 } // namespace Game

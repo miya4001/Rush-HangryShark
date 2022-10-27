@@ -40,8 +40,10 @@ namespace Game {
     }
 
     void UITimer::Process() {
-      // タイマー秒が尽きた場合中断
+      // タイマー秒が尽きた場合
       if (_timerSeconds <= 0) {
+        // ゲームクリア
+        _app.SetGameClear(true);
         return;
       }
       // フレームカウントが上限の場合
