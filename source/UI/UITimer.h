@@ -53,12 +53,13 @@ namespace Game {
        */
       void TimerConversion();
 
+      int _colon{ -1 };           //!< コロン画像
       int _frameCount{ 0 };       //!< フレームカウント
       int _timerSeconds{ 0 };     //!< タイマー秒
       int _onePlaceSeconds{ 0 };  //!< 秒(一の位)
       int _tenPlaceSeconds{ 0 };  //!< 秒(十の位)
       int _onePlaceMinutes{ 0 };  //!< 分(一の位)
-      // タイマー数字画像ハンドル
+      // タイマー数字画像
       std::vector<int> _timerNumber;
     };
   } // namespace UI

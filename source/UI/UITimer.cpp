@@ -11,10 +11,15 @@
 
 namespace {
   // タイマー各種定数
-  constexpr int TimerSecondsInit = 180;  //!< 初期タイマー秒
-  constexpr int FrameCountMax = 60;      //!< フレームカウント上限
-  constexpr int SecondsMax = 60;         //!< 秒上限
-  constexpr int TenPlace = 10;           //!< 十の位
+  constexpr int TimerSecondsInit = 180;   //!< 初期タイマー秒
+  constexpr int FrameCountMax = 60;       //!< フレームカウント上限
+  constexpr int SecondsMax = 60;          //!< 秒上限
+  constexpr int TenPlace = 10;            //!< 十の位
+  constexpr int ColonX = 1700;            //!< コロンx座標
+  constexpr int OnePlaceMinutesX = 1630;  //!< 分(一の位)x座標
+  constexpr int TenPlaceSecondsX = 1730;  //!< 秒(十の位)x座標
+  constexpr int OnePlaceSecondsX = 1800;  //!< 秒(一の位)x座標
+  constexpr int DrawY = 25;               //!< 描画y座標
 }
 
 namespace Game {
@@ -25,7 +30,8 @@ namespace Game {
 
     bool UITimer::Init() {
       // 画像ハンドルの設定
-      //_timerNumber = _app.GetGraphicLoadServer().GetDivGraphicHandles(GraphicKey::TimerNumber);
+      _timerNumber = _app.GetGraphicLoadServer().GetDivGraphicHandles(GraphicKey::TimerNumber);
+      _colon = _app.GetGraphicLoadServer().GetGraphicHandle(GraphicKey::TimerColon);
       // 変数初期化
       _timerSeconds = TimerSecondsInit;
       // タイマー秒変換
@@ -34,6 +40,10 @@ namespace Game {
     }
 
     void UITimer::Process() {
+      // タイマー秒が尽きた場合中断
+      if (_timerSeconds <= 0) {
+        return;
+      }
       // フレームカウントが上限の場合
       if (FrameCountMax <= _frameCount) {
         // フレームカウント初期化
@@ -49,15 +59,12 @@ namespace Game {
     }
 
     void UITimer::Draw() const {
+      // コロン描画
+      DrawGraph(ColonX, DrawY, _colon, true);
       // タイマー数字描画
-      //DrawGraph(, , _timerNumber.at(_onePlaceMinutes), true);
-      //DrawGraph(, , _timerNumber.at(_tenPlaceSeconds), true);
-      //DrawGraph(, , _timerNumber.at(_onePlaceSeconds), true);
-      // デバッグ情報描画
-#ifdef _DEBUG
-      // タイマー
-      DrawFormatString(1500, 100, GetColor(255, 255, 255), "%d : %d %d", _onePlaceMinutes, _tenPlaceSeconds, _onePlaceSeconds);
-#endif
+      DrawGraph(OnePlaceMinutesX, DrawY, _timerNumber.at(_onePlaceMinutes), true);
+      DrawGraph(TenPlaceSecondsX, DrawY, _timerNumber.at(_tenPlaceSeconds), true);
+      DrawGraph(OnePlaceSecondsX, DrawY, _timerNumber.at(_onePlaceSeconds), true);
     }
 
     void UITimer::OneSecondPass() {

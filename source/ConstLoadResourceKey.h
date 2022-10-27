@@ -27,6 +27,7 @@ namespace Game {
     constexpr auto HungryGauge = "hungryGauge";        //!< 空腹ゲージ画像
     constexpr auto HungryGaugeBar = "hungryGaugeBar";  //!< 空腹ゲージバー画像
     constexpr auto TimerNumber = "timerNumber";        //!< タイマー数字画像
+    constexpr auto TimerColon = "timerColon";          //!< タイマーコロン画像
   } // namespace GraphicKey
   /**
    * @brief  モデルハンドルキー

@@ -96,15 +96,16 @@ namespace Game {
       using GraphicLoadServer = AppFrame::Graphic::GraphicLoadServer;
       const GraphicLoadServer::LoadGraphicMap loadGraphicMap{
         {GraphicKey::HungryGauge, "resource/Graphic/UI/HungryGauge.png"},
-        {GraphicKey::HungryGaugeBar, "resource/Graphic/UI/HungryGaugeBar.png"}
+        {GraphicKey::HungryGaugeBar, "resource/Graphic/UI/HungryGaugeBar.png"},
+        {GraphicKey::TimerColon, "resource/Graphic/UI/Colon.png"}
       };
       // 各種分割画像ハンドルの読み込み
-      //const GraphicLoadServer::LoadDivGraphicMap loadDivGraphicMap{
-      //  {GraphicKey::TimerNumber, {"resource/Graphic/.png", 0, 0, 0, 0, 0}}
-      //};
+      const GraphicLoadServer::LoadDivGraphicMap loadDivGraphicMap{
+        {GraphicKey::TimerNumber, {"resource/Graphic/UI/Number_sheet.png", 10, 10, 1, 70, 106}}
+      };
       // 画像読み込みサーバに一括読み込み
       _app.GetGraphicLoadServer().LoadGraphics(loadGraphicMap);
-      //_app.GetGraphicLoadServer().GetDivGraphicHandles(loadDivGraphicMap);
+      _app.GetGraphicLoadServer().LoadDivGraphics(loadDivGraphicMap);
       // 各種モデルハンドルの読み込み
       using ModelLoadServer = AppFrame::Model::ModelLoadServer;
       const ModelLoadServer::LoadModelMap loadModelMap {
