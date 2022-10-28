@@ -25,6 +25,15 @@ namespace Game{
     class EnemyBase : public Object::ObjectBase {
     public:
       /**
+       * @brief  敵の状態の列挙型クラス
+       */
+      enum class EnemyState {
+        Idle,    //!< 待機
+        Swim,    //!< 遊泳
+        Attack,  //!< 攻撃
+        Dead     //!< 死亡
+      };
+      /**
        * @brief  コンストラクタ
        * @param  app アプリケーションの参照
        */
@@ -50,11 +59,24 @@ namespace Game{
        */
       virtual void Spawn(const AppMath::Vector4 position, const AppMath::Vector4 rotation);
       /**
+       * @brief  敵の状態死亡設定
+       */
+      virtual void SetEnemyDead() {
+        _enemyState = EnemyState::Dead;
+      }
+      /**
        * @brief  食料値の取得
        * @return 食料値
        */
-      virtual int GetFoodValue() {
+      virtual int GetFoodValue() const {
         return _foodValue;
+      }
+      /**
+       * @brief  敵の状態の取得
+       * @return 敵の状態
+       */
+      virtual EnemyState GetEnemyState() const {
+        return _enemyState;
       }
       /**
        * @brief  球の衝突判定の取得
@@ -83,8 +105,14 @@ namespace Game{
        * @brief  衝突
        */
       virtual void Hit();
+      /**
+       * @brief  死亡
+       */
+      virtual void Dead();
 
       int _foodValue{ 0 };  //!< 食料値
+      //!< 敵の状態
+      EnemyState _enemyState{ EnemyState::Idle };
       //!< 球の衝突判定
       std::unique_ptr<Collision::CollisionSphere> _sphere{ nullptr };
     };

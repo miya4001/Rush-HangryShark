@@ -22,9 +22,15 @@ namespace Game {
     }
 
     void EnemyJerryfish::Process() {
+      // “G‚Ìó‘Ô‚ª€–S‚Ìê‡’†’f
+      if (_enemyState == EnemyState::Dead) {
+        // €–S
+        Dead();
+        return;
+      }
       // ŠC’†”ÍˆÍŠO‚Ìê‡’†’f
       if (!InTheSea()) {
-        // €–S
+        // €–Só‘Ô
         SetDead();
         return;
       }

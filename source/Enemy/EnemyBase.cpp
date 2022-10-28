@@ -87,5 +87,12 @@ namespace Game {
       // ƒvƒŒƒCƒ„[‚ÌUŒ‚‹…‚ÆÕ“Ë”»’è
       _sphere->IntersectSphere(std::dynamic_pointer_cast<Player::PlayerShark>(player)->GetAttack());
     }
+
+    void EnemyBase::Dead() {
+      // €–S‰‰o
+
+      // €–Só‘Ô
+      SetDead();
+    }
   } // namespace Enemy
 } // namespace Game

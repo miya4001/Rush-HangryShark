@@ -173,7 +173,7 @@ namespace Game {
           // 食料値を取得し捕食値を設定
           _eatFood = enemy->GetFoodValue();
           // 敵の死亡
-          enemy->SetDead();
+          enemy->SetEnemyDead();
           // 捕食状態
           _playerState = PlayerState::Eat;
           // 捕食SEの再生
