@@ -127,6 +127,7 @@ namespace Game {
 
       int _hungry{ 0 };           //!< 空腹値
       int _hungryCount{ 0 };      //!< 空腹カウント
+      int _eatFood{ 0 };          //!< 捕食値
       int _eatTime{ 0 };          //!< 捕食時間
       int _animationCount{ 0 };   //!< アニメカウント
       float _moveSpeed{ 0.0f };   //!< 移動速度

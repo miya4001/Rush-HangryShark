@@ -24,16 +24,17 @@ namespace {
   constexpr int HungryCountMax = 60;  //!< 空腹カウント上限
   // 捕食定数
   constexpr int EatTimeMax = 60;  //!< 捕食時間上限
-  constexpr int EatValue = 10;    //!< 捕食値
-  // 死亡
+  // 死亡定数
   constexpr float DeadPositionY = 50.0f;   //!< 死亡位置y
   constexpr float DeadRotationZ = 180.0f;  //!< 死亡向きz
   constexpr int DrawnSEVolume = 200;       //!< 溺れるSE音量
-  // 遊泳(回転・移動・攻撃準備)定数
-  constexpr float RotateDegree = 3.0f;      //!< 回転角度(デグリー値)
-  constexpr float SwimSpeed = 10.0f;        //!< 水泳速度
-  constexpr float RushSpeed = 20.0f;        //!< 突撃速度
-  constexpr float AttackDistance = 50.0f;   //!< 攻撃距離
+  // 回転定数
+  constexpr float RotateDegree = 3.0f;  //!< 回転角度(デグリー値)
+  // 移動定数
+  constexpr float SwimSpeed = 10.0f;  //!< 水泳速度
+  constexpr float RushSpeed = 20.0f;  //!< 突撃速度
+  // 攻撃準備定数
+  constexpr float AttackDistance = 50.0f;  //!< 攻撃距離
   // 遊泳アニメーション定数
   constexpr int AnimationCountMax = 60;  //!< アニメカウント上限
   constexpr float AnimationY = 0.05f;    //!< アニメ位置y
@@ -165,10 +166,14 @@ namespace Game {
         if (object->GetId() != ObjectId::Enemy) {
           continue;
         }
+        // 敵のコピー
+        auto enemy = std::dynamic_pointer_cast<Enemy::EnemyBase>(object);
         // 敵との接触判定
-        if (_attack->IntersectSphere(std::dynamic_pointer_cast<Enemy::EnemyBase>(object)->GetSphere())) {
+        if (_attack->IntersectSphere(enemy->GetSphere())) {
+          // 食料値を取得し捕食値を設定
+          _eatFood = enemy->GetFoodValue();
           // 敵の死亡
-          object->SetDead();
+          enemy->SetDead();
           // 捕食状態
           _playerState = PlayerState::Eat;
           // 捕食SEの再生
@@ -186,7 +191,7 @@ namespace Game {
         // 捕食時間初期化
         _eatTime = 0;
         // 空腹値に捕食値追加
-        _hungry += EatValue;
+        _hungry += _eatFood;
         // 空腹値上限調整
         if (HungryMax <= _hungry) {
           _hungry = HungryMax;

@@ -50,10 +50,17 @@ namespace Game{
        */
       virtual void Spawn(const AppMath::Vector4 position, const AppMath::Vector4 rotation);
       /**
+       * @brief  食料値の取得
+       * @return 食料値
+       */
+      virtual int GetFoodValue() {
+        return _foodValue;
+      }
+      /**
        * @brief  球の衝突判定の取得
        * @return 球の衝突判定の参照
        */
-      Collision::CollisionSphere& GetSphere() {
+      virtual Collision::CollisionSphere& GetSphere() {
         return *_sphere;
       }
 
@@ -77,6 +84,7 @@ namespace Game{
        */
       virtual void Hit();
 
+      int _foodValue{ 0 };  //!< 食料値
       //!< 球の衝突判定
       std::unique_ptr<Collision::CollisionSphere> _sphere{ nullptr };
     };

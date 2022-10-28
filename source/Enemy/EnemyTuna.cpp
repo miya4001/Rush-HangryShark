@@ -11,6 +11,7 @@
 
 namespace {
   // マグロ各種定数
+  constexpr int FoodValue = 5;          //!< 食料値
   constexpr float Scale = 0.15f;        //!< 拡大率
   constexpr float Speed = 2.0f;         //!< 移動速度
   constexpr float RotateDegree = 1.0f;  //!< 回転角度(デグリー値)
@@ -44,6 +45,7 @@ namespace Game {
       _modelHandle = _app.GetModelLoadServer().GetDuplicateModelHandle(ModelKey::Tuna);
       // 各種パラメータの設定
       _scale.Fill(Scale);
+      _foodValue = FoodValue;
     }
 
     void EnemyTuna::Move() {
