@@ -25,6 +25,15 @@ namespace Game{
     class EnemyBase : public Object::ObjectBase {
     public:
       /**
+       * @brief  “G‚ÌŽ¯•Ê‚Ì—ñ‹“Œ^ƒNƒ‰ƒX
+       */
+      enum class EnemyID {
+        None,      //!< ŠY“–‚È‚µ
+        Shrimp,    //!< ƒGƒr
+        Tuna,      //!< ƒ}ƒOƒ
+        Jerryfish  //!< ƒNƒ‰ƒQ
+      };
+      /**
        * @brief  “G‚Ìó‘Ô‚Ì—ñ‹“Œ^ƒNƒ‰ƒX
        */
       enum class EnemyState {
@@ -72,6 +81,13 @@ namespace Game{
         return _foodValue;
       }
       /**
+       * @brief  “G‚ÌŽ¯•Ê‚ÌŽæ“¾
+       * @return “G‚ÌŽ¯•Ê
+       */
+      virtual EnemyID GetEnemyID() const {
+        return _enemyID;
+      }
+      /**
        * @brief  “G‚Ìó‘Ô‚ÌŽæ“¾
        * @return “G‚Ìó‘Ô
        */
@@ -111,6 +127,8 @@ namespace Game{
       virtual void Dead();
 
       int _foodValue{ 0 };  //!< H—¿’l
+      //!< “G‚ÌŽ¯•Ê
+      EnemyID _enemyID{ EnemyID::None };
       //!< “G‚Ìó‘Ô
       EnemyState _enemyState{ EnemyState::Idle };
       //!< ‹…‚ÌÕ“Ë”»’è

@@ -49,6 +49,7 @@ namespace Game {
       _modelHandle = _app.GetModelLoadServer().GetDuplicateModelHandle(ModelKey::Jerryfish);
       // 各種パラメータの設定
       _scale.Fill(Scale);
+      _enemyID = EnemyID::Jerryfish;
     }
 
     void EnemyJerryfish::Move() {
