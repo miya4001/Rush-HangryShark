@@ -144,6 +144,9 @@
     <ClInclude Include="source\Mode\ModeGameClear.h">
       <Filter>ヘッダー ファイル\Mode</Filter>
     </ClInclude>
+    <ClInclude Include="source\Enemy\EnemyShrimp.h">
+      <Filter>ヘッダー ファイル\Enemy</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="source\Application\ApplicationMain.cpp">
@@ -211,6 +214,9 @@
     </ClCompile>
     <ClCompile Include="source\Mode\ModeGameClear.cpp">
       <Filter>ソース ファイル\Mode</Filter>
+    </ClCompile>
+    <ClCompile Include="source\Enemy\EnemyShrimp.cpp">
+      <Filter>ソース ファイル\Enemy</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

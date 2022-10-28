@@ -20,7 +20,7 @@ namespace Game {
      * @class  EnemyTuna
      * @brief  敵(マグロ)クラス
      */
-    class EnemyTuna :public EnemyBase {
+    class EnemyTuna : public EnemyBase {
     public:
       /**
        * @brief  コンストラクタ

@@ -1,9 +1,9 @@
 /*****************************************************************//**
- * @file   EnemyJerryfish.h
- * @brief  敵(クラゲ)クラス
+ * @file   EnemyShrimp.h
+ * @brief  敵(エビ)クラス
  * 
  * @author 宮澤耀生
- * @date   September 2022
+ * @date   October 2022
  *********************************************************************/
 #pragma once
 #include "EnemyBase.h"
@@ -11,22 +11,22 @@
 /**
  * @brief  ゲーム
  */
-namespace Game {
+namespace Game{
   /**
    * @brief  敵
    */
   namespace Enemy {
     /**
-     * @class  EnemyJerryfish
-     * @brief  敵(クラゲ)クラス
+     * @class  EnemyShrimp
+     * @brief  敵(エビ)クラス
      */
-    class EnemyJerryfish : public EnemyBase {
+    class EnemyShrimp : public EnemyBase {
     public:
       /**
        * @brief  コンストラクタ
        * @param  app アプリケーションの参照
        */
-      EnemyJerryfish(Application::ApplicationMain& app);
+      EnemyShrimp(Application::ApplicationMain& app);
       /**
        * @brief  更新
        */
