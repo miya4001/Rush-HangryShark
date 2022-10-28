@@ -9,6 +9,7 @@
 #include "../Application/ApplicationMain.h"
 #include "../Object/ObjectServer.h"
 #include "SpawnEnemy.h"
+#include "../Enemy/EnemyShrimp.h"
 #include "../Enemy/EnemyTuna.h"
 #include "../Enemy/EnemyJerryfish.h"
 
@@ -64,6 +65,10 @@ namespace Game {
       for (auto&& spawn : _spawnRegistry.at(key.data()))
         // 識別番号から判別
         switch (spawn->GetNumber()) {
+        // エビ
+        case SpawnNumber::Shrimp:
+          RegisterObjctServer(EnemyShrimp(*spawn.get()));
+          break;
         // マグロ
         case SpawnNumber::Tuna:
           RegisterObjctServer(EnemyTuna(*spawn.get()));
@@ -93,6 +98,16 @@ namespace Game {
       map.clear();
       // レジストリから削除する
       _spawnRegistry.erase(key.data());
+    }
+
+    std::shared_ptr<Enemy::EnemyShrimp> SpawnServer::EnemyShrimp(SpawnEnemy& spawn) const {
+      // エビの生成
+      auto shrimp = std::make_shared<Enemy::EnemyShrimp>(_app);
+      // スポーン情報の設定
+      auto [position, rotation] = spawn.GetTransform();
+      shrimp->Spawn(position, rotation);
+      // 生成したシェアードポインタを返す
+      return std::move(shrimp);
     }
 
     std::shared_ptr<Enemy::EnemyTuna> SpawnServer::EnemyTuna(SpawnEnemy& spawn) const {

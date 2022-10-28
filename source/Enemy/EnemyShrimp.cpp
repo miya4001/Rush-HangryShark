@@ -11,9 +11,9 @@
 
 namespace {
   // エビ各種定数
-  constexpr float Scale = 0.15f;        //!< 拡大率
+  constexpr float Scale = 0.05f;        //!< 拡大率
   constexpr float Speed = 1.0f;         //!< 移動速度
-  constexpr float RotateDegree = 2.0f;  //!< 回転角度(デグリー値)
+  constexpr float RotateDegree = 1.0f;  //!< 回転角度(デグリー値)
 }
 
 namespace Game {
@@ -41,7 +41,7 @@ namespace Game {
 
     void EnemyShrimp::SetParameters() {
       // モデルハンドルの設定
-      _modelHandle = _app.GetModelLoadServer().GetDuplicateModelHandle(ModelKey::Tuna);
+      _modelHandle = _app.GetModelLoadServer().GetDuplicateModelHandle(ModelKey::Shrimp);
       // 各種パラメータの設定
       _scale.Fill(Scale);
     }

@@ -20,6 +20,7 @@ namespace {
   constexpr auto Start = "start";    //!< 開始テーブル
   constexpr auto EnemyA = "enemyA";  //!< テーブルA
   constexpr auto EnemyB = "enemyB";  //!< テーブルB
+  constexpr auto EnemyC = "enemyC";  //!< テーブルC
 }
 
 namespace Game{
@@ -103,10 +104,16 @@ namespace Game{
         {SpawnNumber::Jerryfish, {-250.0f, 0.0f, -750.0f}, {0.0f, 0.0f, 0.0f}},
         {SpawnNumber::Jerryfish, {250.0f, 0.0f, -750.0f}, {0.0f, 0.0f, 0.0f}}
       };
+      // テーブルC
+      const SpawnServer::EnemyTable enemyC{
+        {SpawnNumber::Shrimp, {-250.0f, 0.0f, -750.0f}, {0.0f, 0.0f, 0.0f}},
+        {SpawnNumber::Shrimp, {250.0f, 0.0f, -750.0f}, {0.0f, 0.0f, 0.0f}}
+      };
       // 生成情報の登録
       _app.GetSpawnServer().RegisterSpawnTable(Start, start);
       _app.GetSpawnServer().RegisterSpawnTable(EnemyA, enemyA);
       _app.GetSpawnServer().RegisterSpawnTable(EnemyB, enemyB);
+      _app.GetSpawnServer().RegisterSpawnTable(EnemyC, enemyC);
       // 登録完了
       _isRegister = true;
     }

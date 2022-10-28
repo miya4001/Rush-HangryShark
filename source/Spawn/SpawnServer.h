@@ -28,6 +28,7 @@ namespace Game{
    * @brief  敵
    */
   namespace Enemy {
+    class EnemyShrimp;
     class EnemyTuna;
     class EnemyJerryfish;
   } // namespace Enemy
@@ -86,6 +87,12 @@ namespace Game{
        */
       void DeleteSpawnTable(const std::string_view key);
       /**
+       * @brief  エビの生成
+       * @param  spawn 生成情報
+       * @return エビのシェアードポインタ
+       */
+      std::shared_ptr<Enemy::EnemyShrimp> EnemyShrimp(SpawnEnemy& spawn) const;
+      /**
        * @brief  マグロの生成
        * @param  spawn 生成情報
        * @return マグロのシェアードポインタ
@@ -109,7 +116,8 @@ namespace Game{
    * @brief  生成番号
    */
   namespace SpawnNumber {
-    constexpr int Tuna = 1;       //!< マグロ
-    constexpr int Jerryfish = 2;  //!< クラゲ
+    constexpr int Shrimp = 1;     //!< エビ
+    constexpr int Tuna = 2;       //!< マグロ
+    constexpr int Jerryfish = 3;  //!< クラゲ
   } // namespace SpawnNumber
 } // namespace Game
