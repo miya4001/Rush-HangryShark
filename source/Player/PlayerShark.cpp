@@ -116,8 +116,14 @@ namespace Game {
     }
 
     void PlayerShark::SetPlayerDamage() {
+      // 被ダメ状態の場合中断
+      if (_playerState == PlayerState::Damage) {
+        return;
+      }
       // 被ダメ状態
       _playerState = PlayerState::Damage;
+      // 麻痺SEの再生
+      _app.GetSoundComponent().PlayBackGround(SoundKey::Paralysis);
       // 被ダメ演出(仮)
 #ifdef _DEBUG
         // 本体球の塗りつぶし

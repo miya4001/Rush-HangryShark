@@ -58,8 +58,9 @@ namespace Game {
        */
       void Attack();
 
-      int _chargeCount{ 0 };  //!< 充電カウント
-      int _attackCount{ 0 };  //!< 攻撃カウント
+      int _chargeCount{ 0 };    //!< 充電カウント
+      int _attackCount{ 0 };    //!< 攻撃カウント
+      bool _isAttack{ false };  //!< 攻撃成功
       //!< 攻撃球の衝突判定
       std::unique_ptr<Collision::CollisionSphere> _attack{ nullptr };
     };

@@ -123,6 +123,7 @@ namespace Game {
       const SoundLoadServer::LoadSoundMap loadSoundMap{
         {SoundKey::Bite, "resource/Sound/SE/Bite.wav"},
         {SoundKey::Eat, "resource/Sound/SE/Eat.wav"},
+        {SoundKey::Paralysis, "resource/Sound/SE/Paralysis.wav"},
         {SoundKey::Drawn, "resource/Sound/SE/Drawn.wav"},
         {SoundKey::Whistle, "resource/Sound/SE/Whistle.wav"}
       };

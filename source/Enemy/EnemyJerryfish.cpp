@@ -140,6 +140,8 @@ namespace Game {
       if (AttackCountMax <= _attackCount) {
         // UŒ‚ƒJƒEƒ“ƒg‰Šú‰»
         _attackCount = 0;
+        // UŒ‚¬Œ÷‰Šú‰»
+        _isAttack = false;
         // —V‰jó‘Ô
         _enemyState = EnemyState::Swim;
 #ifdef _DEBUG
@@ -150,22 +152,24 @@ namespace Game {
       }
       // UŒ‚ƒJƒEƒ“ƒg‚ð‘‚â‚·
       ++_attackCount;
-      // UŒ‚
-      bool attack = false;
+      // UŒ‚¬Œ÷‚Ìê‡’†’f
+      if (_isAttack) {
+        return;
+      }
       // ƒvƒŒƒCƒ„[‚ÌƒRƒs[
       auto player = _app.GetObjectServer().GetPlayerShark();
       // ƒvƒŒƒCƒ„[‚Ì–{‘Ì‹…‚ÆÕ“Ë”»’è
-      attack = _attack->IntersectSphere(std::dynamic_pointer_cast<Player::PlayerShark>(player)->GetSphere());
-      // UŒ‚‚ª“–‚½‚Á‚½ê‡
-      if (attack) {
-        // ƒvƒŒƒCƒ„[‚Ì”íƒ_ƒó‘ÔÝ’è
-        player->SetPlayerDamage();
-      }
+      _isAttack = _attack->IntersectSphere(std::dynamic_pointer_cast<Player::PlayerShark>(player)->GetSphere());
       // UŒ‚‰‰o(‰¼)
 #ifdef _DEBUG
         // UŒ‚‹…‚Ì“h‚è‚Â‚Ô‚µ
       _attack->SetFill(true);
 #endif
+      // UŒ‚‚ª“–‚½‚Á‚½ê‡
+      if (_isAttack) {
+        // ƒvƒŒƒCƒ„[‚Ì”íƒ_ƒó‘ÔÝ’è
+        player->SetPlayerDamage();
+      }
     }
   } // namespace Enemy
 } // namespace Game
