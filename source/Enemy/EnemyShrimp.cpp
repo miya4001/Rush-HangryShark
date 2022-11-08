@@ -27,20 +27,26 @@ namespace Game {
     }
 
     void EnemyShrimp::Process() {
-      // “G‚Ìó‘Ô‚ª€–S‚Ìê‡’†’f
-      if (_enemyState == EnemyState::Dead) {
-        // €–S
-        Dead();
-        return;
-      }
       // ŠC’†”ÍˆÍŠO‚Ìê‡’†’f
       if (!InTheSea()) {
         // €–Só‘Ô
         SetDead();
         return;
       }
-      // ˆÚ“®
-      Move();
+      // ƒGƒr‚Ìó‘Ô‚É‡‚í‚¹‚Äˆ—
+      switch (_enemyState) {
+      // —V‰j
+      case EnemyState::Swim:
+        // ˆÚ“®
+        Move();
+        break;
+      // €–S
+      case EnemyState::Dead:
+        Dead();
+        break;
+      default:
+        break;
+      }
       // Õ“Ë
       Hit();
       // ƒ[ƒ‹ƒhÀ•W‚ÌXV
@@ -55,6 +61,7 @@ namespace Game {
       // Šeíƒpƒ‰ƒ[ƒ^‚Ìİ’è
       _scale.Fill(Scale);
       _enemyID = EnemyID::Shrimp;
+      _enemyState = EnemyState::Swim;
       _foodValue = FoodValue;
     }
 

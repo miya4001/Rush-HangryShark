@@ -41,8 +41,7 @@ namespace Game {
       }
       // マグロの状態に合わせて処理
       switch (_enemyState) {
-      // 待機・遊泳
-      case EnemyState::Idle:
+      // 遊泳
       case EnemyState::Swim:
         // 移動
         Move();
@@ -84,6 +83,7 @@ namespace Game {
       _scale.Fill(Scale);
       _scale.SetX(ScaleX);
       _enemyID = EnemyID::Tuna;
+      _enemyState = EnemyState::Swim;
       _foodValue = FoodValue;
     }
 
@@ -129,9 +129,9 @@ namespace Game {
 
     void EnemyTuna::Search() {
       // 球のローカル座標
-      auto pos = _sphere->GetPosition();
+      auto spherePosition = _sphere->GetPosition();
       // 探索球のローカル座標の設定
-      _search->SetPosition(pos);
+      _search->SetPosition(spherePosition);
       // 発見
       bool discover = false;
       // プレイヤーのコピー

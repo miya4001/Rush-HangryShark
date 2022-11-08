@@ -31,6 +31,10 @@ namespace Game {
        * @brief  更新
        */
       void Process() override;
+      /**
+       * @brief  描画
+       */
+      void Draw() const override;
 
     private:
       /**
@@ -45,6 +49,19 @@ namespace Game {
        * @brief  移動
        */
       void Move() override;
+      /**
+       * @brief  充電
+       */
+      void Charge();
+      /**
+       * @brief  攻撃
+       */
+      void Attack();
+
+      int _chargeCount{ 0 };  //!< 充電カウント
+      int _attackCount{ 0 };  //!< 攻撃カウント
+      //!< 攻撃球の衝突判定
+      std::unique_ptr<Collision::CollisionSphere> _attack{ nullptr };
     };
   } // namespace Enemy
 } // namespace Game

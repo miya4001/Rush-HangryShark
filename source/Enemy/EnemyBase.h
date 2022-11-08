@@ -69,7 +69,7 @@ namespace Game{
        */
       virtual void Spawn(const AppMath::Vector4 position, const AppMath::Vector4 rotation);
       /**
-       * @brief  “G‚Ìó‘Ô€–Sİ’è
+       * @brief  “G‚Ì€–Só‘Ô‚Ìİ’è
        */
       virtual void SetEnemyDead() {
         _enemyState = EnemyState::Dead;
