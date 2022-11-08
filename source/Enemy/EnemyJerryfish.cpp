@@ -11,7 +11,8 @@
 
 namespace {
   // クラゲ各種定数
-  constexpr float Scale = 0.1f;         //!< 拡大率
+  constexpr float Scale = 0.1f;  //!< 拡大率
+  // 移動定数
   constexpr float RotateDegree = 1.0f;  //!< 回転角度(デグリー値)
 }
 

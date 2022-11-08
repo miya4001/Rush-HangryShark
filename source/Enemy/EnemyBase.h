@@ -39,6 +39,7 @@ namespace Game{
       enum class EnemyState {
         Idle,    //!< ‘Ò‹@
         Swim,    //!< —V‰j
+        Escape,  //!< “¦‘–
         Attack,  //!< UŒ‚
         Dead     //!< Ž€–S
       };
@@ -107,6 +108,10 @@ namespace Game{
        * @brief  ƒpƒ‰ƒ[ƒ^‚ÌÝ’è
        */
       virtual void SetParameters();
+      /**
+       * @brief  Õ“Ë”»’è‚ÌÝ’è
+       */
+      virtual void SetCollision();
       /**
        * @brief  ŠC’†”ÍˆÍ“à”»’è
        * @return true:ŠC’†”ÍˆÍ“à

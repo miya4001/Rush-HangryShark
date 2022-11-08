@@ -11,9 +11,10 @@
 
 namespace {
   // エビ各種定数
-  constexpr int FoodValue = 5;          //!< 食料値
-  constexpr float Scale = 0.05f;        //!< 拡大率
-  constexpr float Speed = 1.0f;         //!< 移動速度
+  constexpr int FoodValue = 3;    //!< 食料値
+  constexpr float Scale = 0.05f;  //!< 拡大率
+  // 移動定数
+  constexpr float MoveSpeed = 1.0f;     //!< 移動速度
   constexpr float RotateDegree = 1.0f;  //!< 回転角度(デグリー値)
 }
 
@@ -78,7 +79,7 @@ namespace Game {
       // 前方向きの算出
       auto forward = AppMath::Utility::TransformVector(front, rotateY);
       // 移動量
-      auto move = forward * Speed;
+      auto move = forward * MoveSpeed;
       // 移動量の追加
       _position.Add(move);
       // 球の衝突判定の更新

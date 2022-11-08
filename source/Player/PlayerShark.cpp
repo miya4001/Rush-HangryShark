@@ -57,14 +57,13 @@ namespace Game {
       Hungry();
       // プレイヤーの状態に合わせて処理
       switch (_playerState) {
-      // 待機・移動
+      // 待機・遊泳
       case PlayerState::Idle:
       case PlayerState::Swim:
-        // 遊泳
         Swim();
         break;
+      // 攻撃
       case PlayerState::Attack:
-        // 攻撃
         Attack();
         break;
       // 捕食

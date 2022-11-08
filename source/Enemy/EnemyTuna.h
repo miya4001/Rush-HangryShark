@@ -31,6 +31,10 @@ namespace Game {
        * @brief  XV
        */
       void Process() override;
+      /**
+       * @brief  •`‰æ
+       */
+      void Draw() const override;
 
     private:
       /**
@@ -38,9 +42,24 @@ namespace Game {
        */
       void SetParameters() override;
       /**
+       * @brief  Õ“Ë”»’è‚Ìİ’è
+       */
+      void SetCollision() override;
+      /**
        * @brief  ˆÚ“®
        */
       void Move() override;
+      /**
+       * @brief  ’Tõ
+       */
+      void Search();
+      /**
+       * @brief  “¦‘–
+       */
+      void Escape();
+
+      //!< ’Tõ‹…‚ÌÕ“Ë”»’è
+      std::unique_ptr<Collision::CollisionSphere> _search{ nullptr };
     };
   } // namespace Enemy
 } // namespace Game

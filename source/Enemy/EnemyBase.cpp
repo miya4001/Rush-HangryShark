@@ -13,7 +13,7 @@
 
 namespace {
   // 敵各種定数
-  constexpr float Radius = 30.0f;   //!< 球半径
+  constexpr float Radius = 25.0f;   //!< 球半径
   constexpr float SphereY = 25.0f;  //!< 球y座標
 }
 
@@ -50,15 +50,21 @@ namespace Game {
       // 各種パラメータの設定
       _position = playerPosition + position;
       _rotation = rotation;
-      // 球の衝突判定の設定
-      auto pos = _position;
-      pos.SetY(SphereY);
-      _sphere = std::make_unique<Collision::CollisionSphere>(*this, pos, Radius);
+      // 衝突判定の設定
+      SetCollision();
     }
 
     void EnemyBase::SetParameters() {
       // 各種パラメータの設定
       _objectId = ObjectId::Enemy;
+    }
+
+    void EnemyBase::SetCollision() {
+      // 球のローカル座標の調整
+      auto spherePosition = _position;
+      spherePosition.SetY(SphereY);
+      // 球の衝突判定の設定
+      _sphere = std::make_unique<Collision::CollisionSphere>(*this, spherePosition, Radius);
     }
 
     bool EnemyBase::InTheSea() {
