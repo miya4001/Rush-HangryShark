@@ -14,7 +14,7 @@
 
 namespace {
   // プレイヤー各種定数
-  constexpr float Scale = 1.0f;     //!< 拡大率
+  constexpr float Scale = 1.25f;    //!< 拡大率
   constexpr float Radius = 50.0f;   //!< 球半径
   constexpr float SphereY = 25.0f;  //!< 球y座標
   // 空腹定数
@@ -38,8 +38,8 @@ namespace {
   // 攻撃準備定数
   constexpr float AttackDistance = 50.0f;  //!< 攻撃距離
   // 遊泳アニメーション定数
-  constexpr int AnimationCountMax = 60;  //!< アニメカウント上限
-  constexpr float AnimationY = 0.05f;    //!< アニメ位置y
+  constexpr int AnimationCountMax = 30;  //!< アニメカウント上限
+  constexpr float AnimationY = 0.1f;     //!< アニメ位置y
 }
 
 namespace Game {
@@ -139,6 +139,8 @@ namespace Game {
       _scale.Fill(Scale);
       _hungry = HungryInit;
       _moveSpeed = SwimSpeed;
+      // 初回描画用にモデルの拡大率の設定
+      MV1SetScale(_modelHandle, AppMath::UtilityDX::ToVECTOR(_scale));
       // 球の衝突判定の設定
       auto position = _position;
       position.SetY(SphereY);
