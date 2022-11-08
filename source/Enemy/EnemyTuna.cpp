@@ -14,11 +14,11 @@
 namespace {
   // マグロ各種定数
   constexpr int FoodValue = 8;            //!< 食料値
-  constexpr float Scale = 0.2f;           //!< 拡大率
-  constexpr float ScaleX = 0.5f;          //!< 拡大率x
-  constexpr float SphereY = 30.0f;        //!< 球y座標
-  constexpr float Radius = 30.0f;         //!< 球半径
-  constexpr float SearchRadius = 200.0f;  //!< 探索球半径
+  constexpr float Scale = 0.25f;          //!< 拡大率
+  constexpr float ScaleX = 0.75f;         //!< 拡大率x
+  constexpr float SphereY = 40.0f;        //!< 球y座標
+  constexpr float Radius = 40.0f;         //!< 球半径
+  constexpr float SearchRadius = 400.0f;  //!< 探索球半径
   // 移動定数
   constexpr float MoveSpeed = 3.0f;     //!< 移動速度
   constexpr float RotateDegree = 1.0f;  //!< 回転角度(デグリー値)

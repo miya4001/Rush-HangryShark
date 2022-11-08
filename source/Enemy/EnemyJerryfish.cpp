@@ -11,9 +11,13 @@
 
 namespace {
   // クラゲ各種定数
-  constexpr float Scale = 0.1f;  //!< 拡大率
+  constexpr int FoodValue = 1;      //!< 食料値
+  constexpr float Scale = 0.15f;    //!< 拡大率
+  constexpr float SphereY = 50.0f;  //!< 球y座標
+  constexpr float Radius = 50.0f;   //!< 球半径
   // 移動定数
   constexpr float RotateDegree = 1.0f;  //!< 回転角度(デグリー値)
+  constexpr float FloatUpSpeed = 0.1f;  //!< 浮上速度
 }
 
 namespace Game {
@@ -51,6 +55,15 @@ namespace Game {
       // 各種パラメータの設定
       _scale.Fill(Scale);
       _enemyID = EnemyID::Jerryfish;
+      _foodValue = FoodValue;
+    }
+
+    void EnemyJerryfish::SetCollision() {
+      // 球のローカル座標の調整
+      auto spherePosition = _position;
+      spherePosition.SetY(SphereY);
+      // 球の衝突判定の設定
+      _sphere = std::make_unique<Collision::CollisionSphere>(*this, spherePosition, Radius);
     }
 
     void EnemyJerryfish::Move() {
@@ -65,6 +78,13 @@ namespace Game {
 #endif
       // 向きに角度を加算
       _rotation.Add(angle);
+      // 浮上量
+      auto floatUp = AppMath::Vector4();
+      floatUp.SetY(FloatUpSpeed);
+      // 浮上量の追加
+      _position.Add(floatUp);
+      // 球の衝突判定の更新
+      _sphere->Process(floatUp);
     }
   } // namespace Enemy
 } // namespace Game

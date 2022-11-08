@@ -11,12 +11,6 @@
 #include "../Sea/SeaSphere.h"
 #include "../Player/PlayerShark.h"
 
-namespace {
-  // 敵各種定数
-  constexpr float Radius = 25.0f;   //!< 球半径
-  constexpr float SphereY = 25.0f;  //!< 球y座標
-}
-
 namespace Game {
   namespace Enemy {
     EnemyBase::EnemyBase(Application::ApplicationMain& app) : ObjectBase(app) {
@@ -60,11 +54,7 @@ namespace Game {
     }
 
     void EnemyBase::SetCollision() {
-      // 球のローカル座標の調整
-      auto spherePosition = _position;
-      spherePosition.SetY(SphereY);
-      // 球の衝突判定の設定
-      _sphere = std::make_unique<Collision::CollisionSphere>(*this, spherePosition, Radius);
+
     }
 
     bool EnemyBase::InTheSea() {

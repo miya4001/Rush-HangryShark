@@ -11,8 +11,10 @@
 
 namespace {
   // エビ各種定数
-  constexpr int FoodValue = 3;    //!< 食料値
-  constexpr float Scale = 0.05f;  //!< 拡大率
+  constexpr int FoodValue = 3;      //!< 食料値
+  constexpr float Scale = 0.1f;     //!< 拡大率
+  constexpr float SphereY = 20.0f;  //!< 球y座標
+  constexpr float Radius = 20.0f;   //!< 球半径
   // 移動定数
   constexpr float MoveSpeed = 1.0f;     //!< 移動速度
   constexpr float RotateDegree = 1.0f;  //!< 回転角度(デグリー値)
@@ -54,6 +56,14 @@ namespace Game {
       _scale.Fill(Scale);
       _enemyID = EnemyID::Shrimp;
       _foodValue = FoodValue;
+    }
+
+    void EnemyShrimp::SetCollision() {
+      // 球のローカル座標の調整
+      auto spherePosition = _position;
+      spherePosition.SetY(SphereY);
+      // 球の衝突判定の設定
+      _sphere = std::make_unique<Collision::CollisionSphere>(*this, spherePosition, Radius);
     }
 
     void EnemyShrimp::Move() {

@@ -38,6 +38,10 @@ namespace Game {
        */
       void SetParameters() override;
       /**
+       * @brief  Õ“Ë”»’è‚Ìİ’è
+       */
+      void SetCollision() override;
+      /**
        * @brief  ˆÚ“®
        */
       void Move() override;

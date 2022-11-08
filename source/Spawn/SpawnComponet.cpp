@@ -94,10 +94,10 @@ namespace Game{
       };
       // テーブルA
       const SpawnServer::EnemyTable enemyA{
-        {SpawnNumber::Tuna, {1000.0f, 0.0f, 1000.0f}, {0.0f, 0.0f, 0.0f}},
         {SpawnNumber::Tuna, {1000.0f, 0.0f, -1000.0f}, {0.0f, 0.0f, 0.0f}},
-        {SpawnNumber::Tuna, {-1000.0f, 0.0f, 1000.0f}, {0.0f, 0.0f, 0.0f}},
-        {SpawnNumber::Tuna, {-1000.0f, 0.0f, -1000.0f}, {0.0f, 0.0f, 0.0f}}
+        {SpawnNumber::Tuna, {-1000.0f, 0.0f, -1000.0f}, {0.0f, 0.0f, 0.0f}},
+        {SpawnNumber::Jerryfish, {-250.0f, 0.0f, -750.0f}, {0.0f, 0.0f, 0.0f}},
+        {SpawnNumber::Shrimp, {250.0f, 0.0f, -750.0f}, {0.0f, 0.0f, 0.0f}}
       };
       // テーブルB
       const SpawnServer::EnemyTable enemyB{
