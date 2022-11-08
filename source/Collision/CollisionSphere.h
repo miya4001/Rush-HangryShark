@@ -51,9 +51,12 @@ namespace Game{
        */
       void Draw() const;
       /**
-       * @brief  “h‚è‚Â‚Ô‚µ‰ğœ
+       * @brief  “h‚è‚Â‚Ô‚µİ’è
+       * @param  flag ƒtƒ‰ƒO
        */
-      void NoFill();
+      void SetFill(const bool flag) {
+        _drawFill = flag;
+      }
 #endif
       /**
        * @brief  ‹…‚Æ‹…‚ÌÕ“Ë”»’è

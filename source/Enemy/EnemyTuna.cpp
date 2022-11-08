@@ -175,7 +175,7 @@ namespace Game {
       _search->Process(escape);
 #ifdef _DEBUG
       // ’Tõ‹…‚Ì“h‚è‚Â‚Ô‚µ‰ðœ
-      _search->NoFill();
+      _search->SetFill(false);
 #endif
     }
   } // namespace Enemy

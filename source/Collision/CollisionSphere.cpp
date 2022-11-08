@@ -28,10 +28,6 @@ namespace Game {
       // ‹…‚Ì•`‰æ(Õ“Ë‚ ‚è‚Ìê‡‹…‚Ì“h‚è‚Â‚Ô‚µ)
       DrawSphere3D(AppMath::UtilityDX::ToVECTOR(_position), _radius, 10, GetColor(0, 0, 0), 0, _drawFill);
     }
-
-    void CollisionSphere::NoFill() {
-      _drawFill = false;
-    }
 #endif
 
     bool CollisionSphere::IntersectSphere(const CollisionSphere& sphere) {

@@ -33,6 +33,7 @@ namespace Game {
         Rush,    //!< 突撃
         Attack,  //!< 攻撃
         Eat,     //!< 捕食
+        Damage,  //!< 被ダメ
         Dead     //!< 死亡
       };
       /**
@@ -54,6 +55,10 @@ namespace Game {
        * @brief  描画
        */
       void Draw() const override;
+      /**
+       * @brief  プレイヤーの被ダメ状態の設定
+       */
+      void SetPlayerDamage();
       /**
        * @brief  プレイヤー状態の取得
        * @return プレイヤー状態
@@ -105,6 +110,10 @@ namespace Game {
        */
       void Eat();
       /**
+       * @brief  被ダメ
+       */
+      void Damage();
+      /**
        * @brief  死亡
        */
       void Dead();
@@ -128,7 +137,8 @@ namespace Game {
       int _hungry{ 0 };           //!< 空腹値
       int _hungryCount{ 0 };      //!< 空腹カウント
       int _eatFood{ 0 };          //!< 捕食値
-      int _eatTime{ 0 };          //!< 捕食時間
+      int _eatCount{ 0 };         //!< 捕食カウント
+      int _damageCount{ 0 };      //!< 被ダメカウント
       int _animationCount{ 0 };   //!< アニメカウント
       float _moveSpeed{ 0.0f };   //!< 移動速度
       bool _swimUp{ true };       //!< 遊泳上昇

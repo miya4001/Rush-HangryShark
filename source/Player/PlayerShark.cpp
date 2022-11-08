@@ -23,7 +23,9 @@ namespace {
   constexpr int HungryInit = 30;      //!< 初期空腹値
   constexpr int HungryCountMax = 60;  //!< 空腹カウント上限
   // 捕食定数
-  constexpr int EatTimeMax = 60;  //!< 捕食時間上限
+  constexpr int EatCountMax = 60;  //!< 捕食カウント上限
+  // 被ダメ定数
+  constexpr int DamageCountMax = 120;  //!< 被ダメカウント上限
   // 死亡定数
   constexpr float DeadPositionY = 50.0f;   //!< 死亡位置y
   constexpr float DeadRotationZ = 180.0f;  //!< 死亡向きz
@@ -70,7 +72,11 @@ namespace Game {
       case PlayerState::Eat:
         Eat();
         break;
-      // 死亡
+      // 被ダメ
+      case PlayerState::Damage:
+        Damage();
+        break;
+        // 死亡
       case PlayerState::Dead:
         Dead();
         break;
@@ -106,6 +112,16 @@ namespace Game {
       _sphere->Draw();
       // 攻撃球の衝突判定の描画
       _attack->Draw();
+#endif
+    }
+
+    void PlayerShark::SetPlayerDamage() {
+      // 被ダメ状態
+      _playerState = PlayerState::Damage;
+      // 被ダメ演出(仮)
+#ifdef _DEBUG
+        // 本体球の塗りつぶし
+      _sphere->SetFill(true);
 #endif
     }
 
@@ -185,10 +201,10 @@ namespace Game {
     }
 
     void PlayerShark::Eat() {
-      // 捕食時間が上限の場合
-      if (EatTimeMax <= _eatTime) {
-        // 捕食時間初期化
-        _eatTime = 0;
+      // 捕食カウントが上限の場合
+      if (EatCountMax <= _eatCount) {
+        // 捕食カウント初期化
+        _eatCount = 0;
         // 空腹値に捕食値追加
         _hungry += _eatFood;
         // 空腹値上限調整
@@ -197,14 +213,31 @@ namespace Game {
         }
 #ifdef _DEBUG
         // 攻撃球の塗りつぶし解除
-        _attack->NoFill();
+        _attack->SetFill(false);
 #endif
         // 捕食終了
         _playerState = PlayerState::Idle;
         return;
       }
-      // 捕食時間を増やす
-      ++_eatTime;
+      // 捕食カウントを増やす
+      ++_eatCount;
+    }
+
+    void PlayerShark::Damage() {
+      // 被ダメカウントが上限の場合
+      if (DamageCountMax <= _damageCount) {
+        // 被ダメカウント初期化
+        _damageCount = 0;
+        // 待機状態
+        _playerState = PlayerState::Idle;
+#ifdef _DEBUG
+        // 本体球の塗りつぶし解除
+        _sphere->SetFill(false);
+#endif
+        return;
+      }
+      // 被ダメカウントを増やす
+      ++_damageCount;
     }
 
     void PlayerShark::Dead() {

@@ -24,7 +24,7 @@ namespace {
   // [“d’è”
   constexpr int ChargeCountMax = 300;  //!< [“dƒJƒEƒ“ƒgãŒÀ
   // UŒ‚’è”
-  constexpr int AttackCountMax = 180;  //!< UŒ‚ƒJƒEƒ“ƒgãŒÀ
+  constexpr int AttackCountMax = 120;  //!< UŒ‚ƒJƒEƒ“ƒgãŒÀ
 }
 
 namespace Game {
@@ -142,6 +142,10 @@ namespace Game {
         _attackCount = 0;
         // —V‰jó‘Ô
         _enemyState = EnemyState::Swim;
+#ifdef _DEBUG
+        // UŒ‚‹…‚Ì“h‚è‚Â‚Ô‚µ‰ğœ
+        _attack->SetFill(false);
+#endif
         return;
       }
       // UŒ‚ƒJƒEƒ“ƒg‚ğ‘‚â‚·
@@ -155,8 +159,13 @@ namespace Game {
       // UŒ‚‚ª“–‚½‚Á‚½ê‡
       if (attack) {
         // ƒvƒŒƒCƒ„[‚Ì”íƒ_ƒó‘Ôİ’è
-        //player->
+        player->SetPlayerDamage();
       }
+      // UŒ‚‰‰o(‰¼)
+#ifdef _DEBUG
+        // UŒ‚‹…‚Ì“h‚è‚Â‚Ô‚µ
+      _attack->SetFill(true);
+#endif
     }
   } // namespace Enemy
 } // namespace Game
