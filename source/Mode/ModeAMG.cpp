@@ -10,11 +10,6 @@
 #include "ModeTitle.h"
 #include "../ConstLoadResourceKey.h"
 
-namespace {
-  // 各種定数
-  constexpr int MaxCount = 30;  //!< カウント上限
-}
-
 namespace Game {
   namespace Mode {
     ModeAMG::ModeAMG(Application::ApplicationMain& app) : ModeBase(*app.GetApplication()), _appMain(app) {
@@ -38,8 +33,6 @@ namespace Game {
     }
 
     void ModeAMG::Process() {
-      // カウントを増やす
-      ++_modeCount;
       // モード切り替え
       ChangeMode();
     }
@@ -68,10 +61,6 @@ namespace Game {
     }
 
     void ModeAMG::ChangeMode() {
-      // カウントが上限未満の場合中断
-      if (_modeCount <= MaxCount) {
-        return;
-      }
       // モードタイトルの登録
       _app.GetModeServer().AddMode(Title, std::make_shared<Mode::ModeTitle>(_appMain));
       // モードタイトル遷移

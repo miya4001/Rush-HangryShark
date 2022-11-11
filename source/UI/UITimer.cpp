@@ -48,18 +48,15 @@ namespace Game {
         _app.GetSoundComponent().PlayBackGround(SoundKey::Whistle);
         return;
       }
+      // フレームカウント増加
+      _frameCount = AppFrame::Math::Utility::IncrementCount(_frameCount, FrameCountMax);
       // フレームカウントが上限の場合
-      if (FrameCountMax <= _frameCount) {
-        // フレームカウント初期化
-        _frameCount = 0;
+      if (_frameCount == 0) {
         // 一秒経過
         OneSecondPass();
         // タイマー秒変換
         TimerConversion();
-        return;
       }
-      // フレームカウントを増やす
-      ++_frameCount;
     }
 
     void UITimer::Draw() const {

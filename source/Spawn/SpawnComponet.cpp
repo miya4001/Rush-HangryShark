@@ -41,11 +41,10 @@ namespace Game{
 
     void SpawnComponent::Process() {
       // 生成タイミングの管理
-      if (!SpawnTiming()) {
-        return;
+      if (SpawnTiming()) {
+        // 敵の生成
+        SpawnEnemy();
       }
-      // 敵の生成
-      SpawnEnemy();
     }
 
     void SpawnComponent::SetSpawn() {
@@ -62,17 +61,15 @@ namespace Game{
     }
 
     bool SpawnComponent::SpawnTiming() {
-      // 生成カウントが生成タイミング以下の場合
-      if (_spawnCount <= Timing) {
-        // 生成カウントを増やす
-        ++_spawnCount;
-        // 生成を行わない
-        return false;
+      // カウント増加
+      _spawnCount = AppMath::Utility::IncrementCount(_spawnCount, Timing);
+      // 生成カウントが上限の場合
+      if (_spawnCount == 0) {
+        // 生成を行う
+        return true;
       }
-      // 生成カウント初期化
-      _spawnCount = 0;
-      // 生成を行う
-      return true;
+      // 生成を行わない
+      return false;
     }
 
     void SpawnComponent::SpawnEnemy() {

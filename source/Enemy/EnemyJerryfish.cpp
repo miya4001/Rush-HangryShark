@@ -123,23 +123,20 @@ namespace Game {
       auto spherePosition = _sphere->GetPosition();
       // 攻撃球のローカル座標の設定
       _attack->SetPosition(spherePosition);
+      // 充電カウント増加
+      _chargeCount = AppMath::Utility::IncrementCount(_chargeCount, ChargeCountMax);
       // 充電カウント上限の場合
-      if (ChargeCountMax <= _chargeCount) {
-        // 充電カウント初期化
-        _chargeCount = 0;
+      if (_chargeCount == 0) {
         // 攻撃状態
         _enemyState = EnemyState::Attack;
-        return;
       }
-      // 充電カウントを増やす
-      ++_chargeCount;
     }
 
     void EnemyJerryfish::Attack() {
+      // 攻撃カウント増加
+      _attackCount = AppMath::Utility::IncrementCount(_attackCount, AttackCountMax);
       // 攻撃カウント上限の場合
-      if (AttackCountMax <= _attackCount) {
-        // 攻撃カウント初期化
-        _attackCount = 0;
+      if (_attackCount == 0) {
         // 攻撃成功初期化
         _isAttack = false;
         // 遊泳状態
@@ -150,8 +147,6 @@ namespace Game {
 #endif
         return;
       }
-      // 攻撃カウントを増やす
-      ++_attackCount;
       // 攻撃成功の場合中断
       if (_isAttack) {
         return;

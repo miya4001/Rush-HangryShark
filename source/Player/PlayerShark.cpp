@@ -38,8 +38,8 @@ namespace {
   // 攻撃準備定数
   constexpr float AttackDistance = 50.0f;  //!< 攻撃距離
   // 遊泳アニメーション定数
-  constexpr int AnimationCountMax = 30;  //!< アニメカウント上限
-  constexpr float AnimationY = 0.1f;     //!< アニメ位置y
+  constexpr int AnimationCountMax = 15;  //!< アニメカウント上限
+  constexpr float AnimationY = 0.2f;     //!< アニメ位置y
 }
 
 namespace Game {
@@ -153,10 +153,10 @@ namespace Game {
       if (_playerState == PlayerState::Eat) {
         return;
       }
+      // 空腹カウント増加
+      _hungryCount = AppMath::Utility::IncrementCount(_hungryCount, HungryCountMax);
       // 空腹カウントが上限の場合
-      if (HungryCountMax <= _hungryCount) {
-        // 空腹カウント初期化
-        _hungryCount = 0;
+      if (_hungryCount == 0) {
         // 空腹値を減らす
         --_hungry;
         // 空腹値が下限の場合
@@ -164,10 +164,7 @@ namespace Game {
           // 死亡状態
           _playerState = PlayerState::Dead;
         }
-        return;
       }
-      // 空腹カウントを増やす
-      ++_hungryCount;
     }
 
     void PlayerShark::Swim() {
@@ -209,43 +206,35 @@ namespace Game {
     }
 
     void PlayerShark::Eat() {
+      // 捕食カウント増加
+      _eatCount = AppMath::Utility::IncrementCount(_eatCount, EatCountMax);
       // 捕食カウントが上限の場合
-      if (EatCountMax <= _eatCount) {
-        // 捕食カウント初期化
-        _eatCount = 0;
+      if (_eatCount == 0) {
         // 空腹値に捕食値追加
         _hungry += _eatFood;
         // 空腹値上限調整
-        if (HungryMax <= _hungry) {
-          _hungry = HungryMax;
-        }
+        _hungry = AppMath::Utility::Min(_hungry, HungryMax);
 #ifdef _DEBUG
         // 攻撃球の塗りつぶし解除
         _attack->SetFill(false);
 #endif
         // 捕食終了
         _playerState = PlayerState::Idle;
-        return;
       }
-      // 捕食カウントを増やす
-      ++_eatCount;
     }
 
     void PlayerShark::Damage() {
+      // 被ダメカウント増加
+      _damageCount = AppMath::Utility::IncrementCount(_damageCount, DamageCountMax);
       // 被ダメカウントが上限の場合
-      if (DamageCountMax <= _damageCount) {
-        // 被ダメカウント初期化
-        _damageCount = 0;
+      if (_damageCount == 0) {
         // 待機状態
         _playerState = PlayerState::Idle;
 #ifdef _DEBUG
         // 本体球の塗りつぶし解除
         _sphere->SetFill(false);
 #endif
-        return;
       }
-      // 被ダメカウントを増やす
-      ++_damageCount;
     }
 
     void PlayerShark::Dead() {
@@ -361,32 +350,21 @@ namespace Game {
       auto animationY = AppMath::Vector4(0.0f, AnimationY, 0.0f);
       // ローカル座標y
       float positionY = _position.GetY();
+      // カウント増加
+      _animationCount = AppMath::Utility::IncrementCount(_animationCount, AnimationCountMax);
+      // アニメーションカウントが上限の場合
+      if (_animationCount == 0) {
+        // 上昇下降反転
+        _swimUp = !_swimUp;
+      }
       // 遊泳上昇に合わせてアニメーション
       if (_swimUp) {
-        // 上昇終了の場合
-        if (AnimationCountMax <= _animationCount) {
-          // 遊泳下降
-          _swimUp = false;
-          // アニメカウント初期化
-          _animationCount = 0;
-          return;
-        }
         // ローカル座標yに加算
         _position.Add(animationY);
       } else {
-        // 下降終了の場合
-        if (AnimationCountMax <= _animationCount) {
-          // 遊泳上昇
-          _swimUp = true;
-          // アニメカウント初期化
-          _animationCount = 0;
-          return;
-        }
         // ローカル座標yに減算
         _position.Sub(animationY);
       }
-      // アニメカウントを増やす
-      ++_animationCount;
     }
   } // namespace Player
 } // namespace Game

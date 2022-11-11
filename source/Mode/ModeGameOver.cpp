@@ -135,7 +135,7 @@ namespace Game {
         return;
       }
       // ³•‰‚Ç‚¿‚ç‚©”»’è
-      bool isPositive = 0 <= leftY;
+      bool isPositive = AppFrame::Math::Utility::IsPositive(leftY);
       // “ü—Í‚É‡‚í‚¹‚Ä•Ï”Ø‚è‘Ö‚¦
       _switch = isPositive ? _retry : _backTitle;
       _bubbleX = isPositive ? BubbleUpX : BubbleDownX;
