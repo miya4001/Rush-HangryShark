@@ -15,7 +15,7 @@ namespace {
   // ŠC’†”wŒiŠeí’è”
   constexpr float Scale = 0.5f;      //!< Šg‘å—¦
   constexpr float Radius = 2500.0f;  //!< ‹…”¼Œa
-}
+} // namespace
 
 namespace Game {
   namespace Sea {

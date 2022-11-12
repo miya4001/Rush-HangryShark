@@ -20,7 +20,7 @@ namespace {
   constexpr int TenPlaceSecondsX = 1730;  //!< •b(\‚ÌˆÊ)xÀ•W
   constexpr int OnePlaceSecondsX = 1800;  //!< •b(ˆê‚ÌˆÊ)xÀ•W
   constexpr int DrawY = 25;               //!< •`‰æyÀ•W
-}
+} // namespace
 
 namespace Game {
   namespace UI {

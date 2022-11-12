@@ -21,7 +21,7 @@ namespace {
   constexpr auto EnemyA = "enemyA";  //!< テーブルA
   constexpr auto EnemyB = "enemyB";  //!< テーブルB
   constexpr auto EnemyC = "enemyC";  //!< テーブルC
-}
+} // namespace
 
 namespace Game{
   namespace Spawn {

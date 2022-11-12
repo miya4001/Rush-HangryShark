@@ -25,7 +25,7 @@ namespace {
   constexpr int ChargeCountMax = 300;  //!< 充電カウント上限
   // 攻撃定数
   constexpr int AttackCountMax = 120;  //!< 攻撃カウント上限
-}
+} // namespace
 
 namespace Game {
   namespace Enemy {

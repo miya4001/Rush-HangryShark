@@ -14,7 +14,7 @@ namespace {
   constexpr float PositionY = 100.0f;  //!< 位置y座標
   constexpr float TargetY = 50.0f;     //!< 注視点y座標
   constexpr float Distance = 250.0f;   //!< 位置-注視点間距離
-}
+} // namespace
 
 namespace Game {
   namespace Camera {

@@ -18,7 +18,7 @@ namespace {
   // 移動定数
   constexpr float MoveSpeed = 1.0f;     //!< 移動速度
   constexpr float RotateDegree = 1.0f;  //!< 回転角度(デグリー値)
-}
+} // namespace
 
 namespace Game {
   namespace Enemy {

@@ -16,7 +16,7 @@ namespace {
   constexpr int BackY = 750;    //!< バックy座標
   constexpr int BubbleX = 860;  //!< 泡x座標
   constexpr int BubbleY = 750;  //!< 泡y座標
-}
+} // namespace
 
 namespace Game {
   namespace Mode {

@@ -13,14 +13,14 @@
 
 namespace {
   // 各種定数
-  constexpr int SwitchX = 960;       //!< 切り替え画像x座標
-  constexpr int SwitchY = 750;       //!< 切り替え画像y座標
-  constexpr int BubbleUpX = 785;     //!< 泡上x座標
-  constexpr int BubbleUpY = 700;     //!< 泡上y座標
-  constexpr int BubbleDownX = 860;   //!< 泡下x座標
-  constexpr int BubbleDownY = 800;   //!< 泡下y座標
-  constexpr int SEVolume = 200;      //!< SE音量
-}
+  constexpr int SwitchX = 960;      //!< 切り替え画像x座標
+  constexpr int SwitchY = 750;      //!< 切り替え画像y座標
+  constexpr int BubbleUpX = 785;    //!< 泡上x座標
+  constexpr int BubbleUpY = 700;    //!< 泡上y座標
+  constexpr int BubbleDownX = 860;  //!< 泡下x座標
+  constexpr int BubbleDownY = 800;  //!< 泡下y座標
+  constexpr int SEVolume = 200;     //!< SE音量
+} // namespace
 
 namespace Game {
   namespace Mode {

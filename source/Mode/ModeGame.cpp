@@ -20,7 +20,7 @@ namespace {
   namespace AppMath = AppFrame::Math;
   const AppMath::Vector4 CameraPosition{ 0.0f, 100.0f, 250.0f };  //!< 初期カメラ位置
   const AppMath::Vector4 CameraTarget{ 0.0f, 50.0f, 0.0f };       //!< 初期カメラ注視点
-}
+} // namespace
 
 namespace Game {
   namespace Mode {

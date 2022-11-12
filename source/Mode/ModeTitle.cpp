@@ -19,7 +19,7 @@ namespace {
   constexpr int BubbleUpY = 800;     //!< –AãyÀ•W
   constexpr int BubbleDownY = 900;   //!< –A‰ºyÀ•W
   constexpr int SEVolume = 200;      //!< SE‰¹—Ê
-}
+} // namespace
 
 namespace Game {
   namespace Mode {

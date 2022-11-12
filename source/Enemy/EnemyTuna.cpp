@@ -24,7 +24,7 @@ namespace {
   constexpr float RotateDegree = 1.0f;  //!< 回転角度(デグリー値)
   // 逃走定数
   constexpr float EscapeSpeed = 8.0f;  //!< 逃走速度
-}
+} // namespace
 
 namespace Game {
   namespace Enemy {

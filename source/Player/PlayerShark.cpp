@@ -40,7 +40,7 @@ namespace {
   // 遊泳アニメーション定数
   constexpr int AnimationCountMax = 15;  //!< アニメカウント上限
   constexpr float AnimationY = 0.2f;     //!< アニメ位置y
-}
+} // namespace
 
 namespace Game {
   namespace Player {

@@ -19,7 +19,7 @@ namespace {
   constexpr int GaugeBarLeftX = 25;    //!< 空腹ゲージバー左上x座標
   constexpr int GaugeBarLeftY = 70;    //!< 空腹ゲージバー左上y座標
   constexpr int GaugeBarRightY = 120;  //!< 空腹ゲージバー左上y座標
-}
+} // namespace
 
 namespace Game {
   namespace UI {
