@@ -15,12 +15,18 @@
 
 namespace {
   // 生成各種定数
-  constexpr int Timing = 180;  //!< 生成タイミング
-  // 生成キー
+  constexpr int SpawnCountMax = 180;  //!< 生成カウント上限
+  constexpr int RandSpawnkeyMax = 6;  //!< ランダム生成キー上限
+  // 特殊生成キー
   constexpr auto Start = "start";    //!< 開始テーブル
+  constexpr auto Error = "error";    //!< エラー
+  // ランダム生成キー
   constexpr auto EnemyA = "enemyA";  //!< テーブルA
   constexpr auto EnemyB = "enemyB";  //!< テーブルB
   constexpr auto EnemyC = "enemyC";  //!< テーブルC
+  constexpr auto EnemyD = "enemyD";  //!< テーブルD
+  constexpr auto EnemyE = "enemyE";  //!< テーブルE
+  constexpr auto EnemyF = "enemyF";  //!< テーブルF
 } // namespace
 
 namespace Game{
@@ -37,6 +43,7 @@ namespace Game{
     void SpawnComponent::Release() {
       // 変数初期化
       _spawnCount = 0;
+      _spawnEnemy = 0;
     }
 
     void SpawnComponent::Process() {
@@ -62,7 +69,7 @@ namespace Game{
 
     bool SpawnComponent::SpawnTiming() {
       // カウント増加
-      _spawnCount = AppMath::Utility::IncrementCount(_spawnCount, Timing);
+      _spawnCount = AppMath::Utility::IncrementCount(_spawnCount, SpawnCountMax);
       // 生成カウントが上限の場合
       if (_spawnCount == 0) {
         // 生成を行う
@@ -73,8 +80,45 @@ namespace Game{
     }
 
     void SpawnComponent::SpawnEnemy() {
+      // 生成キーの選択
+      auto key = ChooseSpawnKey();
       // 生成
-      _app.GetSpawnServer().Spawn(EnemyA);
+      _app.GetSpawnServer().Spawn(key);
+      // 敵生成数を増やす
+      ++_spawnEnemy;
+    }
+
+    std::string_view SpawnComponent::ChooseSpawnKey() {
+      // 空生成キー
+      std::string_view key = "";
+      // 乱数
+      int rand = std::rand();
+      // 剰余計算
+      int remainder = rand % RandSpawnkeyMax;
+      // 剰余に合わせて生成キーの選択
+      switch (remainder) {
+      case 0:
+        key = EnemyA;
+        break;
+      case 1:
+        key = EnemyB;
+        break;
+      case 2:
+        key = EnemyC;
+        break;
+      case 3:
+        key = EnemyD;
+        break;
+      case 4:
+        key = EnemyE;
+        break;
+      case 5:
+        key = EnemyF;
+        break;
+      default:
+        break;
+      }
+      return key;
     }
 
     void SpawnComponent::RegisterEnemyTable() {
@@ -84,33 +128,60 @@ namespace Game{
       }
       // 開始テーブル
       const SpawnServer::EnemyTable start{
-        {SpawnNumber::Tuna, {0.0f, 0.0f, 1000.0f}, {0.0f, 0.0f, 0.0f}},
-        {SpawnNumber::Tuna, {0.0f, 0.0f, -1000.0f}, {0.0f, 0.0f, 0.0f}},
-        {SpawnNumber::Tuna, {1000.0f, 0.0f, 0.0f}, {0.0f, 0.0f, 0.0f}},
-        {SpawnNumber::Tuna, {-1000.0f, 0.0f, 0.0f}, {0.0f, 0.0f, 0.0f}}
+        {SpawnNumber::Shrimp, {500.0f, 0.0f, 500.0f}, {0.0f, 0.0f, 0.0f}},
+        {SpawnNumber::Shrimp, {500.0f, 0.0f, -500.0f}, {0.0f, 0.0f, 0.0f}},
+        {SpawnNumber::Shrimp, {-500.0f, 0.0f, 500.0f}, {0.0f, 0.0f, 0.0f}},
+        {SpawnNumber::Shrimp, {-500.0f, 0.0f, -500.0f}, {0.0f, 0.0f, 0.0f}},
+        {SpawnNumber::Tuna, {0.0f, 0.0f, 1500.0f}, {0.0f, 0.0f, 0.0f}},
+        {SpawnNumber::Tuna, {0.0f, 0.0f, -1500.0f}, {0.0f, 0.0f, 0.0f}},
+        {SpawnNumber::Jerryfish, {1500.0f, 0.0f, 0.0f}, {0.0f, 0.0f, 0.0f}},
+        {SpawnNumber::Jerryfish, {-1500.0f, 0.0f, 0.0f}, {0.0f, 0.0f, 0.0f}}
       };
       // テーブルA
       const SpawnServer::EnemyTable enemyA{
-        {SpawnNumber::Tuna, {1000.0f, 0.0f, -1000.0f}, {0.0f, 0.0f, 0.0f}},
-        {SpawnNumber::Tuna, {-1000.0f, 0.0f, -1000.0f}, {0.0f, 0.0f, 0.0f}},
-        {SpawnNumber::Jerryfish, {-250.0f, 0.0f, -750.0f}, {0.0f, 0.0f, 0.0f}},
-        {SpawnNumber::Shrimp, {250.0f, 0.0f, -750.0f}, {0.0f, 0.0f, 0.0f}}
+        {SpawnNumber::Shrimp, {750.0f, 0.0f, 750.0f}, {0.0f, 0.0f, 0.0f}},
+        {SpawnNumber::Shrimp, {750.0f, 0.0f, -750.0f}, {0.0f, 0.0f, 0.0f}},
+        {SpawnNumber::Shrimp, {-750.0f, 0.0f, 750.0f}, {0.0f, 0.0f, 0.0f}},
+        {SpawnNumber::Shrimp, {-750.0f, 0.0f, -750.0f}, {0.0f, 0.0f, 0.0f}},
       };
       // テーブルB
       const SpawnServer::EnemyTable enemyB{
-        {SpawnNumber::Jerryfish, {-250.0f, 0.0f, -750.0f}, {0.0f, 0.0f, 0.0f}},
-        {SpawnNumber::Jerryfish, {250.0f, 0.0f, -750.0f}, {0.0f, 0.0f, 0.0f}}
+        {SpawnNumber::Tuna, {1000.0f, 0.0f, 500.0f}, {0.0f, 0.0f, 0.0f}},
+        {SpawnNumber::Tuna, {1000.0f, 0.0f, -500.0f}, {0.0f, 0.0f, 0.0f}},
+        {SpawnNumber::Tuna, {-1000.0f, 0.0f, 500.0f}, {0.0f, 0.0f, 0.0f}},
+        {SpawnNumber::Tuna, {-1000.0f, 0.0f, -500.0f}, {0.0f, 0.0f, 0.0f}}
       };
       // テーブルC
       const SpawnServer::EnemyTable enemyC{
-        {SpawnNumber::Shrimp, {-250.0f, 0.0f, -750.0f}, {0.0f, 0.0f, 0.0f}},
-        {SpawnNumber::Shrimp, {250.0f, 0.0f, -750.0f}, {0.0f, 0.0f, 0.0f}}
+        {SpawnNumber::Jerryfish, {0.0f, 0.0f, 750.0f}, {0.0f, 0.0f, 0.0f}},
+        {SpawnNumber::Jerryfish, {250.0f, 0.0f, -750.0f}, {0.0f, 0.0f, 0.0f}},
+        {SpawnNumber::Jerryfish, {-250.0f, 0.0f, -750.0f}, {0.0f, 0.0f, 0.0f}}
+      };
+      // テーブルD
+      const SpawnServer::EnemyTable enemyD{
+        {SpawnNumber::Shrimp, {0.0f, 0.0f, -1000.0f}, {0.0f, 0.0f, 0.0f}},
+        {SpawnNumber::Shrimp, {500.0f, 0.0f, 1000.0f}, {0.0f, 0.0f, 0.0f}},
+        {SpawnNumber::Shrimp, {-500.0f, 0.0f, 1000.0f}, {0.0f, 0.0f, 0.0f}}
+      };
+      // テーブルE
+      const SpawnServer::EnemyTable enemyE{
+        {SpawnNumber::Tuna, {0.0f, 0.0f, -750.0f}, {0.0f, 0.0f, 0.0f}},
+        {SpawnNumber::Tuna, {500.0f, 0.0f, 500.0f}, {0.0f, 0.0f, 0.0f}},
+        {SpawnNumber::Tuna, {-500.0f, 0.0f, 500.0f}, {0.0f, 0.0f, 0.0f}}
+      };
+      // テーブルF
+      const SpawnServer::EnemyTable enemyF{
+        {SpawnNumber::Jerryfish, {250.0f, 0.0f, 750.0f}, {0.0f, 0.0f, 0.0f}},
+        {SpawnNumber::Jerryfish, {-250.0f, 0.0f, 750.0f}, {0.0f, 0.0f, 0.0f}}
       };
       // 生成情報の登録
       _app.GetSpawnServer().RegisterSpawnTable(Start, start);
       _app.GetSpawnServer().RegisterSpawnTable(EnemyA, enemyA);
       _app.GetSpawnServer().RegisterSpawnTable(EnemyB, enemyB);
       _app.GetSpawnServer().RegisterSpawnTable(EnemyC, enemyC);
+      _app.GetSpawnServer().RegisterSpawnTable(EnemyD, enemyD);
+      _app.GetSpawnServer().RegisterSpawnTable(EnemyE, enemyE);
+      _app.GetSpawnServer().RegisterSpawnTable(EnemyF, enemyF);
       // 登録完了
       _isRegister = true;
     }

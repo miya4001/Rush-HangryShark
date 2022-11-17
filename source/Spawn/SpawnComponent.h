@@ -6,6 +6,7 @@
  * @date   October 2022
  *********************************************************************/
 #pragma once
+#include <string_view>
 
 /**
  * @brief  ゲーム
@@ -61,11 +62,17 @@ namespace Game {
        */
       void SpawnEnemy();
       /**
+       * @brief  生成キーの選択
+       * @return 生成キー
+       */
+      std::string_view ChooseSpawnKey();
+      /**
        * @brief  敵生成情報の登録
        */
       void RegisterEnemyTable();
 
       int _spawnCount{ 0 };       //!< 生成カウント
+      int _spawnEnemy{ 0 };       //!< 敵生成数
       bool _isRegister{ false };  //!< 登録フラグ
       //!< アプリケーションの参照
       Application::ApplicationMain& _app;
