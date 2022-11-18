@@ -20,6 +20,7 @@ namespace {
   namespace AppMath = AppFrame::Math;
   const AppMath::Vector4 CameraPosition{ 0.0f, 100.0f, 250.0f };  //!< 初期カメラ位置
   const AppMath::Vector4 CameraTarget{ 0.0f, 50.0f, 0.0f };       //!< 初期カメラ注視点
+  const AppMath::Vector4 DirLight{ 0.0f, -1.0f, 0.0f };           //!< ディレクショナルライト
 } // namespace
 
 namespace Game {
@@ -39,6 +40,10 @@ namespace Game {
     void ModeGame::Enter() {
       // リソースの読み取り処理
       LoadResource();
+      // ディレクショナルライトの変更
+      ChangeLightTypeDir(AppMath::UtilityDX::ToVECTOR(DirLight));
+      // ライトを青色に変更
+      SetLightDifColor(GetColorF(0.5f, 0.5f, 1.0f, 0.0f));
       // カメラ初期化
       _appMain.GetCamera().FixedPoint(CameraPosition, CameraTarget);
       // 生成情報の設定
