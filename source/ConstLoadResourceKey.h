@@ -42,6 +42,12 @@ namespace Game {
     constexpr auto Jerryfish = "jerryfish";  //!< クラゲモデル
   } // namespace ModelKey
   /**
+   * @brief  エフェクトハンドルキー
+   */
+  namespace EffectKey {
+    constexpr auto Blood = "blood";  //!< 血エフェクト
+  } // namespace EffectKey
+  /**
    * @brief  音源ハンドルキー
    */
   namespace SoundKey {

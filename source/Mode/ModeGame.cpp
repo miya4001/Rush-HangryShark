@@ -123,6 +123,13 @@ namespace Game {
       };
       // モデル読み込みサーバに一括読み込み
       _app.GetModelLoadServer().LoadModels(loadModelMap);
+      // 各種エフェクトハンドルの読み込み
+      using EffectLoadServer = AppFrame::Effect::EffectLoadServer;
+      const EffectLoadServer::LoadEffectMap loadEffectMap {
+        {EffectKey::Blood, "resource/Effect/Blood/Blood.efkefc", 10.0f}
+      };
+      // エフェクト読み込みサーバに一括読み込み
+      _app.GetEffectLoadServer().LoadEffects(loadEffectMap);
       // 各種音源ハンドルの読み込み
       using SoundLoadServer = AppFrame::Sound::SoundLoadServer;
       const SoundLoadServer::LoadSoundMap loadSoundMap{
