@@ -9,6 +9,7 @@
 #include "../Object/ObjectServer.h"
 #include "../Camera/Camera.h"
 #include "../Spawn/SpawnServer.h"
+#include "../Effect/EffectServer.h"
 #include "../Mode/ModeAMG.h"
 
 namespace Game {
@@ -33,6 +34,8 @@ namespace Game {
       _camera = std::make_unique<Camera::Camera>();
       // 生成サーバの生成
       _spawnServer = std::make_unique<Spawn::SpawnServer>(*this);
+      // エフェクトサーバの生成
+      _effectServer = std::make_unique<Effect::EffectServer>(*this);
       // モードAMGの登録
       _modeServer->AddMode(Mode::AMG, std::make_unique<Mode::ModeAMG>(*this));
       // モードAMGの追加
@@ -50,6 +53,10 @@ namespace Game {
 
     Spawn::SpawnServer& ApplicationMain::GetSpawnServer() {
       return *_spawnServer;
+    }
+
+    Effect::EffectServer& ApplicationMain::GetEffectServer() {
+      return *_effectServer;
     }
   } // namespace Application
 } // namespace Game

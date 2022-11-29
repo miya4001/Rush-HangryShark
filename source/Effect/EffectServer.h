@@ -13,11 +13,18 @@
  */
 namespace Game {
   /**
+   * @brief  アプリケーション
+   */
+  namespace Application {
+    class ApplicationMain;
+  } // namespace Application
+  /**
    * @brief  エフェクト
    */
   namespace Effect {
     namespace AppMath = AppFrame::Math;
     class EffectBase;
+    class EffectBlood;
     /**
      * @class  EffectServer
      * @brief  エフェクトの基底クラス
@@ -26,8 +33,9 @@ namespace Game {
     public:
       /**
        * @brief  コンストラクタ
+       * @param  app アプリケーションの参照
        */
-      EffectServer();
+      EffectServer(Application::ApplicationMain& app);
       /**
        * @brief  デストラクタ
        */
@@ -58,7 +66,16 @@ namespace Game {
        * @param  effect エフェクトのシェアードポインタ
        */
       void RegisterEffect(std::shared_ptr<EffectBase> effect);
+      /**
+       * @brief  血の生成
+       * @param  position エフェクト再生位置
+       * @param  rotation エフェクト再生向き
+       * @return 血のシェアードポインタ
+       */
+      std::shared_ptr<EffectBlood> Blood(const AppMath::Vector4 position, const AppMath::Vector4 rotation);
 
+      //!< アプリケーションの参照
+      Application::ApplicationMain& _app;
       //!< エフェクトレジストリ
       std::vector<std::shared_ptr<EffectBase>> _effectRegistry;
     };
@@ -67,6 +84,6 @@ namespace Game {
    * @brief  エフェクト番号
    */
   namespace EffectNumber {
-
+    constexpr int Blood = 1;  //!< 血
   } // namespace EffectNumber
 } // namespace Game

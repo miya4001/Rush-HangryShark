@@ -7,11 +7,13 @@
  *********************************************************************/
 #include "EffectServer.h"
 #include <EffekseerForDXLib.h>
+#include "../Application/ApplicationMain.h"
 #include "EffectBase.h"
+#include "EffectBlood.h"
 
 namespace Game {
   namespace Effect {
-    EffectServer::EffectServer() {
+    EffectServer::EffectServer(Application::ApplicationMain& app) : _app(app) {
       // レジストリの初期化
       _effectRegistry.clear();
     }
@@ -61,6 +63,10 @@ namespace Game {
     void EffectServer::MakeEffect(const int number, const AppMath::Vector4 position, const AppMath::Vector4 rotation) {
       // 識別番号から判別
       switch (number) {
+      // 血
+      case EffectNumber::Blood:
+        RegisterEffect(Blood(position, rotation));
+        break;
       // 該当なし
       default:
 #ifdef _DEBUG
@@ -80,6 +86,15 @@ namespace Game {
       }
       // 登録
       _effectRegistry.emplace_back(std::move(effect));
+    }
+
+    std::shared_ptr<EffectBlood> EffectServer::Blood(const AppMath::Vector4 position, const AppMath::Vector4 rotation) {
+      // 血の生成
+      auto blood = std::make_shared<EffectBlood>(_app);
+      // エフェクト再生情報の設定
+      blood->SetTransform(position, rotation);
+      // 生成したシェアードポインタを返す
+      return std::move(blood);
     }
   } // namespace Effect
 } // namespace Game

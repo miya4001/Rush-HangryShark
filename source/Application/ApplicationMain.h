@@ -31,6 +31,12 @@ namespace Game {
     class SpawnServer;
   } // namespace Spawn
   /**
+   * @brief  エフェクト
+   */
+  namespace Effect {
+    class EffectServer;
+  } // namespace Effect
+  /**
    * @brief  アプリケーション
    */
   namespace Application {
@@ -93,6 +99,11 @@ namespace Game {
        * @return 生成サーバの参照
        */
       Spawn::SpawnServer& GetSpawnServer();
+      /**
+       * @brief  エフェクトサーバの取得
+       * @return エフェクトサーバの参照
+       */
+      Effect::EffectServer& GetEffectServer();
 
     private:
       bool _isGameOver{ false };   //!< ゲームオーバーフラグ
@@ -103,6 +114,8 @@ namespace Game {
       std::unique_ptr<Camera::Camera> _camera{ nullptr };
       //!< 生成サーバ
       std::unique_ptr<Spawn::SpawnServer> _spawnServer{ nullptr };
+      //!< エフェクトサーバ
+      std::unique_ptr<Effect::EffectServer> _effectServer{ nullptr };
     };
   } // namespace Application
 } // namespace Game
