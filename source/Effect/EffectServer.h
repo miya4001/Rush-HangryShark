@@ -25,6 +25,7 @@ namespace Game {
     namespace AppMath = AppFrame::Math;
     class EffectBase;
     class EffectBlood;
+    class EffectParalysis;
     /**
      * @class  EffectServer
      * @brief  エフェクトの基底クラス
@@ -73,6 +74,13 @@ namespace Game {
        * @return 血のシェアードポインタ
        */
       std::shared_ptr<EffectBlood> Blood(const AppMath::Vector4 position, const AppMath::Vector4 rotation);
+      /**
+       * @brief  麻痺の生成
+       * @param  position エフェクト再生位置
+       * @param  rotation エフェクト再生向き
+       * @return 麻痺のシェアードポインタ
+       */
+      std::shared_ptr<EffectParalysis> Paralysis(const AppMath::Vector4 position, const AppMath::Vector4 rotation);
 
       //!< アプリケーションの参照
       Application::ApplicationMain& _app;
@@ -84,6 +92,7 @@ namespace Game {
    * @brief  エフェクト番号
    */
   namespace EffectNumber {
-    constexpr int Blood = 1;  //!< 血
+    constexpr int Blood = 1;      //!< 血
+    constexpr int Paralysis = 2;  //!< 麻痺
   } // namespace EffectNumber
 } // namespace Game

@@ -10,6 +10,7 @@
 #include "../Object/ObjectServer.h"
 #include "../Camera/Camera.h"
 #include "../Enemy/EnemyBase.h"
+#include "../Effect/EffectServer.h"
 #include "../ConstLoadResourceKey.h"
 
 namespace {
@@ -122,13 +123,15 @@ namespace Game {
       }
       // 被ダメ状態
       _playerState = PlayerState::Damage;
-      // 麻痺SEの再生
-      _app.GetSoundComponent().PlayBackGround(SoundKey::Paralysis);
-      // 被ダメ演出(仮)
+      // 被ダメ確認
 #ifdef _DEBUG
         // 本体球の塗りつぶし
       _sphere->SetFill(true);
 #endif
+      // エフェクト(麻痺)生成
+      _app.GetEffectServer().MakeEffect(EffectNumber::Paralysis, _position, _rotation);
+      // 麻痺SEの再生
+      _app.GetSoundComponent().PlayBackGround(SoundKey::Paralysis);
     }
 
     void PlayerShark::SetParameters() {

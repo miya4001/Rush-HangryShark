@@ -9,6 +9,7 @@
 #include "../Application/ApplicationMain.h"
 #include "../Object/ObjectServer.h"
 #include "../Player/PlayerShark.h"
+#include "../Effect/EffectServer.h"
 #include "../ConstLoadResourceKey.h"
 
 namespace {
@@ -22,9 +23,9 @@ namespace {
   constexpr float RotateDegree = 1.0f;  //!< ‰ñ“]Šp“x(ƒfƒOƒŠ[’l)
   constexpr float FloatUpSpeed = 0.1f;  //!< •‚ã‘¬“x
   // [“d’è”
-  constexpr int ChargeCountMax = 300;  //!< [“dƒJƒEƒ“ƒgãŒÀ
+  constexpr int ChargeCountMax = 270;  //!< [“dƒJƒEƒ“ƒgãŒÀ
   // UŒ‚’è”
-  constexpr int AttackCountMax = 120;  //!< UŒ‚ƒJƒEƒ“ƒgãŒÀ
+  constexpr int AttackCountMax = 90;  //!< UŒ‚ƒJƒEƒ“ƒgãŒÀ
 } // namespace
 
 namespace Game {
@@ -129,6 +130,8 @@ namespace Game {
       if (_chargeCount == 0) {
         // UŒ‚ó‘Ô
         _enemyState = EnemyState::Attack;
+        // ƒGƒtƒFƒNƒg(–ƒáƒ)‚Ì¶¬
+        _app.GetEffectServer().MakeEffect(EffectNumber::Paralysis, _position, _rotation);
       }
     }
 
@@ -141,6 +144,7 @@ namespace Game {
         _isAttack = false;
         // —V‰jó‘Ô
         _enemyState = EnemyState::Swim;
+        // UŒ‚I—¹Šm”F
 #ifdef _DEBUG
         // UŒ‚‹…‚Ì“h‚è‚Â‚Ô‚µ‰ðœ
         _attack->SetFill(false);
@@ -155,7 +159,7 @@ namespace Game {
       auto player = _app.GetObjectServer().GetPlayerShark();
       // ƒvƒŒƒCƒ„[‚Ì–{‘Ì‹…‚ÆÕ“Ë”»’è
       _isAttack = _attack->IntersectSphere(std::dynamic_pointer_cast<Player::PlayerShark>(player)->GetSphere());
-      // UŒ‚‰‰o(‰¼)
+      // UŒ‚Šm”F
 #ifdef _DEBUG
         // UŒ‚‹…‚Ì“h‚è‚Â‚Ô‚µ
       _attack->SetFill(true);

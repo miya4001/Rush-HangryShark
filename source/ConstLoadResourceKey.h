@@ -52,8 +52,8 @@ namespace Game {
    * @brief  エフェクト拡大率
    */
   namespace EffectMagni {
-    constexpr float Blood = 10.0f;      //!< 血エフェクト拡大率
-    constexpr float Paralysis = 10.0f;  //!< 麻痺エフェクト拡大率
+    constexpr float Blood = 5.0f;      //!< 血エフェクト拡大率
+    constexpr float Paralysis = 8.0f;  //!< 麻痺エフェクト拡大率
   } // namespace EffectMagni
   /**
    * @brief  音源ハンドルキー
