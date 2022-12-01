@@ -54,7 +54,7 @@ namespace Game {
    */
   namespace EffectMagni {
     constexpr float Blood = 5.0f;      //!< 血エフェクト拡大率
-    constexpr float Discover = 5.0f;   //!< 発見エフェクト拡大率
+    constexpr float Discover = 20.0f;  //!< 発見エフェクト拡大率
     constexpr float Paralysis = 8.0f;  //!< 麻痺エフェクト拡大率
   } // namespace EffectMagni
   /**

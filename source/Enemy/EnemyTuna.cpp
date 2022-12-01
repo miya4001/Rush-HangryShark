@@ -9,6 +9,7 @@
 #include "../Application/ApplicationMain.h"
 #include "../Object/ObjectServer.h"
 #include "../Player/PlayerShark.h"
+#include "../Effect/EffectServer.h"
 #include "../ConstLoadResourceKey.h"
 
 namespace {
@@ -22,6 +23,8 @@ namespace {
   // 移動定数
   constexpr float MoveSpeed = 3.0f;     //!< 移動速度
   constexpr float RotateDegree = 1.0f;  //!< 回転角度(デグリー値)
+  // 探索定数
+  constexpr float DiscoverY = 100.0f;  //!< 発見y座標
   // 逃走定数
   constexpr float EscapeSpeed = 8.0f;  //!< 逃走速度
 } // namespace
@@ -142,6 +145,11 @@ namespace Game {
       if (discover) {
         // 逃走状態
         _enemyState = EnemyState::Escape;
+        // エフェクト位置調整
+        auto position = _position;
+        position.SetY(DiscoverY);
+        // エフェクト(発見)の生成
+        _app.GetEffectServer().MakeEffect(EffectNumber::Discover, position, _rotation);
       }
     }
 
