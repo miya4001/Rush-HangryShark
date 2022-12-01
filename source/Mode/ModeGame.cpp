@@ -133,7 +133,8 @@ namespace Game {
       // 各種エフェクトハンドルの読み込み
       using EffectLoadServer = AppFrame::Effect::EffectLoadServer;
       const EffectLoadServer::LoadEffectMap loadEffectMap {
-        {EffectKey::Blood, "resource/Effect/Blood/Blood.efkefc", 10.0f}
+        {EffectKey::Blood, "resource/Effect/Blood/Blood.efkefc", EffectMagni::Blood},
+        {EffectKey::Paralysis, "resource/Effect/Paralysis/Paralysis.efkefc", EffectMagni::Paralysis}
       };
       // エフェクト読み込みサーバに一括読み込み
       _app.GetEffectLoadServer().LoadEffects(loadEffectMap);

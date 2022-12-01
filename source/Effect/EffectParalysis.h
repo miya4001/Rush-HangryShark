@@ -1,9 +1,9 @@
 /*****************************************************************//**
- * @file   EffectBlood.h
- * @brief  エフェクト(血)クラス
+ * @file   EffectParalysis.h
+ * @brief  エフェクト(麻痺)クラス
  * 
  * @author 宮澤耀生
- * @date   November 2022
+ * @date   December 2022
  *********************************************************************/
 #pragma once
 #include "EffectBase.h"
@@ -17,16 +17,16 @@ namespace Game {
    */
   namespace Effect {
     /**
-     * @class  EffectBlood
-     * @brief  エフェクト(血)クラス
+     * @class  EffectParalysis
+     * @brief  エフェクト(麻痺)クラス
      */
-    class EffectBlood : public EffectBase {
+    class EffectParalysis : public EffectBase {
     public:
       /**
        * @brief  コンストラクタ
        * @param  app アプリケーションの参照
        */
-      EffectBlood(Application::ApplicationMain& app);
+      EffectParalysis(Application::ApplicationMain& app);
 
     private:
       /**

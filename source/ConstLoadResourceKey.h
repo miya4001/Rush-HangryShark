@@ -45,8 +45,16 @@ namespace Game {
    * @brief  エフェクトハンドルキー
    */
   namespace EffectKey {
-    constexpr auto Blood = "blood";  //!< 血エフェクト
+    constexpr auto Blood = "blood";          //!< 血エフェクト
+    constexpr auto Paralysis = "paralysis";  //!< 麻痺エフェクト
   } // namespace EffectKey
+  /**
+   * @brief  エフェクト拡大率
+   */
+  namespace EffectMagni {
+    constexpr float Blood = 10.0f;      //!< 血エフェクト拡大率
+    constexpr float Paralysis = 10.0f;  //!< 麻痺エフェクト拡大率
+  } // namespace EffectMagni
   /**
    * @brief  音源ハンドルキー
    */
