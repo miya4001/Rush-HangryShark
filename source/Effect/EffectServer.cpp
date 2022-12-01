@@ -37,6 +37,8 @@ namespace Game {
       }
       // レジストリの解放
       _effectRegistry.clear();
+      // 解放を反映するために更新
+      UpdateEffekseer3D();
     }
 
     void EffectServer::Process() {

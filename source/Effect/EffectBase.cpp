@@ -45,8 +45,6 @@ namespace Game {
     void EffectBase::DeadEffect() {
       // エフェクト停止
       StopEffekseer3DEffect(_playHandle);
-      // エフェクト再生ハンドル消去
-      _playHandle = -1;
       // エフェクト死亡状態
       _effectState = EffectState::Dead;
     }
