@@ -42,7 +42,7 @@ namespace Game {
       // レジストリ内のエフェクトの更新
       for (auto&& effect : _effectRegistry) {
         // エフェクトが死亡状態でない場合
-        if (effect->IsDead()) {
+        if (!effect->IsDead()) {
           // 更新
           effect->Process();
         }

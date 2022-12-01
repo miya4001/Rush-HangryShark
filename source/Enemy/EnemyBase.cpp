@@ -10,6 +10,7 @@
 #include "../Object/ObjectServer.h"
 #include "../Sea/SeaSphere.h"
 #include "../Player/PlayerShark.h"
+#include "../Effect/EffectServer.h"
 
 namespace Game {
   namespace Enemy {
@@ -85,8 +86,8 @@ namespace Game {
     }
 
     void EnemyBase::Dead() {
-      // 死亡演出
-
+      // エフェクト(血)の生成
+      _app.GetEffectServer().MakeEffect(EffectNumber::Blood, _position, _rotation);
       // 死亡状態
       SetDead();
     }

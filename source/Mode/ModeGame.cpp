@@ -9,6 +9,7 @@
 #include "../Application/ApplicationMain.h"
 #include "../Object/ObjectServer.h"
 #include "../Camera/Camera.h"
+#include "../Effect/EffectServer.h"
 #include "../UI/UIHungryGauge.h"
 #include "../UI/UITimer.h"
 #include "ModeGameOver.h"
@@ -55,12 +56,14 @@ namespace Game {
     void ModeGame::Exit() {
       // 生成したオブジェクトを削除
       _appMain.GetObjectServer().Release();
-      // 複製したモデルの解放
-      _appMain.GetModelLoadServer().DeleteDuplicateModels();
       // 生成コンポーネントの解放
       _spawn->Release();
+      // 生成したエフェクトを削除
+      _appMain.GetEffectServer().Release();
       // UIサーバの解放
       _uiServer->Release();
+      // 複製したモデルの解放
+      _appMain.GetModelLoadServer().DeleteDuplicateModels();
     }
 
     void ModeGame::Input(AppFrame::Input::InputManager& input) {
@@ -80,6 +83,8 @@ namespace Game {
       _appMain.GetObjectServer().Process();
       // 生成コンポーネントの更新
       _spawn->Process();
+      // エフェクトサーバの更新
+      _appMain.GetEffectServer().Process();
       // UIサーバの更新
       _uiServer->Process();
       // モード切り替え
@@ -89,6 +94,8 @@ namespace Game {
     void ModeGame::Draw() const {
       // オブジェクトサーバの描画
       _appMain.GetObjectServer().Draw();
+      // エフェクトサーバの描画
+      _appMain.GetEffectServer().Draw();
       // UIサーバの描画
       _uiServer->Draw();
     }
