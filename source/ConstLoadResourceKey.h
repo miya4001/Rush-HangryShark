@@ -19,17 +19,22 @@ namespace Game {
     constexpr auto AMG = "amg";                        //!< AMG画像
     constexpr auto Title = "title";                    //!< タイトル画像
     constexpr auto Start = "start";                    //!< 開始画像
+    constexpr auto Explain = "explain";                //!< 説明画像
     constexpr auto Quit = "quit";                      //!< 終了画像
+    constexpr auto Back = "back";                      //!< バック画像
+    constexpr auto Explanation = "Explanation";        //!< ゲーム説明画像
+    constexpr auto Pause = "pause";                    //!< ポーズ画像
+    constexpr auto Continue = "continue";              //!< 続行画像
+    constexpr auto Retire = "retire";                  //!< リタイア画像
     constexpr auto GameOver = "gameOver";              //!< ゲームオーバー画像
     constexpr auto Retry = "retry";                    //!< リトライ画像
     constexpr auto BackTitle = "backTitle";            //!< タイトルバック画像
     constexpr auto GameClear = "gameClear";            //!< ゲームクリア画像
-    constexpr auto Back = "back";                      //!< バック画像
     constexpr auto Bubble = "bubble";                  //!< 泡画像
     constexpr auto HungryGauge = "hungryGauge";        //!< 空腹ゲージ画像
     constexpr auto HungryGaugeBar = "hungryGaugeBar";  //!< 空腹ゲージバー画像
-    constexpr auto TimerNumber = "timerNumber";        //!< タイマー数字画像
     constexpr auto TimerColon = "timerColon";          //!< タイマーコロン画像
+    constexpr auto Number = "number";                  //!< 数字画像
   } // namespace GraphicKey
   /**
    * @brief  モデルハンドルキー

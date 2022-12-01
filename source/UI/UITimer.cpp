@@ -30,7 +30,7 @@ namespace Game {
 
     bool UITimer::Init() {
       // ‰æ‘œƒnƒ“ƒhƒ‹‚Ìİ’è
-      _timerNumber = _app.GetGraphicLoadServer().GetDivGraphicHandles(GraphicKey::TimerNumber);
+      _timerNumber = _app.GetGraphicLoadServer().GetDivGraphicHandles(GraphicKey::Number);
       _colon = _app.GetGraphicLoadServer().GetGraphicHandle(GraphicKey::TimerColon);
       // •Ï”‰Šú‰»
       _timerSeconds = TimerSecondsInit;

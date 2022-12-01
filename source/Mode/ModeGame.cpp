@@ -114,7 +114,7 @@ namespace Game {
       };
       // 各種分割画像ハンドルの読み込み
       const GraphicLoadServer::LoadDivGraphicMap loadDivGraphicMap{
-        {GraphicKey::TimerNumber, {"resource/Graphic/UI/Number_sheet.png", 10, 10, 1, 70, 106}}
+        {GraphicKey::Number, {"resource/Graphic/UI/Number_sheet.png", 10, 10, 1, 70, 106}}
       };
       // 画像読み込みサーバに一括読み込み
       _app.GetGraphicLoadServer().LoadGraphics(loadGraphicMap);

@@ -84,10 +84,11 @@ namespace Game {
       int _sea{ -1 };           //!< 海中画像
       int _title{ -1 };         //!< タイトル画像
       int _start{ -1 };         //!< 開始画像
+      int _explain{ -1 };       //!< 説明画像
       int _quit{ -1 };          //!< 終了画像
       int _bubble{ -1 };        //!< 泡画像
+      int _cursor{ 0 };         //!< カーソル
       int _switch{ -1 };        //!< 切り替え画像
-      int _bubbleX{ 0 };        //!< 泡x座標
       int _bubbleY{ 0 };        //!< 泡y座標
       bool _isStick{ false };   //!< 左スティック入力
       bool _decision{ false };  //!< 選択決定

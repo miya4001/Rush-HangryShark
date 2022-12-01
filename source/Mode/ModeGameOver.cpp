@@ -15,9 +15,8 @@ namespace {
   // 各種定数
   constexpr int SwitchX = 960;      //!< 切り替え画像x座標
   constexpr int SwitchY = 750;      //!< 切り替え画像y座標
-  constexpr int BubbleUpX = 785;    //!< 泡上x座標
+  constexpr int BubbleX = 785;      //!< 泡x座標
   constexpr int BubbleUpY = 700;    //!< 泡上y座標
-  constexpr int BubbleDownX = 860;  //!< 泡下x座標
   constexpr int BubbleDownY = 800;  //!< 泡下y座標
   constexpr int SEVolume = 200;     //!< SE音量
 } // namespace
@@ -40,9 +39,8 @@ namespace Game {
       _retry = _app.GetGraphicLoadServer().GetGraphicHandle(GraphicKey::Retry);
       _backTitle = _app.GetGraphicLoadServer().GetGraphicHandle(GraphicKey::BackTitle);
       _bubble = _app.GetGraphicLoadServer().GetGraphicHandle(GraphicKey::Bubble);
-      _switch = _retry;
       // 変数初期化
-      _bubbleX = BubbleUpX;
+      _switch = _retry;
       _bubbleY = BubbleUpY;
     }
 
@@ -78,7 +76,7 @@ namespace Game {
       // 画像の描画
       DrawGraph(0, 0, _gameOver, true);
       DrawRotaGraph(SwitchX, SwitchY, 1.0, 0.0, _switch, true);
-      DrawRotaGraph(_bubbleX, _bubbleY, 1.0, 0.0, _bubble, true);
+      DrawRotaGraph(BubbleX, _bubbleY, 1.0, 0.0, _bubble, true);
     }
 
     void ModeGameOver::LoadResource() {
@@ -106,14 +104,14 @@ namespace Game {
       }
       // カーソルに合わせて切り替え
       switch (_bubbleY) {
-        // 選択上
+      // リトライ選択
       case BubbleUpY:
         // モードゲーム遷移
         _app.GetModeServer().TransionToMode(Game);
         // 空腹SEの再生
         _app.GetSoundComponent().PlayBackGround(SoundKey::Hungry, SEVolume);
         break;
-        // 選択下
+      // タイトルバック選択
       case BubbleDownY:
         // モードタイトル遷移
         _app.GetModeServer().TransionToMode(Title);
@@ -138,7 +136,6 @@ namespace Game {
       bool isPositive = AppFrame::Math::Utility::IsPositive(leftY);
       // 入力に合わせて変数切り替え
       _switch = isPositive ? _retry : _backTitle;
-      _bubbleX = isPositive ? BubbleUpX : BubbleDownX;
       _bubbleY = isPositive ? BubbleUpY : BubbleDownY;
       // スティック入力あり
       _isStick = true;

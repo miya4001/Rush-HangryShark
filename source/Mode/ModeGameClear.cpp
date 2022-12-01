@@ -76,8 +76,7 @@ namespace Game {
       // 各種画像ハンドルの読み込み
       using GraphicLoadServer = AppFrame::Graphic::GraphicLoadServer;
       const GraphicLoadServer::LoadGraphicMap loadGraphicMap{
-        {GraphicKey::GameClear, "resource/Graphic/GameClear/GameClear.png"},
-        {GraphicKey::Back, "resource/Graphic/GameClear/Back.png"}
+        {GraphicKey::GameClear, "resource/Graphic/GameClear/GameClear.png"}
       };
       // 画像読み込みサーバに一括読み込み
       _app.GetGraphicLoadServer().LoadGraphics(loadGraphicMap);

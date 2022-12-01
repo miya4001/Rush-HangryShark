@@ -12,13 +12,16 @@
 
 namespace {
   // 各種定数
-  constexpr int SwitchX = 1500;      //!< 切り替え画像x座標
-  constexpr int SwitchY = 850;       //!< 切り替え画像y座標
-  constexpr int BubbleUpX = 1350;    //!< 泡上x座標
-  constexpr int BubbleDownX = 1400;  //!< 泡下x座標
-  constexpr int BubbleUpY = 800;     //!< 泡上y座標
-  constexpr int BubbleDownY = 900;   //!< 泡下y座標
-  constexpr int SEVolume = 200;      //!< SE音量
+  constexpr int SwitchX = 1500;       //!< 切り替え画像x座標
+  constexpr int SwitchY = 850;        //!< 切り替え画像y座標
+  constexpr int CursorStart = 1;      //!< カーソル開始
+  constexpr int CursorExplain = 2;    //!< カーソル説明
+  constexpr int CursorQuit = 3;       //!< カーソル終了
+  constexpr int BubbleX = 1350;       //!< 泡x座標
+  constexpr int BubbleStart = 750;    //!< 泡開始y座標
+  constexpr int BubbleExplain = 850;  //!< 泡説明y座標
+  constexpr int BubbleQuit = 950;     //!< 泡終了y座標
+  constexpr int SEVolume = 200;       //!< SE音量
 } // namespace
 
 namespace Game {
@@ -38,12 +41,13 @@ namespace Game {
       _sea = _app.GetGraphicLoadServer().GetGraphicHandle(GraphicKey::UnderSea);
       _title = _app.GetGraphicLoadServer().GetGraphicHandle(GraphicKey::Title);
       _start = _app.GetGraphicLoadServer().GetGraphicHandle(GraphicKey::Start);
+      _explain = _app.GetGraphicLoadServer().GetGraphicHandle(GraphicKey::Explain);
       _quit = _app.GetGraphicLoadServer().GetGraphicHandle(GraphicKey::Quit);
       _bubble = _app.GetGraphicLoadServer().GetGraphicHandle(GraphicKey::Bubble);
-      _switch = _start;
       // 変数初期化
-      _bubbleX = BubbleUpX;
-      _bubbleY = BubbleUpY;
+      _switch = _start;
+      _cursor = CursorStart;
+      _bubbleY = BubbleStart;
     }
 
     void ModeTitle::Exit() {
@@ -77,7 +81,7 @@ namespace Game {
       DrawGraph(0, 0, _sea, true);
       DrawGraph(0, 0, _title, true);
       DrawRotaGraph(SwitchX, SwitchY, 1.0, 0.0, _switch, true);
-      DrawRotaGraph(_bubbleX, _bubbleY, 1.0, 0.0, _bubble, true);
+      DrawRotaGraph(BubbleX, _bubbleY, 1.0, 0.0, _bubble, true);
     }
 
     void ModeTitle::LoadResource() {
@@ -90,7 +94,9 @@ namespace Game {
       const GraphicLoadServer::LoadGraphicMap loadGraphicMap{
         {GraphicKey::Title, "resource/Graphic/Title/Title.png"},
         {GraphicKey::Start, "resource/Graphic/Title/Start.png"},
+        {GraphicKey::Explain, "resource/Graphic/Title/Explain.png"},
         {GraphicKey::Quit, "resource/Graphic/Title/Quit.png"},
+        {GraphicKey::Back, "resource/Graphic/Explanation/Back.png"},
         {GraphicKey::Bubble, "resource/Graphic/Cursor/Bubble.png"}
       };
       // 画像読み込みサーバに一括読み込み
@@ -113,14 +119,19 @@ namespace Game {
         return;
       }
       // カーソルに合わせて切り替え
-      switch (_bubbleY) {
-      // 選択上
-      case BubbleUpY:
+      switch (_cursor) {
+      // 開始選択
+      case CursorStart:
         // モードゲーム遷移
         ToModeGame();
         break;
-      // 選択下
-      case BubbleDownY:
+      // 説明選択
+      case CursorExplain:
+        // アプリケーションの終了要請
+        _app.RequestTerminate();
+        break;
+      // 終了選択
+      case CursorQuit:
         // アプリケーションの終了要請
         _app.RequestTerminate();
         break;
@@ -142,10 +153,40 @@ namespace Game {
       }
       // 正負どちらか判定
       bool isPositive = AppFrame::Math::Utility::IsPositive(leftY);
-      // 入力に合わせて変数切り替え
-      _switch = isPositive ? _start : _quit;
-      _bubbleX = isPositive ? BubbleUpX : BubbleDownX;
-      _bubbleY = isPositive ? BubbleUpY : BubbleDownY;
+      // 入力に合わせてカーソル上下
+      if (isPositive) {
+        // 開始より下の場合
+        if (CursorStart < _cursor) {
+          // カーソルを上げる
+          --_cursor;
+        }
+      } else {
+        // 終了より上の場合
+        if (_cursor < CursorQuit) {
+          // カーソルを下げる
+          ++_cursor;
+        }
+      }
+      // カーソルに合わせて変数切り替え
+      switch (_cursor) {
+      // 開始
+      case CursorStart:
+        _switch = _start;
+        _bubbleY = BubbleStart;
+        break;
+      // 説明
+      case CursorExplain:
+        _switch = _explain;
+        _bubbleY = BubbleExplain;
+        break;
+      // 終了
+      case CursorQuit:
+        _switch = _quit;
+        _bubbleY = BubbleQuit;
+        break;
+      default:
+        break;
+      }
       // スティック入力あり
       _isStick = true;
       // 泡SEの再生
