@@ -25,6 +25,7 @@ namespace Game {
     namespace AppMath = AppFrame::Math;
     class EffectBase;
     class EffectBlood;
+    class EffectDiscover;
     class EffectParalysis;
     /**
      * @class  EffectServer
@@ -75,6 +76,13 @@ namespace Game {
        */
       std::shared_ptr<EffectBlood> Blood(const AppMath::Vector4 position, const AppMath::Vector4 rotation);
       /**
+       * @brief  発見の生成
+       * @param  position エフェクト再生位置
+       * @param  rotation エフェクト再生向き
+       * @return 発見のシェアードポインタ
+       */
+      std::shared_ptr<EffectDiscover> Discover(const AppMath::Vector4 position, const AppMath::Vector4 rotation);
+      /**
        * @brief  麻痺の生成
        * @param  position エフェクト再生位置
        * @param  rotation エフェクト再生向き
@@ -93,6 +101,7 @@ namespace Game {
    */
   namespace EffectNumber {
     constexpr int Blood = 1;      //!< 血
-    constexpr int Paralysis = 2;  //!< 麻痺
+    constexpr int Discover = 2;   //!< 発見
+    constexpr int Paralysis = 3;  //!< 麻痺
   } // namespace EffectNumber
 } // namespace Game

@@ -10,6 +10,7 @@
 #include "../Application/ApplicationMain.h"
 #include "EffectBase.h"
 #include "EffectBlood.h"
+#include "EffectDiscover.h"
 #include "EffectParalysis.h"
 
 namespace Game {
@@ -70,6 +71,10 @@ namespace Game {
       case EffectNumber::Blood:
         RegisterEffect(Blood(position, rotation));
         break;
+      // 発見
+      case EffectNumber::Discover:
+        RegisterEffect(Discover(position, rotation));
+        break;
       // 麻痺
       case EffectNumber::Paralysis:
         RegisterEffect(Paralysis(position, rotation));
@@ -102,6 +107,15 @@ namespace Game {
       blood->SetTransform(position, rotation);
       // 生成したシェアードポインタを返す
       return std::move(blood);
+    }
+
+    std::shared_ptr<EffectDiscover> EffectServer::Discover(const AppMath::Vector4 position, const AppMath::Vector4 rotation) {
+      // 発見の生成
+      auto discover = std::make_shared<EffectDiscover>(_app);
+      // エフェクト再生情報の設定
+      discover->SetTransform(position, rotation);
+      // 生成したシェアードポインタを返す
+      return std::move(discover);
     }
 
     std::shared_ptr<EffectParalysis> EffectServer::Paralysis(const AppMath::Vector4 position, const AppMath::Vector4 rotation) {

@@ -134,6 +134,7 @@ namespace Game {
       using EffectLoadServer = AppFrame::Effect::EffectLoadServer;
       const EffectLoadServer::LoadEffectMap loadEffectMap {
         {EffectKey::Blood, "resource/Effect/Blood/Blood.efkefc", EffectMagni::Blood},
+        {EffectKey::Discover, "resource/Effect/Discover/Discover.efkefc", EffectMagni::Discover},
         {EffectKey::Paralysis, "resource/Effect/Paralysis/Paralysis.efkefc", EffectMagni::Paralysis}
       };
       // エフェクト読み込みサーバに一括読み込み
