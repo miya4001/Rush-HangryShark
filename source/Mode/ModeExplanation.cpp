@@ -12,10 +12,10 @@
 
 namespace {
   // 各種定数
-  constexpr int BackX = 960;    //!< バックx座標
-  constexpr int BackY = 900;    //!< バックy座標
-  constexpr int BubbleX = 860;  //!< 泡x座標
-  constexpr int BubbleY = 900;  //!< 泡y座標
+  constexpr int BackX = 1700;    //!< バックx座標
+  constexpr int BackY = 1000;    //!< バックy座標
+  constexpr int BubbleX = 1600;  //!< 泡x座標
+  constexpr int BubbleY = 1000;  //!< 泡y座標
 } // namespace
 
 namespace Game {

@@ -78,6 +78,10 @@ namespace Game {
        */
       void SetUI();
       /**
+       * @brief  モードポーズ遷移
+       */
+      void ToModePause();
+      /**
        * @brief  モードゲームオーバー遷移
        */
       void ToModeGameOver();
@@ -86,6 +90,7 @@ namespace Game {
        */
       void ToModeGameClear();
 
+      bool _isPause{ false };  //!< ポーズフラグ
       //!< アプリケーションメインの参照
       Application::ApplicationMain& _appMain;
       //!< 生成コンポーネント

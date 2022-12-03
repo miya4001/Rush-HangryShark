@@ -12,6 +12,7 @@
 #include "../Effect/EffectServer.h"
 #include "../UI/UIHungryGauge.h"
 #include "../UI/UITimer.h"
+#include "ModePause.h"
 #include "ModeGameOver.h"
 #include "ModeGameClear.h"
 #include "../ConstLoadResourceKey.h"
@@ -71,22 +72,25 @@ namespace Game {
       auto&& xJoypad = input.GetXJoypad();
       // STARTボタンが入力された場合
       if (xJoypad.GetButton(XINPUT_BUTTON_START, AppFrame::Input::InputTrigger)) {
-        // アプリケーションの終了要請
-        _app.RequestTerminate();
+        // ポーズ開始
+        _isPause = true;
       }
     }
 
     void ModeGame::Process() {
       // 入力
       Input(_app.GetInputManager());
-      // オブジェクトサーバの更新
-      _appMain.GetObjectServer().Process();
-      // 生成コンポーネントの更新
-      _spawn->Process();
-      // エフェクトサーバの更新
-      _appMain.GetEffectServer().Process();
-      // UIサーバの更新
-      _uiServer->Process();
+      // ポーズでない場合
+      if (!_isPause) {
+        // オブジェクトサーバの更新
+        _appMain.GetObjectServer().Process();
+        // 生成コンポーネントの更新
+        _spawn->Process();
+        // エフェクトサーバの更新
+        _appMain.GetEffectServer().Process();
+        // UIサーバの更新
+        _uiServer->Process();
+      }
       // モード切り替え
       ChangeMode();
     }
@@ -155,6 +159,12 @@ namespace Game {
     }
 
     void ModeGame::ChangeMode() {
+      // ポーズの場合
+      if (_isPause) {
+        // モードポーズ遷移
+        ToModePause();
+        return;
+      }
       // ゲームオーバーの場合
       if (_appMain.GetGameOver()) {
         // モードゲームオーバー遷移
@@ -176,6 +186,20 @@ namespace Game {
       // タイマーの生成
       auto timer = std::make_shared<UI::UITimer>(_appMain);
       _uiServer->RegisterUI(timer);
+    }
+
+    void ModeGame::ToModePause() {
+      // キーの登録判定
+      bool key = _app.GetModeServer().ContainsMode(Pause);
+      // キーが未登録の場合
+      if (!key) {
+        // モードポーズの登録
+        _app.GetModeServer().AddMode(Pause, std::make_shared<Mode::ModePause>(_appMain));
+      }
+      // モードポーズ遷移
+      _app.GetModeServer().PushBack(Pause);
+      // ポーズ完了
+      _isPause = false;
     }
 
     void ModeGame::ToModeGameOver() {
