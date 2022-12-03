@@ -27,10 +27,6 @@ namespace Game {
 
     }
 
-    bool ModeGameOver::Init() {
-      return true;
-    }
-
     void ModeGameOver::Enter() {
       // ƒŠƒ\[ƒX‚Ì“Ç‚İæ‚èˆ—
       LoadResource();

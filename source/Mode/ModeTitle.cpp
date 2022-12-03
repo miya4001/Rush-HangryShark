@@ -31,10 +31,6 @@ namespace Game {
 
     }
 
-    bool ModeTitle::Init() {
-      return true;
-    }
-
     void ModeTitle::Enter() {
       // ƒŠƒ\[ƒX‚Ì“Ç‚İæ‚èˆ—
       LoadResource();

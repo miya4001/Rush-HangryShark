@@ -26,10 +26,6 @@ namespace Game {
 
     }
 
-    bool ModePause::Init() {
-      return true;
-    }
-
     void ModePause::Enter() {
       // ƒŠƒ\[ƒX‚Ì“Ç‚İæ‚èˆ—
       LoadResource();

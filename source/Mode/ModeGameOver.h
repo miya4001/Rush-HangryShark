@@ -35,12 +35,6 @@ namespace Game {
        */
       ModeGameOver(Application::ApplicationMain& app);
       /**
-       * @brief  初期化
-       * @return true:初期化成功
-       *         false:初期化失敗
-       */
-      bool Init() override;
-      /**
        * @brief  モード開始
        */
       void Enter() override;

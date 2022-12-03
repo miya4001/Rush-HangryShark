@@ -24,10 +24,6 @@ namespace Game {
 
     }
 
-    bool ModeExplanation::Init() {
-      return true;
-    }
-
     void ModeExplanation::Enter() {
       // ƒŠƒ\[ƒX‚Ì“Ç‚İæ‚èˆ—
       LoadResource();

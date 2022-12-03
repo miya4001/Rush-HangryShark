@@ -16,10 +16,6 @@ namespace Game {
 
     }
 
-    bool ModeAMG::Init() {
-      return true;
-    }
-
     void ModeAMG::Enter() {
       // ƒŠƒ\[ƒX‚Ì“Ç‚İæ‚èˆ—
       LoadResource();

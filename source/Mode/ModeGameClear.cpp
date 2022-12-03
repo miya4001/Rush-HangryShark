@@ -24,10 +24,6 @@ namespace Game {
 
     }
 
-    bool ModeGameClear::Init() {
-      return true;
-    }
-
     void ModeGameClear::Enter() {
       // ƒŠƒ\[ƒX‚Ì“Ç‚İæ‚èˆ—
       LoadResource();
