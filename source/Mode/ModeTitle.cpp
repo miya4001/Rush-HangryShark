@@ -8,6 +8,7 @@
 #include "ModeTitle.h"
 #include "../Application/ApplicationMain.h"
 #include "ModeGame.h"
+#include "ModeExplanation.h"
 #include "../ConstLoadResourceKey.h"
 
 namespace {
@@ -127,8 +128,8 @@ namespace Game {
         break;
       // 説明選択
       case CursorExplain:
-        // アプリケーションの終了要請
-        _app.RequestTerminate();
+        // モード説明遷移
+        ToModeExplanation();
         break;
       // 終了選択
       case CursorQuit:
@@ -205,6 +206,18 @@ namespace Game {
       _app.GetModeServer().TransionToMode(Game);
       // 空腹SEの再生
       _app.GetSoundComponent().PlayBackGround(SoundKey::Hungry, SEVolume);
+    }
+
+    void ModeTitle::ToModeExplanation() {
+      // キーの登録判定
+      bool key = _app.GetModeServer().ContainsMode(Explanation);
+      // キーが未登録の場合
+      if (!key) {
+        // モード説明の登録
+        _app.GetModeServer().AddMode(Explanation, std::make_shared<Mode::ModeExplanation>(_appMain));
+      }
+      // モード説明遷移
+      _app.GetModeServer().TransionToMode(Explanation);
     }
   } // namespace Mode
 } // namespace Game

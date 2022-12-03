@@ -1,9 +1,9 @@
 /*****************************************************************//**
- * @file   ModeTitle.h
- * @brief  モードタイトルクラス
+ * @file   ModeExplanation.h
+ * @brief  モード説明クラス
  * 
  * @author 宮澤耀生
- * @date   April 2022
+ * @date   December 2022
  *********************************************************************/
 #pragma once
 #include <appframe.h>
@@ -22,18 +22,18 @@ namespace Game {
    * @brief  モード
    */
   namespace Mode {
-    constexpr auto Title = "ModeTitle";  //!< モードタイトル登録用キー
+    constexpr auto Explanation = "ModeExplanation";  //!< モード説明登録用キー
     /**
-     * @class  ModeTitle
-     * @brief  モードタイトルクラス
+     * @class  ModeExplanation
+     * @brief  モード説明クラス
      */
-    class ModeTitle : public AppFrame::Mode::ModeBase {
+    class ModeExplanation : public AppFrame::Mode::ModeBase {
     public:
       /**
        * @brief  コンストラクタ
        * @param  app アプリケーションの参照
        */
-      ModeTitle(Application::ApplicationMain& app);
+      ModeExplanation(Application::ApplicationMain& app);
       /**
        * @brief  初期化
        * @return true:初期化成功
@@ -71,30 +71,10 @@ namespace Game {
        * @brief  モード切り替え
        */
       void ChangeMode() override;
-      /**
-       * @brief  カーソル入力
-       * @param  leftY 左スティック上下入力値
-       */
-      void CursorInput(const int leftY);
-      /**
-       * @brief  モードゲーム遷移
-       */
-      void ToModeGame();
-      /**
-       * @brief  モード説明遷移
-       */
-      void ToModeExplanation();
 
-      int _sea{ -1 };           //!< 海中画像
-      int _title{ -1 };         //!< タイトル画像
-      int _start{ -1 };         //!< 開始画像
-      int _explain{ -1 };       //!< 説明画像
-      int _quit{ -1 };          //!< 終了画像
+      int _explanation{ -1 };   //!< 説明画像
+      int _back{ -1 };          //!< バック画像
       int _bubble{ -1 };        //!< 泡画像
-      int _cursor{ 0 };         //!< カーソル
-      int _switch{ -1 };        //!< 切り替え画像
-      int _bubbleY{ 0 };        //!< 泡y座標
-      bool _isStick{ false };   //!< 左スティック入力
       bool _decision{ false };  //!< 選択決定
       //!< アプリケーションメインの参照
       Application::ApplicationMain& _appMain;

@@ -168,6 +168,9 @@
     <ClInclude Include="source\Effect\EffectDiscover.h">
       <Filter>ヘッダー ファイル\Effect</Filter>
     </ClInclude>
+    <ClInclude Include="source\Mode\ModeExplanation.h">
+      <Filter>ヘッダー ファイル\Mode</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="source\Application\ApplicationMain.cpp">
@@ -253,6 +256,9 @@
     </ClCompile>
     <ClCompile Include="source\Effect\EffectDiscover.cpp">
       <Filter>ソース ファイル\Effect</Filter>
+    </ClCompile>
+    <ClCompile Include="source\Mode\ModeExplanation.cpp">
+      <Filter>ソース ファイル\Mode</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>
