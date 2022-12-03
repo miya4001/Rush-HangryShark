@@ -19,6 +19,7 @@
 
 namespace {
   // 各種定数
+  constexpr int SEVolume = 200;  //!< SE音量
   namespace AppMath = AppFrame::Math;
   const AppMath::Vector4 CameraPosition{ 0.0f, 100.0f, 250.0f };  //!< 初期カメラ位置
   const AppMath::Vector4 CameraTarget{ 0.0f, 50.0f, 0.0f };       //!< 初期カメラ注視点
@@ -149,6 +150,7 @@ namespace Game {
         {SoundKey::Bite, "resource/Sound/SE/Bite.wav"},
         {SoundKey::Eat, "resource/Sound/SE/Eat.wav"},
         {SoundKey::Paralysis, "resource/Sound/SE/Paralysis.wav"},
+        {SoundKey::Splash, "resource/Sound/SE/Splash.wav"},
         {SoundKey::Drawn, "resource/Sound/SE/Drawn.wav"},
         {SoundKey::Whistle, "resource/Sound/SE/Whistle.wav"}
       };
@@ -189,6 +191,8 @@ namespace Game {
     }
 
     void ModeGame::ToModePause() {
+      // しぶきSEの再生
+      _app.GetSoundComponent().PlayBackGround(SoundKey::Splash, SEVolume);
       // キーの登録判定
       bool key = _app.GetModeServer().ContainsMode(Pause);
       // キーが未登録の場合
@@ -203,6 +207,8 @@ namespace Game {
     }
 
     void ModeGame::ToModeGameOver() {
+      // 溺れるSEの再生
+      _app.GetSoundComponent().PlayBackGround(SoundKey::Drawn, SEVolume);
       // キーの登録判定
       bool key = _app.GetModeServer().ContainsMode(GameOver);
       // キーが未登録の場合
@@ -215,6 +221,8 @@ namespace Game {
     }
 
     void ModeGame::ToModeGameClear() {
+      // ホイッスルSEの再生
+      _app.GetSoundComponent().PlayBackGround(SoundKey::Whistle, SEVolume);
       // キーの登録判定
       bool key = _app.GetModeServer().ContainsMode(GameClear);
       // キーが未登録の場合

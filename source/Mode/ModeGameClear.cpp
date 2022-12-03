@@ -12,10 +12,11 @@
 
 namespace {
   // 各種定数
-  constexpr int BackX = 960;    //!< バックx座標
-  constexpr int BackY = 750;    //!< バックy座標
-  constexpr int BubbleX = 860;  //!< 泡x座標
-  constexpr int BubbleY = 750;  //!< 泡y座標
+  constexpr int BackX = 960;     //!< バックx座標
+  constexpr int BackY = 750;     //!< バックy座標
+  constexpr int BubbleX = 860;   //!< 泡x座標
+  constexpr int BubbleY = 750;   //!< 泡y座標
+  constexpr int SEVolume = 200;  //!< SE音量
 } // namespace
 
 namespace Game {
@@ -85,6 +86,8 @@ namespace Game {
       if (!_decision) {
         return;
       }
+      // 泡2SEの再生
+      _app.GetSoundComponent().PlayBackGround(SoundKey::Bubble2, SEVolume);
       // モードタイトル遷移
       _app.GetModeServer().TransionToMode(Title);
     }

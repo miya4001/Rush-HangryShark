@@ -95,6 +95,8 @@ namespace Game {
       if (!_decision) {
         return;
       }
+      // 泡2SEの再生
+      _app.GetSoundComponent().PlayBackGround(SoundKey::Bubble2, SEVolume);
       // モードポーズ削除
       _app.GetModeServer().PopBuck();
       // リタイア選択の場合
@@ -122,8 +124,8 @@ namespace Game {
       _bubbleX = isPositive ? BubbleRightX : BubbleLeftX;
       // スティック入力あり
       _isStick = true;
-      // 泡SEの再生
-      _app.GetSoundComponent().PlayBackGround(SoundKey::Bubble, SEVolume);
+      // 泡1SEの再生
+      _app.GetSoundComponent().PlayBackGround(SoundKey::Bubble1, SEVolume);
     }
   } // namespace Mode
 } // namespace Game

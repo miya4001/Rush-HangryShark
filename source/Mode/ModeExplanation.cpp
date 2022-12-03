@@ -16,6 +16,7 @@ namespace {
   constexpr int BackY = 1000;    //!< バックy座標
   constexpr int BubbleX = 1600;  //!< 泡x座標
   constexpr int BubbleY = 1000;  //!< 泡y座標
+  constexpr int SEVolume = 200;  //!< SE音量
 } // namespace
 
 namespace Game {
@@ -83,6 +84,8 @@ namespace Game {
       if (!_decision) {
         return;
       }
+      // 泡2SEの再生
+      _app.GetSoundComponent().PlayBackGround(SoundKey::Bubble2, SEVolume);
       // モードタイトル遷移
       _app.GetModeServer().TransionToMode(Title);
     }

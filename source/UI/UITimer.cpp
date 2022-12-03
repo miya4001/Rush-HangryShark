@@ -44,8 +44,6 @@ namespace Game {
       if (_timerSeconds <= 0) {
         // ゲームクリア
         _app.SetGameClear(true);
-        // ホイッスルSEの再生
-        _app.GetSoundComponent().PlayBackGround(SoundKey::Whistle);
         return;
       }
       // フレームカウント増加

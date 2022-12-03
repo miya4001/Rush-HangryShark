@@ -101,7 +101,8 @@ namespace Game {
       // 各種音源ハンドルの読み込み
       using SoundLoadServer = AppFrame::Sound::SoundLoadServer;
       const SoundLoadServer::LoadSoundMap loadSoundMap{
-        {SoundKey::Bubble, "resource/Sound/SE/Bubble.wav"},
+        {SoundKey::Bubble1, "resource/Sound/SE/Bubble1.wav"},
+        {SoundKey::Bubble2, "resource/Sound/SE/Bubble2.wav"},
         {SoundKey::Hungry, "resource/Sound/SE/Hungry.wav"}
       };
       // 音源読み込みサーバに一括読み込み
@@ -115,6 +116,8 @@ namespace Game {
       if (!_decision) {
         return;
       }
+      // 泡2SEの再生
+      _app.GetSoundComponent().PlayBackGround(SoundKey::Bubble2, SEVolume);
       // カーソルに合わせて切り替え
       switch (_cursor) {
       // 開始選択
@@ -186,8 +189,8 @@ namespace Game {
       }
       // スティック入力あり
       _isStick = true;
-      // 泡SEの再生
-      _app.GetSoundComponent().PlayBackGround(SoundKey::Bubble, SEVolume);
+      // 泡1SEの再生
+      _app.GetSoundComponent().PlayBackGround(SoundKey::Bubble1, SEVolume);
     }
 
     void ModeTitle::ToModeGame() {

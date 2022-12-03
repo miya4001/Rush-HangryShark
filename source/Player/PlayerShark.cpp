@@ -30,7 +30,6 @@ namespace {
   // €–S’è”
   constexpr float DeadPositionY = 50.0f;   //!< €–SˆÊ’uy
   constexpr float DeadRotationZ = 180.0f;  //!< €–SŒü‚«z
-  constexpr int DrawnSEVolume = 200;       //!< “M‚ê‚éSE‰¹—Ê
   // ‰ñ“]’è”
   constexpr float RotateDegree = 3.0f;  //!< ‰ñ“]Šp“x(ƒfƒOƒŠ[’l)
   // ˆÚ“®’è”
@@ -252,8 +251,6 @@ namespace Game {
 #endif
       // ƒQ[ƒ€ƒI[ƒo[
       _app.SetGameOver(true);
-      // “M‚ê‚éSE‚ÌÄ¶
-      _app.GetSoundComponent().PlayBackGround(SoundKey::Drawn, DrawnSEVolume);
     }
 
     void PlayerShark::Rotate() {

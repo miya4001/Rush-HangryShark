@@ -98,6 +98,8 @@ namespace Game {
       if (!_decision) {
         return;
       }
+      // 泡2SEの再生
+      _app.GetSoundComponent().PlayBackGround(SoundKey::Bubble2, SEVolume);
       // カーソルに合わせて切り替え
       switch (_bubbleY) {
       // リトライ選択
@@ -135,8 +137,8 @@ namespace Game {
       _bubbleY = isPositive ? BubbleUpY : BubbleDownY;
       // スティック入力あり
       _isStick = true;
-      // 泡SEの再生
-      _app.GetSoundComponent().PlayBackGround(SoundKey::Bubble, SEVolume);
+      // 泡1SEの再生
+      _app.GetSoundComponent().PlayBackGround(SoundKey::Bubble1, SEVolume);
     }
   } // namespae Mode
 } // namespace Game
