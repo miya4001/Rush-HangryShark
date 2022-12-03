@@ -177,6 +177,7 @@
     <ClInclude Include="source\Mode\ModeGameClear.h" />
     <ClInclude Include="source\Mode\ModeGame.h" />
     <ClInclude Include="source\Mode\ModeGameOver.h" />
+    <ClInclude Include="source\Mode\ModePause.h" />
     <ClInclude Include="source\Mode\ModeTitle.h" />
     <ClInclude Include="source\Object\ObjectBase.h" />
     <ClInclude Include="source\Object\ObjectServer.h" />
@@ -208,6 +209,7 @@
     <ClCompile Include="source\Mode\ModeGameClear.cpp" />
     <ClCompile Include="source\Mode\ModeGame.cpp" />
     <ClCompile Include="source\Mode\ModeGameOver.cpp" />
+    <ClCompile Include="source\Mode\ModePause.cpp" />
     <ClCompile Include="source\Mode\ModeTitle.cpp" />
     <ClCompile Include="source\Object\ObjectBase.cpp" />
     <ClCompile Include="source\Object\ObjectServer.cpp" />
