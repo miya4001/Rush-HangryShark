@@ -79,6 +79,12 @@
     <Filter Include="ソース ファイル\Effect">
       <UniqueIdentifier>{74a8ad9c-6e53-4d1f-b597-410da3ba7a5f}</UniqueIdentifier>
     </Filter>
+    <Filter Include="ヘッダー ファイル\Result">
+      <UniqueIdentifier>{29fa3e58-ee46-4421-8b11-a08b50aaf163}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ソース ファイル\Result">
+      <UniqueIdentifier>{de24ebc7-701a-4b12-85c5-4ab89adaa807}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="source\Application\ApplicationMain.h">
@@ -174,6 +180,9 @@
     <ClInclude Include="source\Mode\ModePause.h">
       <Filter>ヘッダー ファイル\Mode</Filter>
     </ClInclude>
+    <ClInclude Include="source\Result\ResultComponent.h">
+      <Filter>ヘッダー ファイル\Result</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="source\Application\ApplicationMain.cpp">
@@ -265,6 +274,9 @@
     </ClCompile>
     <ClCompile Include="source\Mode\ModePause.cpp">
       <Filter>ソース ファイル\Mode</Filter>
+    </ClCompile>
+    <ClCompile Include="source\Result\ResultComponent.cpp">
+      <Filter>ソース ファイル\Result</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

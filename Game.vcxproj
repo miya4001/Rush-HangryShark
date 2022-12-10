@@ -182,6 +182,7 @@
     <ClInclude Include="source\Object\ObjectBase.h" />
     <ClInclude Include="source\Object\ObjectServer.h" />
     <ClInclude Include="source\Player\PlayerShark.h" />
+    <ClInclude Include="source\Result\ResultComponent.h" />
     <ClInclude Include="source\Sea\SeaSphere.h" />
     <ClInclude Include="source\Spawn\SpawnComponent.h" />
     <ClInclude Include="source\Spawn\SpawnServer.h" />
@@ -214,6 +215,7 @@
     <ClCompile Include="source\Object\ObjectBase.cpp" />
     <ClCompile Include="source\Object\ObjectServer.cpp" />
     <ClCompile Include="source\Player\PlayerShark.cpp" />
+    <ClCompile Include="source\Result\ResultComponent.cpp" />
     <ClCompile Include="source\Sea\SeaSphere.cpp" />
     <ClCompile Include="source\Spawn\SpawnComponet.cpp" />
     <ClCompile Include="source\Spawn\SpawnServer.cpp" />
