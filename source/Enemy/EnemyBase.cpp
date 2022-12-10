@@ -11,6 +11,7 @@
 #include "../Sea/SeaSphere.h"
 #include "../Player/PlayerShark.h"
 #include "../Effect/EffectServer.h"
+#include "../Result/ResultComponent.h"
 
 namespace Game {
   namespace Enemy {
@@ -86,10 +87,12 @@ namespace Game {
     }
 
     void EnemyBase::Dead() {
-      // エフェクト(血)の生成
-      _app.GetEffectServer().MakeEffect(EffectNumber::Blood, _position, _rotation);
       // 死亡状態
       SetDead();
+      // エフェクト(血)の生成
+      _app.GetEffectServer().MakeEffect(EffectNumber::Blood, _position, _rotation);
+      // 死亡数カウント
+      _app.GetResultComponent().DeadCount(_enemyID);
     }
   } // namespace Enemy
 } // namespace Game

@@ -12,6 +12,7 @@
 #include "../Effect/EffectServer.h"
 #include "../UI/UIHungryGauge.h"
 #include "../UI/UITimer.h"
+#include "../Result/ResultComponent.h"
 #include "ModePause.h"
 #include "ModeGameOver.h"
 #include "ModeGameClear.h"
@@ -64,6 +65,8 @@ namespace Game {
       _appMain.GetEffectServer().Release();
       // UIサーバの解放
       _uiServer->Release();
+      // リザルトコンポーネントの解放
+      _appMain.GetResultComponent().Release();
       // 複製したモデルの解放
       _appMain.GetModelLoadServer().DeleteDuplicateModels();
     }

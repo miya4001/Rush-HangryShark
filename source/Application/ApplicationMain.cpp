@@ -10,6 +10,7 @@
 #include "../Camera/Camera.h"
 #include "../Spawn/SpawnServer.h"
 #include "../Effect/EffectServer.h"
+#include "../Result/ResultComponent.h"
 #include "../Mode/ModeAMG.h"
 
 namespace Game {
@@ -36,6 +37,8 @@ namespace Game {
       _spawnServer = std::make_unique<Spawn::SpawnServer>(*this);
       // エフェクトサーバの生成
       _effectServer = std::make_unique<Effect::EffectServer>(*this);
+      // リザルトコンポーネントの生成
+      _resultComponent = std::make_unique<Result::ResultComponent>();
       // モードAMGの登録
       _modeServer->AddMode(Mode::AMG, std::make_unique<Mode::ModeAMG>(*this));
       // モードAMGの追加
@@ -57,6 +60,10 @@ namespace Game {
 
     Effect::EffectServer& ApplicationMain::GetEffectServer() {
       return *_effectServer;
+    }
+
+    Result::ResultComponent& ApplicationMain::GetResultComponent() {
+      return *_resultComponent;
     }
   } // namespace Application
 } // namespace Game

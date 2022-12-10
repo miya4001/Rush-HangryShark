@@ -37,6 +37,12 @@ namespace Game {
     class EffectServer;
   } // namespace Effect
   /**
+   * @brief  リザルト
+   */
+  namespace Result {
+    class ResultComponent;
+  } // namespace Result
+  /**
    * @brief  アプリケーション
    */
   namespace Application {
@@ -104,6 +110,11 @@ namespace Game {
        * @return エフェクトサーバの参照
        */
       Effect::EffectServer& GetEffectServer();
+      /**
+       * @brief  リザルトコンポーネントの取得
+       * @return リザルトコンポーネントの参照
+       */
+      Result::ResultComponent& GetResultComponent();
 
     private:
       bool _isGameOver{ false };   //!< ゲームオーバーフラグ
@@ -116,6 +127,8 @@ namespace Game {
       std::unique_ptr<Spawn::SpawnServer> _spawnServer{ nullptr };
       //!< エフェクトサーバ
       std::unique_ptr<Effect::EffectServer> _effectServer{ nullptr };
+      //!< リザルトコンポーネント
+      std::unique_ptr<Result::ResultComponent> _resultComponent{ nullptr };
     };
   } // namespace Application
 } // namespace Game
