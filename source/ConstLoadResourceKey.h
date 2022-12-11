@@ -30,6 +30,9 @@ namespace Game {
     constexpr auto Retry = "retry";                    //!< リトライ画像
     constexpr auto BackTitle = "backTitle";            //!< タイトルバック画像
     constexpr auto GameClear = "gameClear";            //!< ゲームクリア画像
+    constexpr auto Shrimp = "shrimp";                  //!< エビ数画像
+    constexpr auto Tuna = "tuna";                      //!< マグロ数画像
+    constexpr auto Jerryfish = "jerryfish";            //!< クラゲ数画像
     constexpr auto Bubble = "bubble";                  //!< 泡画像
     constexpr auto HungryGauge = "hungryGauge";        //!< 空腹ゲージ画像
     constexpr auto HungryGaugeBar = "hungryGaugeBar";  //!< 空腹ゲージバー画像

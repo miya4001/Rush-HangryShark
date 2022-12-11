@@ -65,11 +65,26 @@ namespace Game {
        * @brief  モード切り替え
        */
       void ChangeMode() override;
+      /**
+       * @brief  敵数の設定
+       */
+      void SetEnemyNumbers();
 
       int _gameClear{ -1 };     //!< ゲームクリア画像
+      int _shrimp{ -1 };        //!< エビ数画像
+      int _tuna{ -1 };          //!< マグロ数画像
+      int _jerryfish{ -1 };     //!< クラゲ数画像
       int _back{ -1 };          //!< バック画像
       int _bubble{ -1 };        //!< 泡画像
+      int _shrimpTen{ 0 };      //!< エビ数(十の位)
+      int _shrimpOne{ 0 };      //!< エビ数(一の位)
+      int _tunaTen{ 0 };        //!< マグロ数(十の位)
+      int _tunaOne{ 0 };        //!< マグロ数(一の位)
+      int _jerryfishTen{ 0 };   //!< クラゲ数(十の位)
+      int _jerryfishOne{ 0 };   //!< クラゲ数(一の位)
       bool _decision{ false };  //!< 選択決定
+      // 数字画像
+      std::vector<int> _number;
       //!< アプリケーションメインの参照
       Application::ApplicationMain& _appMain;
     };
