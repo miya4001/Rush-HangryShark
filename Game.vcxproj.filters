@@ -183,6 +183,9 @@
     <ClInclude Include="source\Result\ResultComponent.h">
       <Filter>ヘッダー ファイル\Result</Filter>
     </ClInclude>
+    <ClInclude Include="source\UI\UIRadar.h">
+      <Filter>ヘッダー ファイル\UI</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="source\Application\ApplicationMain.cpp">
@@ -277,6 +280,9 @@
     </ClCompile>
     <ClCompile Include="source\Result\ResultComponent.cpp">
       <Filter>ソース ファイル\Result</Filter>
+    </ClCompile>
+    <ClCompile Include="source\UI\UIRadar.cpp">
+      <Filter>ソース ファイル\UI</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

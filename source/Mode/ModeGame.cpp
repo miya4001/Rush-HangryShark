@@ -12,6 +12,7 @@
 #include "../Effect/EffectServer.h"
 #include "../UI/UIHungryGauge.h"
 #include "../UI/UITimer.h"
+#include "../UI/UIRadar.h"
 #include "../Result/ResultComponent.h"
 #include "ModePause.h"
 #include "ModeGameOver.h"
@@ -191,6 +192,9 @@ namespace Game {
       // タイマーの生成
       auto timer = std::make_shared<UI::UITimer>(_appMain);
       _uiServer->RegisterUI(timer);
+      // レーダーの生成
+      auto radar = std::make_shared<UI::UIRadar>(_appMain);
+      _uiServer->RegisterUI(radar);
     }
 
     void ModeGame::ToModePause() {
