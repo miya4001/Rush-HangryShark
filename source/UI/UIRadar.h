@@ -48,8 +48,14 @@ namespace Game {
        * @brief  反応消去
        */
       void ResponseClear();
+      /**
+       * @brief  入力
+       */
+      void Input();
 
+      int _shark{ -1 };      //!< サメ画像
       double _angle{ 0.0 };  //!< 角度(ラジアン)
+      bool _draw{ false };   //!< 描画フラグ
       //!< 描画座標
       std::vector<std::pair<int, int>> _drawPosition;
     };

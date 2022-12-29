@@ -9,6 +9,7 @@
 #include "../Application/ApplicationMain.h"
 #include "../Object/ObjectServer.h"
 #include "../Player/PlayerShark.h"
+#include "../ConstLoadResourceKey.h"
 
 namespace {
   constexpr int PositionScale = 12;  //!< À•WkŽÚ
@@ -24,6 +25,8 @@ namespace Game {
     }
 
     bool UIRadar::Init() {
+      // ‰æ‘œƒnƒ“ƒhƒ‹‚ÌÝ’è
+      _shark = _app.GetGraphicLoadServer().GetGraphicHandle(GraphicKey::Shark);
       // ”½‰žÁ‹Ž
       ResponseClear();
       return true;
@@ -32,6 +35,12 @@ namespace Game {
     void UIRadar::Process() {
       // ”½‰žÁ‹Ž
       ResponseClear();
+      // “ü—Í
+      Input();
+      // •`‰æ‚µ‚È‚¢ê‡’†’f
+      if (!_draw) {
+        return;
+      }
       // ƒvƒŒƒCƒ„[‚ÌƒRƒs[
       auto player = _app.GetObjectServer().GetPlayerShark();
       // ƒvƒŒƒCƒ„[‚Ìƒ[ƒJƒ‹À•W
@@ -70,12 +79,16 @@ namespace Game {
     }
 
     void UIRadar::Draw() const {
+      // •`‰æ‚µ‚È‚¢ê‡’†’f
+      if (!_draw) {
+        return;
+      }
       // ‰¼’u‚«”wŒi‰~•`‰æ
       DrawCircle(PlayerX, PlayerY, 250, GetColor(0, 0, 0));
       DrawCircle(PlayerX, PlayerY, 100, GetColor(0, 255, 0), false);
       DrawCircle(PlayerX, PlayerY, 200, GetColor(0, 255, 0), false);
-      // ƒvƒŒƒCƒ„[‰~•`‰æ
-      DrawCircle(PlayerX, PlayerY, Radius, GetColor(0, 255, 0));
+      // ƒTƒ•`‰æ
+      DrawRotaGraph(PlayerX, PlayerY, 0.5, _angle, _shark, true);
       // “G‰~•`‰æ
       for (auto&& [x, y] : _drawPosition) {
         DrawCircle(x, y, Radius, GetColor(255, 0, 0));
@@ -85,6 +98,18 @@ namespace Game {
     void UIRadar::ResponseClear() {
       // •`‰æÀ•W‰ð•ú
       _drawPosition.clear();
+    }
+
+    void UIRadar::Input() {
+      // “ü—Íó‘Ô‚ÌŽæ“¾
+      auto&& xJoypad = _app.GetInputManager().GetXJoypad();
+      // Xƒ{ƒ^ƒ“(ƒgƒŠƒK)‚Ì“ü—Íó‘Ô
+      bool buttonX = xJoypad.GetButton(XINPUT_BUTTON_X, AppFrame::Input::InputTrigger);
+      // “ü—Í‚ª‚ ‚éê‡
+      if (buttonX) {
+        // •`‰æƒtƒ‰ƒO”½“]
+        _draw = !_draw;
+      }
     }
   } // namespace UI
 } // namespace Game

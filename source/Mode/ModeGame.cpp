@@ -119,7 +119,8 @@ namespace Game {
       const GraphicLoadServer::LoadGraphicMap loadGraphicMap{
         {GraphicKey::HungryGauge, "resource/Graphic/UI/HungryGauge.png"},
         {GraphicKey::HungryGaugeBar, "resource/Graphic/UI/HungryGaugeBar.png"},
-        {GraphicKey::TimerColon, "resource/Graphic/UI/Colon.png"}
+        {GraphicKey::TimerColon, "resource/Graphic/UI/Colon.png"},
+        {GraphicKey::Shark, "resource/Graphic/UI/Shark.png"}
       };
       // Šeí•ªŠ„‰æ‘œƒnƒ“ƒhƒ‹‚Ì“Ç‚İ‚İ
       const GraphicLoadServer::LoadDivGraphicMap loadDivGraphicMap{
